@@ -1,16 +1,13 @@
 # buildwithshafia.dev
 
-Personal portfolio of Shafia Ameeruddin.
+Editorial-magazine portfolio for **Shafia Ameeruddin — AI Engineer**.
+Built per the approved Phase 1–5 plan. Next.js 15 · TypeScript · Tailwind 4 · Framer Motion.
 
-Built to showcase:
+## Local dev
+```
+yarn install
+yarn dev
+```
 
-- AI Engineering
-- GenAI Systems
-- Full Stack Development
-- Product Thinking
-
-Status:
-Planning Phase
-
-Current Phase:
-Repository Setup
+## Deployment
+Target: Vercel. Production domain: https://buildwithshafia.dev
