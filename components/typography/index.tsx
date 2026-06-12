@@ -56,7 +56,7 @@ export function SectionNumber({
         aria-hidden
       />
       <MetaLabel>
-        § {number} — {name}
+        {number} — {name}
       </MetaLabel>
     </div>
   );

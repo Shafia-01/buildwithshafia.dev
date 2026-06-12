@@ -37,12 +37,12 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { label: "Work", href: "/work", section: "03" },
   { label: "Journey", href: "/journey", section: "02" },
+  { label: "Work", href: "/work", section: "03" },
   { label: "Lab", href: "/lab", section: "04" },
-  { label: "Skills", href: "/skills", section: "06" },
   { label: "Community", href: "/community", section: "05" },
-  { label: "Contact", href: "/contact", section: "08" },
+  { label: "Skills", href: "/skills", section: "06" },
+  { label: "Contact", href: "/contact", section: "07" },
 ] as const;
 
 export const sections = [
@@ -52,7 +52,7 @@ export const sections = [
   { number: "04", name: "THE LAB", href: "/lab" },
   { number: "05", name: "COMMUNITY", href: "/community" },
   { number: "06", name: "CAPABILITIES", href: "/skills" },
-  { number: "08", name: "LET'S BUILD", href: "/contact" },
+  { number: "07", name: "LET'S BUILD", href: "/contact" },
 ] as const;
 
 export const featuredProject = {

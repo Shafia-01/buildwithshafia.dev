@@ -27,7 +27,7 @@ export function Footer() {
             ↗ GitHub
           </a>
           <a href={site.resumePath} className="brass-underline text-brass w-fit" target="_blank" rel="noreferrer">
-            ↓ Résumé
+            ↓ RESUME
           </a>
         </div>
         <div className="md:text-right font-mono text-meta-xs uppercase text-ink-muted">

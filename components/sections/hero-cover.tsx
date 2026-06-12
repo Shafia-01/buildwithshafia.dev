@@ -79,7 +79,7 @@ export function HeroCover() {
               testId="hero-cta-resume"
               className="inline-flex items-center gap-2 px-6 py-3 border border-rule-strong text-ink-soft hover:border-ink hover:text-ink font-mono text-meta-xs uppercase transition-colors duration-fast"
             >
-              <Download className="w-3.5 h-3.5" /> Résumé
+              <Download className="w-3.5 h-3.5" /> RESUME
             </MagneticButton>
           </div>
         </FadeRise>

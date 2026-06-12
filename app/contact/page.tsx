@@ -24,7 +24,7 @@ export default function ContactPage() {
       <div className="max-w-wide mx-auto">
         {/* Header spread section */}
         <div className="border-b border-rule pb-12 mb-16">
-          <SectionNumber number="08" name="LET'S BUILD" />
+          <SectionNumber number="07" name="LET'S BUILD" />
           <div className="mt-8">
             <LetterStagger
               text="Let's build something"
@@ -113,7 +113,7 @@ export default function ContactPage() {
             </div>
           </a>
 
-          {/* Résumé tile */}
+          {/* RESUME tile */}
           <a
             href={site.resumePath}
             target="_blank"

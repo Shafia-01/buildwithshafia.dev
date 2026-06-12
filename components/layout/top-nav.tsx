@@ -74,7 +74,7 @@ export function TopNav({ onOpenPalette }: { onOpenPalette: () => void }) {
             data-testid="nav-resume-cta"
             className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-brass text-brass font-mono text-meta-xs uppercase hover:bg-brass hover:text-paper transition-colors duration-fast"
           >
-            <Download className="w-3 h-3" /> Résumé
+            <Download className="w-3 h-3" /> RESUME
           </a>
           <button
             type="button"
@@ -146,7 +146,7 @@ export function TopNav({ onOpenPalette }: { onOpenPalette: () => void }) {
                 className="flex items-baseline gap-4 group"
                 style={{ animation: `fadeSlide 400ms ${i * 60}ms cubic-bezier(0.16,1,0.3,1) both` }}
               >
-                <span className="font-mono text-meta-xs text-ink-muted">§ {l.section}</span>
+                <span className="font-mono text-meta-xs text-ink-muted">{l.section}</span>
                 <span className="font-display text-headline-lg text-ink group-hover:text-brass transition-colors">
                   {l.label}
                 </span>
@@ -154,7 +154,7 @@ export function TopNav({ onOpenPalette }: { onOpenPalette: () => void }) {
             ))}
           </nav>
           <div className="mt-auto flex gap-6 pt-12 border-t border-rule">
-            <a href={site.resumePath} className="font-mono text-meta-xs uppercase text-brass">↓ Résumé</a>
+            <a href={site.resumePath} className="font-mono text-meta-xs uppercase text-brass">↓ RESUME</a>
             <a href={site.github} className="font-mono text-meta-xs uppercase text-ink-soft">↗ GitHub</a>
             <a href={site.linkedin} className="font-mono text-meta-xs uppercase text-ink-soft">↗ LinkedIn</a>
           </div>

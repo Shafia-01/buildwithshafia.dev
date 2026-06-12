@@ -138,7 +138,7 @@ export function CommandPalette({
                     className="px-4 py-2 flex items-center gap-3 text-ink hover:bg-linen data-[selected=true]:bg-linen cursor-pointer"
                   >
                     <Download className="w-4 h-4 text-brass" />
-                    <span>Download résumé</span>
+                    <span>Download RESUME</span>
                   </Command.Item>
                   <Command.Item
                     value="open linkedin"

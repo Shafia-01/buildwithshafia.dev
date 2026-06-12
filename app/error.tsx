@@ -17,7 +17,7 @@ export default function GlobalError({
   return (
     <section className="min-h-[80vh] flex items-center px-6 lg:px-12">
       <div className="max-w-narrow">
-        <p className="font-mono text-meta-xs uppercase text-brass">§ ERR</p>
+        <p className="font-mono text-meta-xs uppercase text-brass">ERR</p>
         <h1 className="mt-6 font-display text-display-md text-ink leading-[0.95] tracking-tight">
           Something broke.
         </h1>
