@@ -61,18 +61,18 @@ export function HeroCover() {
 
           <div className="flex flex-wrap gap-3">
             <MagneticButton
-              href="/work"
-              testId="hero-cta-work"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-ink text-paper border border-ink hover:bg-brass hover:border-brass hover:text-paper font-mono text-meta-xs uppercase transition-colors duration-fast"
-            >
-              See the work <ArrowRight className="w-3.5 h-3.5" />
-            </MagneticButton>
-            <MagneticButton
               href="/the-builder"
               testId="hero-cta-builder"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-brass text-brass hover:bg-brass hover:text-paper font-mono text-meta-xs uppercase transition-colors duration-fast"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-ink text-paper border border-ink hover:bg-brass hover:border-brass hover:text-paper font-mono text-meta-xs uppercase transition-colors duration-fast"
             >
               The Builder
+            </MagneticButton>
+            <MagneticButton
+              href="/work"
+              testId="hero-cta-work"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-brass text-brass hover:bg-brass hover:text-paper font-mono text-meta-xs uppercase transition-colors duration-fast"
+            >
+              See the work <ArrowRight className="w-3.5 h-3.5" />
             </MagneticButton>
             <MagneticButton
               href={site.resumePath}
