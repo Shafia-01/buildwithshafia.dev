@@ -50,17 +50,43 @@ export default async function ProjectDetailPage({ params }: Props) {
         </Link>
 
         {/* Title & One-liner Header */}
-        <div className="border-b border-rule pb-12 mb-12">
-          <SectionNumber number={project.order} name="PROJECT DETAIL" />
-          <div className="mt-6">
-            <LetterStagger
-              text={project.title}
-              className="font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight"
-            />
+        <div className="border-b border-rule pb-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <SectionNumber number={project.order} name="PROJECT DETAIL" />
+            <div className="mt-6">
+              <LetterStagger
+                text={project.title}
+                className="font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight"
+              />
+            </div>
+            <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-3xl leading-snug">
+              {project.oneLiner}
+            </p>
           </div>
-          <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-3xl leading-snug">
-            {project.oneLiner}
-          </p>
+
+          <div className="flex gap-3 shrink-0 md:mb-2">
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass transition-colors rounded-sm"
+            >
+              <Github className="w-3.5 h-3.5" /> ↗ GitHub
+            </a>
+
+            {project.links.watchDemo ? (
+              <a
+                href={project.links.watchDemo}
+                className="inline-flex items-center gap-2 px-4 py-2 border border-brass text-brass font-mono text-meta-xs uppercase hover:bg-brass hover:text-paper transition-colors rounded-sm"
+              >
+                <Play className="w-3.5 h-3.5" /> ▶ Watch Demo
+              </a>
+            ) : (
+              <div className="inline-flex items-center gap-2 px-4 py-2 border border-rule-strong bg-paper-soft text-ink-whisper font-mono text-meta-xs uppercase cursor-not-allowed rounded-sm">
+                <Video className="w-3.5 h-3.5" /> Demo coming soon
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Pull Quote & Metric Strip */}
@@ -140,6 +166,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                     </div>
                   ))}
                 </div>
+
               </div>
             </section>
 
@@ -238,37 +265,6 @@ export default async function ProjectDetailPage({ params }: Props) {
                 <span className="w-16 h-px bg-red-600/40" />
               </div>
             )}
-
-            {/* CTA bar (GitHub + Watch Demo only) */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border border-brass bg-brass-glow rounded-sm mt-8">
-              <div>
-                <h4 className="font-display text-headline-sm text-ink font-semibold">Ready to review the source?</h4>
-                <p className="text-body-xs text-ink-muted mt-0.5">Explore repositories or request live developer recordings.</p>
-              </div>
-              <div className="flex gap-3 shrink-0">
-                <a
-                  href={project.links.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass transition-colors rounded-sm"
-                >
-                  <Github className="w-3.5 h-3.5" /> ↗ GitHub
-                </a>
-
-                {project.links.watchDemo ? (
-                  <a
-                    href={project.links.watchDemo}
-                    className="inline-flex items-center gap-2 px-4 py-2 border border-brass text-brass font-mono text-meta-xs uppercase hover:bg-brass hover:text-paper transition-colors rounded-sm"
-                  >
-                    <Play className="w-3.5 h-3.5" /> ▶ Watch Demo
-                  </a>
-                ) : (
-                  <div className="inline-flex items-center gap-2 px-4 py-2 border border-rule-strong bg-paper-soft text-ink-whisper font-mono text-meta-xs uppercase cursor-not-allowed rounded-sm">
-                    <Video className="w-3.5 h-3.5" /> Demo coming soon
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
 
           {/* Sidebar */}
