@@ -57,15 +57,6 @@ export default function JourneyPage() {
                     />
                   </div>
 
-                  {/* Spacer or Side block */}
-                  <div className="hidden md:block w-1/2 px-8 text-right">
-                    {!isEven && (
-                      <span className="font-mono text-meta-sm tracking-wider text-brass-deep font-semibold">
-                        {item.date}
-                      </span>
-                    )}
-                  </div>
-
                   {/* Card Block */}
                   <FadeRise delay={index * 0.05} className="w-full md:w-1/2 px-0 md:px-8">
                     <div
@@ -136,13 +127,11 @@ export default function JourneyPage() {
                     </div>
                   </FadeRise>
 
-                  {/* Reverse side label */}
-                  <div className="hidden md:block w-1/2 px-8 text-left">
-                    {isEven && (
-                      <span className="font-mono text-meta-sm tracking-wider text-brass-deep font-semibold">
-                        {item.date}
-                      </span>
-                    )}
+                  {/* Date Block (Desktop) */}
+                  <div className={`hidden md:block w-1/2 px-8 ${isEven ? "text-right" : "text-left"}`}>
+                    <span className="font-mono text-meta-sm tracking-wider text-brass-deep font-semibold">
+                      {item.date}
+                    </span>
                   </div>
                 </div>
               );
