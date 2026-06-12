@@ -114,11 +114,11 @@ export default function JourneyPage() {
                           <div className="p-4 bg-linen-deep/20 border border-brass/30 rounded-sm">
                             <div className="flex items-center gap-2 mb-2">
                               <span className="inline-block w-1.5 h-1.5 rounded-full bg-brass" />
-                              <h4 className="font-display text-headline-xs text-ink">
+                              <h4 className="font-display text-headline-sm md:text-headline-md text-ink leading-tight">
                                 {item.promotionTo.title}
                               </h4>
                             </div>
-                            <p className="text-body-xs text-ink-soft leading-relaxed">
+                            <p className="mt-3 text-body-sm text-ink-soft leading-relaxed">
                               {item.promotionTo.description}
                             </p>
                           </div>
