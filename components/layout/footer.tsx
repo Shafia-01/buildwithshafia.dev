@@ -13,7 +13,7 @@ export function Footer() {
             Let's build something meaningful.
           </p>
           <p className="font-mono text-meta-xs uppercase text-ink-muted mt-3">
-            {site.status} · {site.location} · Replies in 24h
+            {site.status} · {site.location}
           </p>
         </div>
         <div className="flex flex-col gap-2 font-mono text-meta-xs uppercase">

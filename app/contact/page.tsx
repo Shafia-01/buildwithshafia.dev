@@ -143,7 +143,7 @@ export default function ContactPage() {
             Available for <span className="text-ink font-semibold">AI Engineer</span> · <span className="text-ink font-semibold">GenAI</span> · <span className="text-ink font-semibold">Software Engineer</span> · <span className="text-ink font-semibold">Founding Engineer</span> roles.
           </p>
           <p className="font-mono text-meta-xs tracking-wider text-ink-muted uppercase mt-3">
-            Based in India · Open to remote · Replies within 24h
+            Based in India · Open to remote
           </p>
         </FadeRise>
       </div>
