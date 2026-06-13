@@ -6,48 +6,42 @@ export interface SkillGroup {
 
 export const skillEcosystem: SkillGroup[] = [
   {
-    id: "ai-ml",
-    title: "AI & Machine Learning",
-    skills: ["PyTorch", "OpenCV", "DeepFace", "scikit-learn", "Statistical Modeling", "Feature Engineering"]
+    id: "languages",
+    title: "Languages",
+    skills: ["Python", "JavaScript", "SQL", "HTML", "CSS"]
   },
   {
-    id: "gen-ai",
-    title: "Generative AI",
-    skills: ["Gemini 1.5 Pro", "LLaMA-3", "Claude 3.5 Sonnet", "Prompt Engineering", "Whisper STT", "Voice Synthesis"]
+    id: "ai-ml-genai",
+    title: "AI / ML & GenAI",
+    skills: [
+      "LLMs",
+      "Generative AI",
+      "RAG",
+      "Prompt Engineering",
+      "AI Agents",
+      "Hugging Face Transformers",
+      "LangChain",
+      "LangGraph",
+      "PyTorch",
+      "Scikit-learn",
+      "OpenCV",
+      "FAISS",
+      "NLP"
+    ]
   },
   {
-    id: "agentic-ai",
-    title: "Agentic AI",
-    skills: ["LangGraph", "LangChain Orchestrator", "FAISS Vector DB", "RAG Pipelines", "Autonomous Agents", "Multi-Agent Networks"]
-  },
-  {
-    id: "software-eng",
+    id: "software-engineering",
     title: "Software Engineering",
-    skills: ["TypeScript", "Python", "Data Structures", "Algorithm Design", "REST APIs", "WebSocket Servers"]
+    skills: ["FastAPI", "React", "Next.js", "Node.js", "Express.js", "Streamlit", "REST APIs", "API Integration", "WebSockets"]
   },
   {
-    id: "frontend",
-    title: "Frontend Development",
-    skills: ["Next.js 15", "React 19", "Tailwind CSS", "Framer Motion", "Responsive Layouts", "Aesthetic UI Design"]
+    id: "data-cloud-devops",
+    title: "Data, Cloud & DevOps",
+    skills: ["NumPy", "Pandas", "Plotly", "Power BI", "MySQL", "MongoDB", "AWS", "Docker", "Hugging Face Spaces", "Git", "GitHub", "CI/CD"]
   },
   {
-    id: "backend",
-    title: "Backend Architectures",
-    skills: ["FastAPI", "Express.js", "Node.js", "Asynchronous Programming", "API Gateways", "Proxy Middleware"]
-  },
-  {
-    id: "databases",
-    title: "Databases & Storage",
-    skills: ["MongoDB", "PostgreSQL", "Redis Cache", "Vector Indexes", "SQL / NoSQL Schema Design"]
-  },
-  {
-    id: "cloud-devops",
-    title: "Cloud & DevOps",
-    skills: ["Docker Containers", "AWS ECS", "GCP", "Hugging Face Spaces", "Vercel Deployments", "CI/CD Pipelines"]
-  },
-  {
-    id: "product-dev",
-    title: "Product Development",
-    skills: ["Founding Engineer Mindset", "User-Centric Prototyping", "Technical Writing", "Rapid Development Cycle"]
+    id: "networking-security",
+    title: "Networking & Security",
+    skills: ["Scapy"]
   }
 ];

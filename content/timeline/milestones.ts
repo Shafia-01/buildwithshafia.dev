@@ -9,6 +9,7 @@ export interface Milestone {
   highlight?: boolean;
   promotionTo?: {
     title: string;
+    date: string;
     description: string;
   };
 }
@@ -16,80 +17,88 @@ export interface Milestone {
 export const milestones: Milestone[] = [
   {
     id: "education-btech",
-    date: "Aug 2020 — Jun 2024",
-    title: "B.Tech in Computer Science & Engineering",
-    organization: "Jamia Hamdard",
+    date: "Sep 2022 – May 2026",
+    title: "Bachelor of Technology in Computer Science and Engineering",
+    organization: "Jamia Hamdard University",
     category: "education",
-    description: "Built strong foundations in data structures, algorithms, network architecture, and databases. Graduated with a focus on intelligent systems."
+    description: "CGPA 8.46/10. Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, DBMS."
   },
   {
-    id: "ieee-coordinator",
-    date: "Sep 2021 — Jul 2023",
-    title: "IEEE Student Coordinator",
-    organization: "IEEE Student Branch",
+    id: "ieee-jhsb",
+    date: "Aug 2023 – Jul 2025",
+    title: "Student Coordinator",
+    organization: "IEEE Jamia Hamdard Student Branch",
     category: "achievement",
-    description: "Orchestrated tech workshops, hackathons, and guest lectures. Bridge builder between academic research and hands-on coding communities."
+    description: "Designed 10+ visual assets including event posters, invitations, and the IEEE JHSB Annual Magazine cover. Hosted 5+ flagship events including Think Tank Trivia (Technozova 4.0) and Hack-IEEE-thon RPA Bootcamp. Contributed to 25+ flagship events impacting 700+ participants, boosting engagement and branch visibility by 40% and event participation by 30%."
   },
   {
-    id: "gdg-associate",
-    date: "Oct 2022 — Jun 2023",
-    title: "GDG PR & Social Media Associate",
-    organization: "Google Developer Groups (GDG)",
-    role: "PR & Social Media Associate",
+    id: "gdg-pr-associate",
+    date: "Jan 2024 – Sep 2024",
+    title: "PR & Social Media Associate",
+    organization: "Google Developer Groups on Campus, Jamia Hamdard",
     category: "experience",
-    description: "Managed outreach campaigns and technical writing publications, expanding local developer engagement by 35%.",
+    description: "Boosted Instagram engagement by 50% through visually compelling, timely content and campaigns. Coordinated cross-functional execution of digital strategies aligned with 15+ workshops/events per year.",
     promotionTo: {
-      title: "GDG Social Media Manager",
-      description: "Promoted to lead the community outreach, managing a cross-functional team of contributors and increasing engagement metrics by 40%."
+      title: "Social Media Manager",
+      date: "Sep 2024 – Aug 2025",
+      description: "Led a 10-member social media team to execute analytics-driven campaigns, resulting in 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
     }
   },
   {
+    id: "placement-cell",
+    date: "Mar 2024 – May 2025",
+    title: "Student Coordinator, Placement Cell",
+    organization: "The Department of Placement and Alumni Affairs, Jamia Hamdard",
+    category: "experience",
+    description: "Facilitated connections between 200+ students and industry recruiters, enhancing placement opportunities through proactive outreach. Coordinated placement activities with cell heads and team members."
+  },
+  {
+    id: "feelcart-shipped",
+    date: "Feb 2025 – Mar 2025",
+    title: "FeelCart (Walmart Innovation Suite) Shipped",
+    organization: "Independent Project",
+    category: "milestone",
+    description: "Dual-module AI shopping assistant (MoodCart + AutoCart) using NLP and SerpAPI, boosting recommendation relevance by 45% and reducing decision time by 55%."
+  },
+  {
     id: "edunet-internship",
-    date: "Jun 2023 — Aug 2023",
-    title: "AI-ML Engineering Intern",
+    date: "Aug 2025 – Sep 2025",
+    title: "Front-End Web Developer Intern",
     organization: "Edunet Foundation",
     category: "internship",
-    description: "Shipped the core search indexer for CineScope, debugging Express proxy layers and OMDb search response validators."
+    description: "Developed and deployed CineScope, a full-stack movie discovery platform integrating the OMDb API with 8 user-facing features. Engineered a secure Express proxy with 6 validation checks, 3 recovery mechanisms, and resolved 5 production-critical issues."
   },
   {
     id: "cyart-internship",
-    date: "Sep 2023 — Dec 2023",
-    title: "AI Systems Engineering Intern",
+    date: "Sep 2025 – Dec 2025",
+    title: "AI Engineer Intern",
     organization: "CyArt Tech",
     category: "internship",
-    description: "Shipped three core engineering deliverables: 1) RSS-based News Sentiment Pipeline, 2) Multi-camera Surveillance integrity checks, 3) XTTS-v2 Voice Cloning benchmarks."
+    description: "Engineered a concurrent Python news analytics pipeline processing 494+ headlines from 20 RSS sources (19 headlines/sec, 20% ingestion improvement, 1,877+ sentiment classifications via 3 NLP engines). Developed a real-time OpenCV surveillance system monitoring 4 concurrent camera streams at ~7.4 FPS with 2 motion-detection algorithms and 4 integrity checks. Researched and benchmarked XTTS-v2 and VALL-E-X through 15+ voice-cloning experiments, achieving 0.965 speaker similarity."
   },
   {
-    id: "walmart-innovation",
-    date: "Jan 2024",
-    title: "Walmart Innovation Suite",
-    organization: "Walmart Hackathon",
-    category: "achievement",
-    description: "Shipped FeelCart, a diptych commerce tool linking DeepFace emotional states with dynamic cart recommendation cycles."
-  },
-  {
-    id: "keylytics-launch",
-    date: "Mar 2024",
+    id: "keylytics-shipped",
+    date: "Oct 2025 – Nov 2025",
     title: "KeyLytics Shipped",
     organization: "Independent Project",
     category: "milestone",
-    description: "Launched an autonomous agentic market intelligence platform using LangGraph models to automate corporate competitor reporting."
+    description: "Agentic AI-powered SEO platform automating keyword and SERP analysis, cutting research time by 60%, improving accuracy by 35%, and scaling results to 50+ keywords per query."
   },
   {
-    id: "learnify-ai",
-    date: "May 2024",
-    title: "Learnify AI Flagship Build",
+    id: "learnify-ai-flagship",
+    date: "Jan 2026 – Mar 2026",
+    title: "Learnify AI — Flagship Build",
     organization: "Independent Project",
     category: "milestone",
     highlight: true,
-    description: "Engineered a multimodal AI tutor with live WebSocket emotion tracking, 3x FAISS vector retrieval speedups, and dynamic Groq/Gemini hot-swapping."
+    description: "Multimodal AI tutoring platform with hot-swappable multi-LLM orchestration (Gemini, Groq, Ollama), real-time DeepFace/OpenCV emotion detection, and a level-adaptive RAG pipeline delivering 3x faster contextual retrieval and a 40% personalization lift."
   },
   {
     id: "graduation",
-    date: "Jun 2024",
-    title: "Graduation — B.Tech CSE",
+    date: "May 2026",
+    title: "Graduation — B.Tech Computer Science and Engineering",
     organization: "Jamia Hamdard University",
     category: "education",
-    description: "Successfully graduated. Awarded degree with honors in computer science."
+    description: "Completed Bachelor of Technology in Computer Science and Engineering, CGPA 8.46/10."
   }
 ];

@@ -5,10 +5,9 @@ export const site = {
   tagline: "Building intelligent products from idea to production.",
   differentiator: "I ship complete AI products, not just AI models.",
   location: "India · Open to Relocation · Open to Remote",
-  status: "Available · 2026",
-  url: "https://buildwithshafia.dev",
+  status: "Available · AI Engineering, GenAI Engineering, Machine Learning Engineering, and Software Engineering opportunities",
   email: "shafiaameeruddin637@gmail.com",
-  linkedin: "https://linkedin.com/in/shafiaameeruddin",
+  linkedin: "https://linkedin.com/in/shafia-ameeruddin01",
   github: "https://github.com/Shafia-01",
   resumePath: "/resume/Shafia_Ameeruddin_AI_Engineer_Resume.pdf",
   techStack: [
@@ -33,7 +32,17 @@ export const site = {
     "MySQL",
     "Scapy",
     "scikit-learn",
-  ],
+  ]
+} as const;
+
+export const hero = {
+  nameDisplay: ["SHAFIA", "AMEERUDDIN"],
+  roleLine: "AI ENGINEER · INDIA",
+  pullQuote: "I ship complete AI products, not just AI models.",
+  supportingCopy: "AI Engineer building intelligent products from idea to production — multimodal tutors, agentic research platforms, and real-time ML systems, shipped full-stack.",
+  availabilityStatement: "Available for AI Engineer roles — AI/ML, GenAI, and Software Engineering. Based in India, open to remote and relocation.",
+  metaDescription: "AI Engineer · GenAI · RAG · Multi-Agent Systems. I ship complete AI products, not just AI models.",
+  introStatement: "I build the full stack around AI: the retrieval pipeline, the orchestration layer, the interface, and the infrastructure that keeps it running. Five shipped products across edtech, market intelligence, retail, security, and entertainment — each one an exercise in taking a model from idea to production."
 } as const;
 
 export const navLinks = [
