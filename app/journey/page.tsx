@@ -92,36 +92,39 @@ export default function JourneyPage() {
                         {item.description}
                       </p>
 
-                      {/* GDG Two-Card Promotion connected units */}
-                      {item.promotionTo && (
-                        <div className="mt-6 pt-6 border-t border-rule relative">
-                          {/* PromotionConnector arrow */}
-                          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-paper px-2 py-0.5 rounded-full border border-rule-strong flex items-center gap-1">
-                            <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep font-bold">
-                              Promotion
+                      {/* GDG Promotion Path badges */}
+                      {item.id === "gdg-pr-associate" && (
+                        <>
+                          <div className="mt-4 pt-3 border-t border-rule/50 flex items-center justify-between">
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">
+                              Promotion Path
                             </span>
-                            <svg
-                              className="w-3 h-3 text-brass"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth="2.5"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M19 13l-7 7-7-7m14-6l-7 7-7-7" />
-                            </svg>
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full flex items-center gap-1 font-bold">
+                              Promoted to Manager ↓
+                            </span>
                           </div>
-
-                          <div className="p-4 bg-linen-deep/20 border border-brass/30 rounded-sm">
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-brass" />
-                              <h4 className="font-display text-headline-sm md:text-headline-md text-ink leading-tight">
-                                {item.promotionTo.title}
-                              </h4>
+                          {/* Visual Promotion Connector (Desktop) */}
+                          <div 
+                            className="hidden md:block absolute left-full top-1/2 w-8 border-y-2 border-r-2 border-dashed border-brass/40 rounded-r-md pointer-events-none"
+                            style={{ height: "38.5rem" }}
+                          >
+                            <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 rotate-90 text-brass">
+                              <svg className="w-3 h-3 fill-brass" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
                             </div>
-                            <p className="mt-3 text-body-sm text-ink-soft leading-relaxed">
-                              {item.promotionTo.description}
-                            </p>
                           </div>
+                        </>
+                      )}
+
+                      {item.id === "gdg-social-media-manager" && (
+                        <div className="mt-4 pt-3 border-t border-rule/50 flex items-center justify-between">
+                          <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">
+                            Promotion Path
+                          </span>
+                          <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full flex items-center gap-1 font-bold">
+                            ↑ Promoted from Associate
+                          </span>
                         </div>
                       )}
                     </div>
