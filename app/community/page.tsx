@@ -25,7 +25,7 @@ export default function CommunityPage() {
         <div className="border-b border-rule pb-12 mb-12">
           <SectionNumber number="05" name="COMMUNITY" />
           <h1 className="mt-6 font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight">
-            Developer ecology.
+            Developer ecology
           </h1>
           <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-2xl leading-relaxed">
             Collaborative leadership, group orchestration, and metrics-driven community impact.
