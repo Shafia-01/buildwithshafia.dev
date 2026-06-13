@@ -57,9 +57,9 @@ export default function CommunityPage() {
               Serving as a bridge between foundational developer groups and academic coordination panels in India.
             </p>
             <div className="mt-6 space-y-2 font-mono text-[10px] text-brass uppercase font-bold">
-              <div>→ GDG Lead manager</div>
-              <div>→ IEEE Coordinator</div>
-              <div>→ Placement officer</div>
+              <div>→ GDG Social Media Manager & Team Lead</div>
+              <div>→ IEEE Student Coordinator</div>
+              <div>→ Placement Cell Student Coordinator</div>
             </div>
           </div>
 

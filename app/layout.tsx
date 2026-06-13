@@ -43,11 +43,10 @@ export const metadata: Metadata = {
     "RAG",
     "LangChain",
     "FastAPI",
-    "Next.js",
+    "Python",
     "Shafia Ameeruddin",
     "Founding Engineer",
-    "Multimodal AI",
-    "Mumbai",
+    "Multimodal AI"
   ],
   authors: [{ name: "Shafia Ameeruddin", url: SITE_URL }],
   creator: "Shafia Ameeruddin",

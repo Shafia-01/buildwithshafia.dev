@@ -37,12 +37,7 @@ export const milestones: Milestone[] = [
     title: "PR & Social Media Associate",
     organization: "Google Developer Groups on Campus, Jamia Hamdard",
     category: "experience",
-    description: "Boosted Instagram engagement by 50% through visually compelling, timely content and campaigns. Coordinated cross-functional execution of digital strategies aligned with 15+ workshops/events per year.",
-    promotionTo: {
-      title: "Social Media Manager",
-      date: "Sep 2024 – Aug 2025",
-      description: "Led a 10-member social media team to execute analytics-driven campaigns, resulting in 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
-    }
+    description: "Boosted Instagram engagement by 50% through visually compelling, timely content and campaigns. Coordinated cross-functional execution of digital strategies aligned with 15+ workshops/events per year."
   },
   {
     id: "placement-cell",
@@ -51,6 +46,14 @@ export const milestones: Milestone[] = [
     organization: "The Department of Placement and Alumni Affairs, Jamia Hamdard",
     category: "experience",
     description: "Facilitated connections between 200+ students and industry recruiters, enhancing placement opportunities through proactive outreach. Coordinated placement activities with cell heads and team members."
+  },
+  {
+    id: "gdg-social-media-manager",
+    date: "Sep 2024 – Aug 2025",
+    title: "Social Media Manager",
+    organization: "Google Developer Groups on Campus, Jamia Hamdard",
+    category: "experience",
+    description: "Led a 10-member social media team to execute analytics-driven campaigns, resulting in 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
   },
   {
     id: "feelcart-shipped",

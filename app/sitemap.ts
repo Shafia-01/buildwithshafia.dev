@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "keylytics",
     "walmart-innovation-suite",
     "mediscan",
-    "ai-threat-detection",
+    "ai-enhanced-cybersecurity-threat-detection",
     "cinescope",
   ];
   return [
