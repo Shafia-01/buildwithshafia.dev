@@ -23,7 +23,7 @@ function matchesFilter(projectSlug: string, filter: string): boolean {
   if (filter === "Full-Stack") return projectSlug === "learnify-ai" || projectSlug === "walmart-innovation-suite" || projectSlug === "cinescope";
   if (filter === "Agentic AI") return projectSlug === "keylytics" || projectSlug === "learnify-ai";
   if (filter === "CV") return projectSlug === "mediscan" || projectSlug === "walmart-innovation-suite";
-  if (filter === "Security") return projectSlug === "ai-threat-detection";
+  if (filter === "Security") return projectSlug === "ai-enhanced-cybersecurity-threat-detection";
   return false;
 }
 

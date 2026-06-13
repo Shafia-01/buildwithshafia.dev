@@ -17,7 +17,7 @@ export default function JourneyPage() {
         <div className="border-b border-rule pb-12 mb-16">
           <SectionNumber number="02" name="THE JOURNEY" />
           <h1 className="mt-6 font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight">
-            Chronology of a builder.
+            Chronology of a builder
           </h1>
           <p className="mt-6 font-editorial italic text-quote text-ink-soft max-w-2xl leading-relaxed">
             <WordStagger text="Tracing the path from foundational computer science theory to shipping agentic systems and multi-modal AI pipelines." />

@@ -280,9 +280,9 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: "ai-threat-detection",
+    slug: "ai-enhanced-cybersecurity-threat-detection",
     order: "05",
-    title: "AI Threat Detection",
+    title: "AI Enhanced Cybersecurity Threat Detection",
     oneLiner: "Watching the wire. In real time.",
     pullQuote: "Analyzing network packets with machine learning to identify rogue Wi-Fi attacks.",
     metrics: [
@@ -298,7 +298,7 @@ export const projects: Project[] = [
       infra: ["Docker", "Linux Capture Engine"]
     },
     problem: "Traditional Wi-Fi intrusion detection systems rely on static signatures that miss zero-day deauthentication attacks, packet flood anomalies, or spoofed AP behavior.",
-    solution: "AI Threat Detection is an independent network sniffing and security utility. It captures local Wi-Fi packets, extracts statistical flow features, and detects anomalous traffic trends using unsupervised anomaly detection models.",
+    solution: "AI Enhanced Cybersecurity Threat Detection is an independent network sniffing and security utility. It captures local Wi-Fi packets, extracts statistical flow features, and detects anomalous traffic trends using unsupervised anomaly detection models.",
     architecture: {
       description: "Network capture adapter feeding a statistical ML evaluation pipeline.",
       steps: [

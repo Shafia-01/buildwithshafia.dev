@@ -37,7 +37,7 @@ const PROJECTS = [
   { label: "KeyLytics", href: "/work/keylytics" },
   { label: "Walmart Innovation Suite", href: "/work/walmart-innovation-suite" },
   { label: "MediScan", href: "/work/mediscan" },
-  { label: "AI Threat Detection", href: "/work/ai-threat-detection" },
+  { label: "AI Enhanced Cybersecurity Threat Detection", href: "/work/ai-enhanced-cybersecurity-threat-detection" },
   { label: "CineScope", href: "/work/cinescope" },
 ];
 

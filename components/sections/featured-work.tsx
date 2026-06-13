@@ -81,7 +81,7 @@ export function FeaturedWork() {
         {/* Hint for remaining */}
         <FadeRise delay={0.15} className="mt-8 text-center md:text-left">
           <MetaLabel>
-            + KeyLytics · Walmart Innovation Suite · MediScan · AI Threat Detection · CineScope →
+            + KeyLytics · Walmart Innovation Suite · MediScan · AI Enhanced Cybersecurity Threat Detection · CineScope →
           </MetaLabel>
         </FadeRise>
       </div>
