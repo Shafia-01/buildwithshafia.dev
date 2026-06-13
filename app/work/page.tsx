@@ -40,7 +40,7 @@ export default function WorkPage() {
           <div>
             <SectionNumber number="03" name="THE WORK" />
             <h1 className="mt-6 font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight">
-              Selected builds.
+              Selected builds
             </h1>
           </div>
 

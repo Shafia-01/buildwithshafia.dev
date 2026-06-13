@@ -62,7 +62,7 @@ export default function ContactPage() {
               className="font-display text-display-md md:text-display-lg text-ink leading-[0.9] tracking-tight block"
             />
             <LetterStagger
-              text="meaningful."
+              text="meaningful"
               className="font-display text-display-md md:text-display-lg text-brass leading-[0.9] tracking-tight block mt-2"
             />
           </div>

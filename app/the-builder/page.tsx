@@ -15,7 +15,7 @@ export default function TheBuilderPage() {
         <div className="border-b border-rule pb-12 mb-16">
           <SectionNumber number="01" name="THE BUILDER" />
           <h1 className="mt-6 font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight">
-            Philosophy of engineering.
+            Philosophy of engineering
           </h1>
         </div>
 

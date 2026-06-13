@@ -23,7 +23,7 @@ export default function LabLandingPage() {
           <h1 className="mt-6 font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight">
             Engineering experiments
           </h1>
-          <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-2xl leading-relaxed">
+          <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-4xl leading-relaxed">
             Shipped microservices, benchmark logs, and technical utility proofs of concept.
           </p>
         </div>

@@ -27,7 +27,7 @@ export default function CommunityPage() {
           <h1 className="mt-6 font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight">
             Developer ecology
           </h1>
-          <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-2xl leading-relaxed">
+          <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-4xl leading-relaxed">
             Collaborative leadership, group orchestration, and metrics-driven community impact.
           </p>
         </div>

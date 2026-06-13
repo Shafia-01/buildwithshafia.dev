@@ -59,7 +59,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 className="font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight"
               />
             </div>
-            <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-3xl leading-snug">
+            <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-4xl leading-snug">
               {project.oneLiner}
             </p>
           </div>

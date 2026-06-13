@@ -17,7 +17,7 @@ export function FeaturedWork() {
           <div>
             <SectionNumber number="03" name="THE FEATURED WORK" />
             <h2 className="mt-6 font-display text-headline-xl md:text-display-md text-ink leading-[0.95] tracking-tight">
-              The crown jewel.
+              The crown jewel
             </h2>
           </div>
           <Link
@@ -67,7 +67,7 @@ export function FeaturedWork() {
                 <h3 className="mt-3 font-display text-headline-lg md:text-display-sm text-ink leading-[1] tracking-tight">
                   {featuredProject.title}
                 </h3>
-                <p className="mt-3 font-editorial italic text-quote text-ink-soft max-w-xl">
+                <p className="mt-3 font-editorial italic text-quote text-ink-soft max-w-4xl">
                   {featuredProject.blurb}
                 </p>
               </div>
