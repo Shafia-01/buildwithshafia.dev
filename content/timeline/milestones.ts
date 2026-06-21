@@ -56,9 +56,9 @@ export const milestones: Milestone[] = [
     description: "Led a 10-member social media team to execute analytics-driven campaigns, resulting in 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
   },
   {
-    id: "feelcart-shipped",
+    id: "cartverse-shipped",
     date: "Feb 2025 – Mar 2025",
-    title: "FeelCart (Walmart Innovation Suite) Shipped",
+    title: "CartVerse Shipped",
     organization: "Independent Project",
     category: "milestone",
     description: "Dual-module AI shopping assistant (MoodCart + AutoCart) using NLP and SerpAPI, boosting recommendation relevance by 45% and reducing decision time by 55%."
@@ -80,9 +80,9 @@ export const milestones: Milestone[] = [
     description: "Engineered a concurrent Python news analytics pipeline processing 494+ headlines from 20 RSS sources (19 headlines/sec, 20% ingestion improvement, 1,877+ sentiment classifications via 3 NLP engines). Developed a real-time OpenCV surveillance system monitoring 4 concurrent camera streams at ~7.4 FPS with 2 motion-detection algorithms and 4 integrity checks. Researched and benchmarked XTTS-v2 and VALL-E-X through 15+ voice-cloning experiments, achieving 0.965 speaker similarity."
   },
   {
-    id: "keylytics-shipped",
+    id: "stratix-shipped",
     date: "Oct 2025 – Nov 2025",
-    title: "KeyLytics Shipped",
+    title: "Stratix Shipped",
     organization: "Independent Project",
     category: "milestone",
     description: "Agentic AI-powered SEO platform automating keyword and SERP analysis, cutting research time by 60%, improving accuracy by 35%, and scaling results to 50+ keywords per query."

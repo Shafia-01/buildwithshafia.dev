@@ -15,10 +15,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   const projects = [
     "learnify-ai",
-    "keylytics",
-    "walmart-innovation-suite",
+    "stratix",
+    "cartverse",
     "mediscan",
-    "ai-enhanced-cybersecurity-threat-detection",
+    "packetwatch",
     "cinescope",
   ];
   return [

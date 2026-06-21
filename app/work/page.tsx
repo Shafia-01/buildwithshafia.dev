@@ -20,10 +20,10 @@ const FILTER_DOMAINS = [
 function matchesFilter(projectSlug: string, filter: string): boolean {
   if (filter === "All") return true;
   if (filter === "AI-RAG") return projectSlug === "learnify-ai";
-  if (filter === "Full-Stack") return projectSlug === "learnify-ai" || projectSlug === "walmart-innovation-suite" || projectSlug === "cinescope";
-  if (filter === "Agentic AI") return projectSlug === "keylytics" || projectSlug === "learnify-ai";
-  if (filter === "CV") return projectSlug === "mediscan" || projectSlug === "walmart-innovation-suite";
-  if (filter === "Security") return projectSlug === "ai-enhanced-cybersecurity-threat-detection";
+  if (filter === "Full-Stack") return projectSlug === "learnify-ai" || projectSlug === "cartverse" || projectSlug === "cinescope";
+  if (filter === "Agentic AI") return projectSlug === "stratix" || projectSlug === "learnify-ai";
+  if (filter === "CV") return projectSlug === "mediscan" || projectSlug === "cartverse";
+  if (filter === "Security") return projectSlug === "packetwatch";
   return false;
 }
 
@@ -118,7 +118,7 @@ export default function WorkPage() {
                               AI-RAG
                             </span>
                           )}
-                          {project.slug === "keylytics" && (
+                          {project.slug === "stratix" && (
                             <span className="px-2 py-0.5 bg-brass-glow text-brass text-[9px] font-mono rounded-sm">
                               AGENTIC AI
                             </span>

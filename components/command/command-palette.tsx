@@ -34,10 +34,10 @@ const NAVIGATE = [
 
 const PROJECTS = [
   { label: "Learnify AI", href: "/work/learnify-ai" },
-  { label: "KeyLytics", href: "/work/keylytics" },
-  { label: "Walmart Innovation Suite", href: "/work/walmart-innovation-suite" },
+  { label: "Stratix", href: "/work/stratix" },
+  { label: "CartVerse", href: "/work/cartverse" },
   { label: "MediScan", href: "/work/mediscan" },
-  { label: "AI Enhanced Cybersecurity Threat Detection", href: "/work/ai-enhanced-cybersecurity-threat-detection" },
+  { label: "PacketWatch", href: "/work/packetwatch" },
   { label: "CineScope", href: "/work/cinescope" },
 ];
 

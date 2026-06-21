@@ -111,9 +111,9 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: "keylytics",
+    slug: "stratix",
     order: "02",
-    title: "KeyLytics",
+    title: "Stratix",
     oneLiner: "Agentic AI Market Intelligence Platform.",
     pullQuote: "Orchestrating autonomous agents to automate deep market research and competitive intelligence.",
     metrics: [
@@ -129,7 +129,7 @@ export const projects: Project[] = [
       infra: ["Redis Queue", "Docker", "PostgreSQL"]
     },
     problem: "Performing comprehensive competitive intelligence requires hours of manual web search, data cleaning, trend correlation, and document drafting. Traditional analytical platforms only display static stats without providing synthesis.",
-    solution: "KeyLytics orchestrates a network of autonomous agents using LangGraph-style state charts. Agents self-correct, partition research duties, scrape search engines, evaluate competitor landing pages, and write publishable intelligence briefs.",
+    solution: "Stratix orchestrates a network of autonomous agents using LangGraph-style state charts. Agents self-correct, partition research duties, scrape search engines, evaluate competitor landing pages, and write publishable intelligence briefs.",
     architecture: {
       description: "Multi-agent coordinator system based on state-sharing graph cycles.",
       steps: [
@@ -165,13 +165,13 @@ export const projects: Project[] = [
       "Integrate PPTX/PDF export templates for instant presentations."
     ],
     links: {
-      github: "https://github.com/Shafia-01/Keylytics"
+      github: "https://github.com/Shafia-01/Stratix"
     }
   },
   {
-    slug: "walmart-innovation-suite",
+    slug: "cartverse",
     order: "03",
-    title: "Walmart Innovation Suite",
+    title: "CartVerse",
     oneLiner: "Emotion-based shopping and auto-reconciliation engine.",
     pullQuote: "Shop what you feel — reimagining commerce around emotional resonance.",
     metrics: [
@@ -187,7 +187,7 @@ export const projects: Project[] = [
       infra: ["Docker"]
     },
     problem: "Shopping apps treat every user the same — no signal for mood, urgency, or buying patterns — leaving recommendation engines generic and cart-building entirely manual.",
-    solution: "FeelCart unifies two engines into a single platform. MoodCart uses NLP to interpret a user's emotional state and maps it to product categories via SerpAPI-driven search. AutoCart analyzes purchase frequency, refill cycles, and trend signals to auto-generate carts.",
+    solution: "CartVerse unifies two engines into a single platform. MoodCart uses NLP to interpret a user's emotional state and maps it to product categories via SerpAPI-driven search. AutoCart analyzes purchase frequency, refill cycles, and trend signals to auto-generate carts.",
     architecture: {
       description: "Signal capture (emotional input or purchase history) flows into engine-specific processing before reaching a shared cart UI.",
       steps: [
@@ -199,7 +199,7 @@ export const projects: Project[] = [
       ]
     },
     engineeringDecisions: [
-      { title: "Unified FeelCart Core Architecture", description: "Combined MoodCart and AutoCart into a single diptych platform, sharing the SerpAPI-driven recommendation infrastructure." },
+      { title: "Unified CartVerse Core Architecture", description: "Combined MoodCart and AutoCart into a single diptych platform, sharing the SerpAPI-driven recommendation infrastructure." },
       { title: "Emotion Signal Processing (MoodCart)", description: "NLP-based classification of emotional input mapped directly to SerpAPI product search queries, lifting recommendation relevance by 45% and cutting decision time by 55%." },
       { title: "Behavior-Driven Cart Automation (AutoCart)", description: "Purchase frequency, refill logic, and trend signals drive automated cart generation, accelerating cart creation by 70% with 50% accuracy on recurring items." }
     ],
@@ -219,7 +219,7 @@ export const projects: Project[] = [
     ],
     roadmap: [],
     links: {
-      github: "https://github.com/Shafia-01/FeelCart-Shop-What-You-Feel"
+      github: "https://github.com/Shafia-01/CartVerse"
     }
   },
   {
@@ -280,9 +280,9 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: "ai-enhanced-cybersecurity-threat-detection",
+    slug: "packetwatch",
     order: "05",
-    title: "AI Enhanced Cybersecurity Threat Detection",
+    title: "PacketWatch",
     oneLiner: "Watching the wire. In real time.",
     pullQuote: "Analyzing network packets with machine learning to identify rogue Wi-Fi attacks.",
     metrics: [
@@ -298,7 +298,7 @@ export const projects: Project[] = [
       infra: ["Docker", "Linux Capture Engine"]
     },
     problem: "Traditional Wi-Fi intrusion detection systems rely on static signatures that miss zero-day deauthentication attacks, packet flood anomalies, or spoofed AP behavior.",
-    solution: "AI Enhanced Cybersecurity Threat Detection is an independent network sniffing and security utility. It captures local Wi-Fi packets, extracts statistical flow features, and detects anomalous traffic trends using unsupervised anomaly detection models.",
+    solution: "PacketWatch is an independent network sniffing and security utility. It captures local Wi-Fi packets, extracts statistical flow features, and detects anomalous traffic trends using unsupervised anomaly detection models.",
     architecture: {
       description: "Network capture adapter feeding a statistical ML evaluation pipeline.",
       steps: [
@@ -333,7 +333,7 @@ export const projects: Project[] = [
       "Integrate Telegram alert bots."
     ],
     links: {
-      github: "https://github.com/Shafia-01/AI-Enhanced-Cybersecurity-Threat-Detection"
+      github: "https://github.com/Shafia-01/PacketWatch"
     }
   },
   {
