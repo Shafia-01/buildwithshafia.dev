@@ -83,12 +83,14 @@ export default function LabLandingPage() {
             </div>
 
             <div className="max-w-xl">
-              {edunetItems.map((item, idx) => (
-                <FadeRise key={item.slug} delay={idx * 0.05}>
-                  <Link
-                    href={`/lab/${item.slug}`}
-                    className="group block p-6 border border-rule-strong bg-paper-soft hover:border-brass transition-all duration-base flex flex-col justify-between rounded-sm"
-                  >
+              {edunetItems.map((item, idx) => {
+                const href = item.slug === "cinescope-build-journey" ? "/work/cinescope" : `/lab/${item.slug}`;
+                return (
+                  <FadeRise key={item.slug} delay={idx * 0.05}>
+                    <Link
+                      href={href}
+                      className="group block p-6 border border-rule-strong bg-paper-soft hover:border-brass transition-all duration-base flex flex-col justify-between rounded-sm"
+                    >
                     <div>
                       <MetaLabel className="text-brass">01 · INTERNSHIP BUILD</MetaLabel>
                       <h3 className="font-display text-headline-sm text-ink mt-3 group-hover:text-brass transition-colors leading-tight">
@@ -113,7 +115,8 @@ export default function LabLandingPage() {
                     </div>
                   </Link>
                 </FadeRise>
-              ))}
+              );
+            })}
             </div>
           </section>
         </div>

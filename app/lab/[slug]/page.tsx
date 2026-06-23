@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Beaker, CheckCircle2 } from "lucide-react";
 import { labItems } from "@/content/lab";
@@ -28,11 +28,15 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function LabDetailPage({ params }: Props) {
   const { slug } = await params;
+  if (slug === "cinescope-build-journey") {
+    redirect("/work/cinescope");
+  }
   const itemIndex = labItems.findIndex((p) => p.slug === slug);
   if (itemIndex === -1) notFound();
 
   const item = labItems[itemIndex];
   const nextItem = labItems[(itemIndex + 1) % labItems.length];
+  const nextItemHref = nextItem.slug === "cinescope-build-journey" ? "/work/cinescope" : `/lab/${nextItem.slug}`;
 
   return (
     <main className="min-h-screen pt-28 pb-24 px-6 lg:px-12 bg-paper text-ink">
@@ -155,7 +159,7 @@ export default async function LabDetailPage({ params }: Props) {
 
             {/* Next Lab Item Card */}
             <Link
-              href={`/lab/${nextItem.slug}`}
+              href={nextItemHref}
               className="block p-6 border border-rule-strong bg-paper-soft hover:border-brass hover:shadow-sm transition-all duration-base group rounded-sm"
             >
               <MetaLabel className="text-brass">Up Next →</MetaLabel>

@@ -8,6 +8,15 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/lab/cinescope-build-journey",
+        destination: "/work/cinescope",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
