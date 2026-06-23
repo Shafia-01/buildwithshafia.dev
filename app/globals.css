@@ -9,18 +9,18 @@
   --paper-soft: #faf6ec;
   --linen: #eae3d2;
   --linen-deep: #ddd3bd;
-  --ink: #061113;
-  --ink-soft: #0d1e21;
-  --ink-muted: #323d40;
-  --ink-whisper: #535e61;
-  --ocean: #20394f;
-  --ocean-soft: #385573;
-  --brass: #a26b2d;
-  --brass-deep: #85551e;
-  --brass-glow: rgba(162, 107, 45, 0.18);
-  --rule: rgba(6, 17, 19, 0.12);
-  --rule-strong: rgba(6, 17, 19, 0.24);
-  --success: #446853;
+  --ink: #000000;
+  --ink-soft: #081113;
+  --ink-muted: #242e30;
+  --ink-whisper: #455052;
+  --ocean: #162736;
+  --ocean-soft: #283e54;
+  --brass: #8f5d24;
+  --brass-deep: #704616;
+  --brass-glow: rgba(143, 93, 36, 0.18);
+  --rule: rgba(0, 0, 0, 0.15);
+  --rule-strong: rgba(0, 0, 0, 0.28);
+  --success: #355341;
 
   /* Grain layer opacity */
   --grain-opacity: 0.035;
@@ -64,6 +64,7 @@ body {
   color: var(--ink);
   font-family: var(--font-inter), system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
+  font-weight: 450;
   position: relative;
   overflow-x: hidden;
 }

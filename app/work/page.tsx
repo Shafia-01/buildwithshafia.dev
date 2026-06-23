@@ -16,6 +16,15 @@ const FILTER_DOMAINS = [
   { label: "Security", value: "Security" }
 ];
 
+const PROJECT_TOP_TECH: Record<string, string[]> = {
+  "learnify-ai": ["FastAPI", "React", "LangChain", "FAISS", "MongoDB", "Ollama"],
+  "stratix": ["LangGraph", "LangChain", "FastAPI", "Streamlit", "SQLite"],
+  "cartverse": ["Python", "Streamlit", "Transformers", "SerpAPI", "MySQL"],
+  "mediscan": ["PyTorch", "Streamlit", "ResNet18", "PyMuPDF", "SSRF Protection"],
+  "packetwatch": ["Python", "Streamlit", "Scapy", "scikit-learn", "Npcap"],
+  "cinescope": ["Vanilla JS", "Node.js", "Express.js", "OMDb API", "localStorage"]
+};
+
 // Helper to check if a project belongs to a domain tag filter
 function matchesFilter(projectSlug: string, filter: string): boolean {
   if (filter === "All") return true;
@@ -135,7 +144,7 @@ export default function WorkPage() {
 
                     <div className="mt-4 pt-4 border-t border-rule flex items-center justify-between">
                       <div className="flex gap-2 flex-wrap">
-                        {project.stack.aiml.slice(0, 2).map((tech) => (
+                        {PROJECT_TOP_TECH[project.slug]?.slice(0, 5).map((tech) => (
                           <span key={tech} className="font-mono text-[9px] text-ink-muted">
                             {tech}
                           </span>

@@ -224,7 +224,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               <h2 className="font-display text-headline-lg text-ink border-b border-rule pb-2">
                 Performance Benchmarks
               </h2>
-              <ul className="grid sm:grid-cols-3 gap-4">
+              <ul className="grid sm:grid-cols-2 gap-4">
                 {project.performance.map((metric, i) => (
                   <li key={i} className="p-4 bg-linen-deep/10 border border-rule-strong rounded-sm text-center">
                     <span className="font-mono text-meta-xs text-brass-deep block mb-1">METRIC 0{i + 1}</span>
