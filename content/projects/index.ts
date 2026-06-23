@@ -45,10 +45,11 @@ export const projects: Project[] = [
     oneLiner: "Multimodal AI tutor with emotion-aware adaptive learning and RAG-powered document chat.",
     pullQuote: "Personalizing academic study using real-time affective computing, retrieval-augmented generation, and gamified quizzing.",
     metrics: [
-      "Sub-2-second Groq LLaMA inference path for RAG responses on typical chunk sets",
-      "FAISS IndexFlatL2 exact nearest-neighbor search across thousands of chunks without a separate vector database process",
-      "On-device Whisper base model transcription with no audio data sent to external APIs",
-      "Emotion smoothing deque reduces false-positive intervention triggers across 5-frame majority vote window"
+      "3x faster contextual retrieval",
+      "3 swappable LLMs",
+      "5 difficulty tiers",
+      "6 AI-mini-games",
+      "40% personalization improvement"
     ],
     stack: {
       backend: [
@@ -186,10 +187,10 @@ export const projects: Project[] = [
     oneLiner: "Autonomous multi-agent market intelligence platform.",
     pullQuote: "Re-imagining SEO research through stateful, multi-agent orchestration.",
     metrics: [
-      "Six-tool registry with uniform dispatch",
-      "Retry-safe external API calls",
-      "Dual-container deployment",
-      "In-process Prometheus-compatible metrics"
+      "7-node LangGraph pipeline",
+      "6 tools executed",
+      "173 test cases",
+      "100% core test coverage"
     ],
     stack: {
       backend: [
@@ -309,10 +310,10 @@ export const projects: Project[] = [
     oneLiner: "Mood-aware and habit-driven shopping assistant for Walmart product discovery.",
     pullQuote: "Personalizing retail discovery using emotional state and purchase history.",
     metrics: [
-      "SerpAPI responses cached for 3600 seconds per query to minimize quota usage",
-      "Retry loop handles rate-limit (429) responses with configurable delay and attempt count",
-      "Lazy classifier loading defers DistilBERT initialization until first mood submission",
-      "Direct keyword lookup resolves common moods without invoking the ML model"
+      "2 independent pipelines",
+      "3-tier sentiment fallback",
+      "26 emotional states mapped",
+      "3600-second query cache TTL"
     ],
     stack: {
       backend: [
@@ -427,10 +428,10 @@ export const projects: Project[] = [
     oneLiner: "Medical vs. non-medical image classifier built on fine-tuned ResNet18 with multi-modal input support.",
     pullQuote: "Automating clinical image triage through staged transfer learning and confidence-aware inference.",
     metrics: [
-      "100% accuracy on 101-image validation set (medical and non_medical, threshold 0.60, TTA disabled)",
-      "~52 ms average inference time per image on CPU (ResNet18, no TTA)",
-      "TTA doubles per-image inference cost; --no-tta flag available for throughput-sensitive runs",
-      "PDF and URL extraction capped at 50 images per source; files under 100 bytes skipped automatically"
+      "12 fine-tuning epochs",
+      "100% classification accuracy",
+      "102ms average inference latency",
+      "2 interface modes (Streamlit & CLI)"
     ],
     stack: {
       backend: [
@@ -548,10 +549,10 @@ export const projects: Project[] = [
     oneLiner: "Watching the wire. In real time.",
     pullQuote: "Detecting network threats through ML-driven packet analysis.",
     metrics: [
-      "Sub-second inference on 100-row CSV uploads",
-      "O(n) feature extraction scaling linearly with packet count",
-      "20-second capture window optimized for flow-level statistical stability",
-      "Single-process deployment with no external service dependencies"
+      "27 statistical flow features",
+      "Sub-second CSV inference",
+      "20-second live capture window",
+      "100 Random Forest estimators"
     ],
     stack: {
       backend: [
@@ -660,10 +661,10 @@ export const projects: Project[] = [
     oneLiner: "Developed and deployed CineScope, a full-stack movie discovery platform with a secure Express proxy backend and 8 user-facing features.",
     pullQuote: "Integrating the OMDb API to deliver search, reviews, ratings, and personalized watchlists with robust server-side security.",
     metrics: [
-      "8 user-facing features including search, reviews, ratings, and personalized watchlists",
-      "6 request validation checks and 3 API error recovery mechanisms",
-      "5 production-critical deployment issues resolved for maximum reliability",
-      "Secure Express proxy architecture to protect private API key credentials"
+      "8 user-facing features",
+      "6 request validation checks",
+      "3 error recovery mechanisms",
+      "5 production-critical issues resolved"
     ],
     stack: {
       backend: [
