@@ -29,7 +29,7 @@ export const milestones: Milestone[] = [
     title: "Student Coordinator",
     organization: "IEEE Jamia Hamdard Student Branch",
     category: "achievement",
-    description: "Designed 10+ visual assets including event posters, invitations, and the IEEE JHSB Annual Magazine cover. Hosted 5+ flagship events including Think Tank Trivia (Technozova 4.0) and Hack-IEEE-thon RPA Bootcamp. Contributed to 25+ flagship events impacting 700+ participants, boosting engagement and branch visibility by 40% and event participation by 30%."
+    description: "Contributed to 25+ flagship IEEE events impacting 700+ participants, boosting engagement and branch visibility by 40% and event participation by 30% through design support, hosting, and cross-functional coordination."
   },
   {
     id: "gdg-pr-associate",
@@ -53,7 +53,7 @@ export const milestones: Milestone[] = [
     title: "Social Media Manager",
     organization: "Google Developer Groups on Campus, Jamia Hamdard",
     category: "experience",
-    description: "Led a 10-member social media team to execute analytics-driven campaigns, resulting in 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
+    description: "Led a 10-member social media team, revamping the organization's social media presence and executing data-driven content strategies, driving 85% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
   },
   {
     id: "cartverse-shipped",

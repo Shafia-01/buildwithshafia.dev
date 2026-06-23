@@ -29,8 +29,8 @@ export const communityNetwork: NetworkConnection[] = [
         label: "Social Media Manager",
         date: "Sep 2024 – Aug 2025",
         subImpacts: [
-          "Led a 10-member social media team executing analytics-driven campaigns.",
-          "Drove 65% growth in digital reach and 40% higher content efficiency.",
+          "Led a 10-member social media team, revamping the organization's social media presence and executing data-driven content strategies.",
+          "Drove 85% growth in digital reach and 40% higher content efficiency.",
           "Secured 5+ new industry partnerships."
         ]
       }
@@ -46,7 +46,7 @@ export const communityNetwork: NetworkConnection[] = [
         subImpacts: [
           "Designed 10+ visual assets including event posters, invitations, and the IEEE JHSB Annual Magazine cover.",
           "Hosted 5+ flagship events including Think Tank Trivia (Technozova 4.0) and Hack-IEEE-thon RPA Bootcamp.",
-          "Contributed to 25+ flagship events impacting 700+ participants, boosting engagement and branch visibility by 40% and event participation by 30%."
+          "Contributed to 25+ flagship IEEE events impacting 700+ participants, boosting engagement and branch visibility by 40% and event participation by 30% through cross-functional coordination."
         ]
       }
     ]
@@ -82,8 +82,10 @@ export const communityNetwork: NetworkConnection[] = [
 ];
 
 export const communityStats = [
-  { metric: "65%", label: "Digital reach growth (GDG)" },
+  { metric: "85%", label: "Digital reach growth (GDG)" },
   { metric: "40%", label: "Content efficiency lift (GDG)" },
+  { metric: "5+", label: "New industry partnerships (GDG)" },
   { metric: "30%", label: "Event participation lift (IEEE)" },
-  { metric: "700+", label: "Participants reached (IEEE)" }
+  { metric: "700+", label: "Participants reached (IEEE)" },
+  { metric: "25+", label: "Flagship events contribution (IEEE)" }
 ];
