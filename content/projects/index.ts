@@ -15,7 +15,10 @@ export interface Project {
   solution: string;
   architecture: {
     description: string;
-    steps: string[];
+    steps: {
+      title: string;
+      description: string;
+    }[];
   };
   engineeringDecisions: {
     title: string;
@@ -39,72 +42,138 @@ export const projects: Project[] = [
     slug: "learnify-ai",
     order: "01",
     title: "Learnify AI",
-    oneLiner: "Multimodal AI tutor with emotion-aware adaptive learning.",
-    pullQuote: "Personalizing education through real-time emotional and cognitive alignment.",
+    oneLiner: "Multimodal AI tutor with emotion-aware adaptive learning and RAG-powered document chat.",
+    pullQuote: "Personalizing academic study using real-time affective computing, retrieval-augmented generation, and gamified quizzing.",
     metrics: [
-      "3× Retrieval Speedup",
-      "40% Personalization Lift",
-      "6 AI-mini-games,",
-      "0.0% System Downtime"
+      "Sub-2-second Groq LLaMA inference path for RAG responses on typical chunk sets",
+      "FAISS IndexFlatL2 exact nearest-neighbor search across thousands of chunks without a separate vector database process",
+      "On-device Whisper base model transcription with no audio data sent to external APIs",
+      "Emotion smoothing deque reduces false-positive intervention triggers across 5-frame majority vote window"
     ],
     stack: {
-      backend: ["FastAPI", "Python", "WebSockets"],
-      frontend: ["React", "JavaScript", "Tailwind CSS"],
-      aiml: ["FAISS", "LangChain", "Gemini", "Groq", "Ollama", "Whisper Speech-to-Text"],
-      infra: ["Docker", "MongoDB"]
+      backend: [
+        "FastAPI",
+        "Pydantic / pydantic-settings",
+        "Motor (async MongoDB driver)",
+        "SlowAPI (rate limiting)",
+        "python-jose (JWT)",
+        "bcrypt (password hashing)",
+        "pdfplumber",
+        "python-pptx",
+        "httpx",
+        "anyio"
+      ],
+      frontend: [
+        "React 19",
+        "Vite 8",
+        "Tailwind CSS 4",
+        "D3.js (force-directed knowledge graph)",
+        "Recharts (analytics charts)",
+        "Axios (HTTP client with Bearer interceptor)",
+        "React Router v7",
+        "react-webcam"
+      ],
+      aiml: [
+        "LangChain (chains, prompts, output parsers)",
+        "all-MiniLM-L6-v2 (sentence-transformers)",
+        "FAISS (faiss-cpu, IndexFlatL2)",
+        "DeepFace (facial emotion analysis)",
+        "OpenCV (frame decoding)",
+        "Whisper (local ASR, openai-whisper)",
+        "gTTS (multilingual TTS)",
+        "NLTK (noun-phrase extraction)",
+        "NetworkX (knowledge graph)"
+      ],
+      infra: [
+        "MongoDB (Motor async, 11 collections)",
+        "FAISS IndexFlatL2 (in-process vector store)",
+        "JSON sidecar (chunk_id mapping)",
+        "Docker (multi-stage build)",
+        "Hugging Face Spaces (Docker SDK)",
+        "GitHub Actions (CI/CD deploy workflow)",
+        "Uvicorn"
+      ]
     },
-    problem: "Traditional online learning platforms offer a flat, one-size-fits-all experience. They fail to adapt to a student's emotional state, cognitive pacing, or immediate points of confusion, leading to disengagement and suboptimal retention.",
-    solution: "Learnify AI transforms online learning by building a multimodal AI tutor that actively listens, analyzes emotional cues via speech/text inputs, and adapts its pedagogical style on the fly using a hot-swappable LLM pipeline and structured RAG system.",
+    problem: "Static learning platforms deliver identical content regardless of a student's current knowledge level, emotional state, or uploaded materials. Generic AI chat wrappers lack source grounding, producing hallucinated answers without citations. Deploying ML inference—speech transcription, facial emotion detection, vector search—across cloud services introduces privacy risk, latency, and API cost. Most projects also ignore the cold-start problem: ephemeral container hosts lose in-memory vector indexes on restart, breaking retrieval entirely.",
+    solution: "Learnify AI ingests PDFs, PPTs, and text files into a local FAISS vector store, answers questions using a user-scoped RAG pipeline with level-adaptive prompts, and cites exact source pages. DeepFace runs asynchronously over WebSocket to detect confusion or fatigue and trigger interventions. Whisper handles on-device speech transcription. A gamification layer tracks XP, streaks, and badges. On container restart, the system auto-rebuilds the FAISS index from MongoDB, ensuring continuity across ephemeral deployments.",
     architecture: {
-      description: "A dual-pathway processing loop connecting WebSocket-based real-time analysis with an orchestrator.",
+      description: "Sequential ingestion-to-retrieval pipeline with async emotion loop and runtime LLM hot-swapping.",
       steps: [
-        "User sends voice or text input via WebSockets to the FastAPI backend.",
-        "Speech is parsed using Whisper; emotion classifier determines frustration/engagement metrics.",
-        "LangChain orchestrator queries FAISS vector store for contextual curriculum material.",
-        "Response generator routes prompt to the optimal model (Groq for sub-100ms replies, Gemini for heavy multi-step analysis).",
-        "Adaptive audio-visual feedback is streamed back to the client interface."
+        {
+          title: "Document Ingestion",
+          description: "Uploaded files are parsed with pdfplumber, python-pptx, or paragraph splitting, then chunked to 500 characters with 50-character overlap using RecursiveCharacterTextSplitter."
+        },
+        {
+          title: "Embedding and Indexing",
+          description: "all-MiniLM-L6-v2 generates 384-dimensional vectors locally. Embeddings are added to a FAISS IndexFlatL2; a JSON sidecar maps integer positions to chunk_id strings."
+        },
+        {
+          title: "RAG Query Execution",
+          description: "The query is embedded, FAISS returns 50 candidates, MongoDB filters by user_id, results are reranked by distance, and the top 5 chunks are injected into a level-specific prompt."
+        },
+        {
+          title: "LLM Generation",
+          description: "LangChain chains route to Gemini, Groq, or local Ollama based on runtime_config. Responses are parsed with regex to extract clean answer text and structured citation objects."
+        },
+        {
+          title: "Emotion Intervention Loop",
+          description: "Browser sends base64 webcam frames over WebSocket every two seconds. DeepFace runs in an asyncio thread; a 5-frame majority-vote deque smooths noisy predictions before dispatching interventions."
+        }
       ]
     },
     engineeringDecisions: [
       {
-        title: "Multi-LLM Hot-Swappable Pipeline",
-        description: "Built a dynamic provider router that measures latency and model health, automatically routing conversational prompts to Groq (sub-150ms feedback loops) and complex logical evaluations to Gemini 1.5 Pro."
+        title: "JSON Sidecar for FAISS Deletion",
+        description: "FAISS IndexFlatL2 has no native string ID support. A parallel JSON sidecar maps sequential integer indices to chunk_id strings, enabling targeted remove_ids() calls without full index rebuilds. The tradeoff is a second file write on every insert or delete."
       },
       {
-        title: "WebSocket-based Emotion Pipeline",
-        description: "Implemented a full-duplex WebSocket communication channel to stream audio chunks and text metadata simultaneously, allowing real-time tone analysis without blocking response generation."
+        title: "Auto-Rebuild on Ephemeral Hosts",
+        description: "Hugging Face Spaces discard local files on restart. sync_faiss_with_db() detects a missing index at startup and regenerates embeddings from MongoDB chunks, recovering the RAG pipeline automatically at the cost of startup latency on cold containers."
       },
       {
-        title: "Vector DB Optimization via FAISS",
-        description: "Optimized RAG retrieval by implementing parent-child document chunking and custom metadata filtering, resulting in a 3x speedup in indexing and search."
+        title: "Privacy Mode Hard Block",
+        description: "When privacy mode is active, get_llm() raises RuntimeError rather than silently falling back to cloud APIs. This prevents data leakage at the cost of availability when Ollama is unreachable, a deliberate tradeoff chosen for privacy guarantees."
       },
       {
-        title: "Hybrid Memory Management",
-        description: "Designed a two-tiered memory mechanism combining Redis for ephemeral session variables (emotion scores, temporary prompts) and MongoDB for persistent historical transcripts."
+        title: "Decoupled Emotion Analysis Thread",
+        description: "DeepFace inference takes up to 1.5 seconds per frame. Running it inside asyncio.to_thread() decouples it from the WebSocket receive loop, keeping the connection alive and the video preview smooth without blocking the event loop."
       },
       {
-        title: "Robust Fallback Mechanism",
-        description: "Configured local Ollama instances as local safety nets. If upstream API rate limits hit, the system drops down to a quantized local model without interrupting the study session."
+        title: "User-Scoped Vector Retrieval",
+        description: "A shared FAISS index stores all users' chunks. Post-retrieval filtering in MongoDB by user_id enforces data isolation. Fetching 50 candidates rather than 5 compensates for filtered-out records from other users."
       }
     ],
     features: [
-      { title: "Emotion-Aware Orchestrator", description: "Adjusts tone, explanation style, and complexity based on client engagement levels." },
-      { title: "Multimodal Inputs", description: "Seamlessly accepts voice notes, documents, text, and images for unified analysis." },
-      { title: "Intelligent Dashboard", description: "Provides granular charts on cognitive progress, retention rates, and focus zones." },
-      { title: "Interactive Sandbox", description: "Allows students to run code snippets and receive immediate feedback from the tutor." }
+      {
+        title: "Level-Adaptive RAG Responses",
+        description: "Three distinct PromptTemplates (beginner, intermediate, advanced) adjust explanation depth and vocabulary. The active template is selected per request based on stored user level."
+      },
+      {
+        title: "Real-Time Emotion Interventions",
+        description: "WebSocket streams webcam frames to DeepFace. Detected confusion triggers a quiz difficulty reduction and simplification mode; fatigue triggers a break recommendation; frustration triggers an analogy-based explanation."
+      },
+      {
+        title: "Runtime LLM Hot-Swapping",
+        description: "A mutable runtime_config singleton allows switching between Gemini, Groq, and Ollama mid-session via a POST endpoint, persisting the preference to MongoDB without restarting the server."
+      },
+      {
+        title: "Gamified Content-Driven Mini-Games",
+        description: "Six games (Snake Quiz, Falling Quiz, Memory Match, Word Scramble, Flashcard Flip, Tic-Tac-Toe) generate questions and vocabulary by sampling the user's own uploaded document chunks through the LLM."
+      }
     ],
     performance: [
-      "Sub-150ms initial token latency on Groq API routes.",
-      "94% accuracy in sentiment classification across active audio streams.",
-      "Handles up to 150 concurrent WebSocket sessions per instance."
+      "Sub-2-second Groq LLaMA inference path for RAG responses on typical chunk sets",
+      "FAISS IndexFlatL2 exact nearest-neighbor search across thousands of chunks without a separate vector database process",
+      "On-device Whisper base model transcription with no audio data sent to external APIs",
+      "Emotion smoothing deque reduces false-positive intervention triggers across 5-frame majority vote window"
     ],
     lessons: [
-      "Streaming audio over WebSockets requires carefully tuned frame buffers to prevent packet dropping.",
-      "Prompt engineering alone is insufficient for steady emotional alignment; structured schema parsing is required."
+      "Ephemeral container storage breaks stateful ML indexes silently; startup validation and auto-rebuild are necessary, not optional, for any vector store deployed on serverless infrastructure.",
+      "Decoupling CPU-bound ML inference from the async event loop with asyncio.to_thread is straightforward but requires careful state management to avoid race conditions when multiple WebSocket sessions share session buffers."
     ],
     roadmap: [
-      "Integrate local voice synthesis to provide speech replies under 100ms.",
-      "Expand curriculum coverage to advanced quantitative reasoning subjects."
+      "Migrate FAISS IndexFlatL2 to IndexIVFFlat to maintain sub-millisecond retrieval as chunk counts exceed 100k, and partition indexes by user to prevent under-retrieval from cross-user filtering.",
+      "Replace synchronous LLM chain invocations with Server-Sent Events streaming to deliver token-by-token output to the frontend, reducing perceived latency on longer analytical responses."
     ],
     links: {
       github: "https://github.com/Shafia-01/Learnify-AI"
@@ -114,55 +183,120 @@ export const projects: Project[] = [
     slug: "stratix",
     order: "02",
     title: "Stratix",
-    oneLiner: "Agentic AI Market Intelligence Platform.",
-    pullQuote: "Orchestrating autonomous agents to automate deep market research and competitive intelligence.",
+    oneLiner: "Autonomous multi-agent market intelligence platform.",
+    pullQuote: "Re-imagining SEO research through stateful, multi-agent orchestration.",
     metrics: [
-      "60% Time Saved",
-      "50+ Target Keywords",
-      "<30s Strategy Delivery",
-      "45% Latency Reduction"
+      "Six-tool registry with uniform dispatch",
+      "Retry-safe external API calls",
+      "Dual-container deployment",
+      "In-process Prometheus-compatible metrics"
     ],
     stack: {
-      backend: ["Python", "FastAPI", "LangGraph", "LangChain"],
-      frontend: ["Next.js 14", "TypeScript", "Tailwind CSS"],
-      aiml: ["OpenAI GPT-4o", "Claude 3.5 Sonnet", "Cohere ReRank"],
-      infra: ["Redis Queue", "Docker", "PostgreSQL"]
+      backend: [
+        "FastAPI",
+        "Pydantic v2",
+        "SQLAlchemy",
+        "APScheduler",
+        "Tenacity"
+      ],
+      frontend: [
+        "Streamlit",
+        "Plotly"
+      ],
+      aiml: [
+        "LangGraph",
+        "LangChain Core",
+        "langchain-google-genai (Gemini)",
+        "LangSmith"
+      ],
+      infra: [
+        "SQLite (WAL mode)",
+        "Docker",
+        "Docker Compose",
+        "Uvicorn",
+        "GitHub Actions CI"
+      ]
     },
-    problem: "Performing comprehensive competitive intelligence requires hours of manual web search, data cleaning, trend correlation, and document drafting. Traditional analytical platforms only display static stats without providing synthesis.",
-    solution: "Stratix orchestrates a network of autonomous agents using LangGraph-style state charts. Agents self-correct, partition research duties, scrape search engines, evaluate competitor landing pages, and write publishable intelligence briefs.",
+    problem: "SEO and market research tools typically return raw, disconnected data — keyword lists, SERP snippets, competitor rankings — and leave the analyst to manually cross-reference them into a strategy. Each data source (search volume, SERP structure, competitor gaps, trends) has different reliability, and tools rarely expose how confident their own output is. The result is research workflows that require constant manual judgment calls about which data to trust, with no systematic way to catch incomplete or low-quality findings before they influence a final recommendation.",
+    solution: "Stratix runs keyword research through a seven-node LangGraph pipeline: a planner drafts a research scope, a ReAct agent executes registered tools (keyword research, SERP analysis, competitor gap, trend forecasting, topic clustering, intent classification), a deterministic aggregator computes per-tool confidence scores, a quality gate enforces minimum data thresholds, an adversarial critic LLM reviews findings for weak claims, and a strategy agent synthesizes a report. Human-in-the-loop interrupts pause execution for plan and report approval, with state checkpointed via SqliteSaver so runs survive restarts.",
     architecture: {
-      description: "Multi-agent coordinator system based on state-sharing graph cycles.",
+      description: "Seven-node LangGraph state machine with two human-in-the-loop interrupts and two retry loops.",
       steps: [
-        "User requests research on a specific keyword or competitor set.",
-        "Planner agent splits request into search tasks and assigns them to worker agents.",
-        "Scraper agents execute concurrent requests and feed raw HTML into cleaner agents.",
-        "Synthesis agent runs evaluations, calls Cohere ReRank, and resolves duplicates.",
-        "Writer agent compiles findings into a standardized markdown executive report."
+        {
+          title: "Planning",
+          description: "planner_node calls Gemini to produce a structured ResearchPlan (objectives, requested modules, max_keywords) as JSON, falling back to a default plan on parse failure, then interrupts for human approval."
+        },
+        {
+          title: "Research Execution",
+          description: "research_agent_node runs a LangChain create_react_agent against six StructuredTool adapters backed by invoke_tool(), which validates input via Pydantic and returns errors as structured dicts instead of raising."
+        },
+        {
+          title: "Aggregation & Confidence Scoring",
+          description: "aggregator_node deterministically builds IntelligenceFindings from collected tool outputs and computes a 0.0–1.0 confidence score per tool using rule-based rubrics (fill ratio, result counts, gap scores)."
+        },
+        {
+          title: "Quality Gate & Critic",
+          description: "quality_gate_node enforces minimum keyword count and confidence thresholds before an LLM-based critic_node reviews findings for weak claims and data gaps, routing back to research on REVISE verdicts within a retry budget."
+        },
+        {
+          title: "Strategy Synthesis & Persistence",
+          description: "strategy_agent_node synthesizes a StrategyReport via Gemini, interrupts for report approval, then persist_node saves keyword findings to SQLite and triggers LLM-as-judge evaluation of plan, report, and tool reliability."
+        }
       ]
     },
     engineeringDecisions: [
-      { title: "Stateful Agent Coordination via LangGraph", description: "Replaced linear chaining with directed acyclic graphs, letting agents loop back for validation if search quality checks fail." },
-      { title: "Hybrid Intent Classifier", description: "Designed a fast classifier that routes simple lookup queries directly to search APIs, saving LLM tokens and cutting latency by 45%." },
-      { title: "Credit-Preservation Auto-Switch", description: "Implemented cost-aware routing that drops to cheaper model endpoints when API budgets approach daily thresholds." },
-      { title: "Multi-Module Pipeline Orchestration", description: "Structured worker processes asynchronously to run web scraping, sentiment parsing, and summarization in parallel." }
+      {
+        title: "SQLite + WAL over PostgreSQL",
+        description: "Chosen for trivial single-node deployment. WAL mode and a 5000ms busy_timeout pragma (set via SQLAlchemy connect event) allow concurrent agent tool writes without external database infrastructure, at the cost of a single-writer ceiling under high concurrency."
+      },
+      {
+        title: "Quality gate before critic node",
+        description: "A cheap deterministic check (keyword count, confidence threshold) runs before the LLM-based critic to fail fast on obviously insufficient data, avoiding wasted LLM calls on findings that wouldn't pass review anyway."
+      },
+      {
+        title: "Tenacity retries scoped to specific exceptions",
+        description: "Retry decorators target only KeylyticsAPIError and requests.RequestException, never bare Exception, so programming errors (TypeError, AttributeError) fail immediately instead of being silently retried and masked."
+      },
+      {
+        title: "Multi-model Gemini fallback chain",
+        description: "LLM calls use LangChain's with_fallbacks() across a list of Gemini models (gemma-4-31b-it down to gemini-2.5-flash) so quota exhaustion or transient errors on one model don't break the pipeline mid-run."
+      },
+      {
+        title: "Exception-eating tool dispatch",
+        description: "invoke_tool() validates input against each tool's Pydantic model and catches execution errors, returning {\"error\": ..., \"tool\": name} instead of raising — so the ReAct agent receives structured failures and continues rather than crashing the graph."
+      }
     ],
     features: [
-      { title: "Autonomous Search Workers", description: "Self-correcting search queries that re-adjust terms if initial results are dry." },
-      { title: "Competitor Footprint Mapper", description: "Extracts pricing models, feature sets, and target markets from competitor URLs." },
-      { title: "Sentiment Tracking Engine", description: "Scans public social feeds to gauge user sentiment and feature requests for competitors." }
+      {
+        title: "Human-in-the-loop checkpoints",
+        description: "Graph execution pauses at plan_approval and report_approval interrupts, letting an operator approve, edit, or reject before continuing."
+      },
+      {
+        title: "Per-tool confidence scoring",
+        description: "Each research tool's output is scored 0.0–1.0 using deterministic rubrics (fill ratios, result counts, gap scores) surfaced to the strategy agent."
+      },
+      {
+        title: "Adversarial critique loop",
+        description: "An LLM critic reviews aggregated findings for weak claims and low-confidence data being used as if reliable, routing back to research when issues are found."
+      },
+      {
+        title: "Scheduled monitoring with report diffing",
+        description: "APScheduler-backed recurring jobs re-run research in auto-approve mode and compute keyword score, recommendation, and confidence deltas between runs."
+      }
     ],
     performance: [
-      "Completes full competitor analysis reports in under 30 seconds.",
-      "Reduces manual research time from 4 hours to 1 click.",
-      "Saves up to 70% in API costs using context pruning."
+      "Six-tool registry with uniform dispatch: All tools (keyword_research, serp_analysis, competitor_gap, trend_forecast, topic_cluster, intent_classifier) share one validated invocation path via TOOL_REGISTRY.",
+      "Retry-safe external API calls: SerpAPI, DataForSEO, and Google Trends calls use exponential backoff with jitter, scoped to recoverable network and API exceptions only.",
+      "Dual-container deployment: Separate Dockerfiles for FastAPI and Streamlit share a SQLite volume via Docker Compose, with a healthcheck gating Streamlit startup on API readiness.",
+      "In-process Prometheus-compatible metrics: Thread-safe counters, histograms, and gauges exposed via /metrics in Prometheus text format, with no external metrics infrastructure required."
     ],
     lessons: [
-      "Web scrapers must fail gracefully; strict DOM dependencies break daily, making LLM-based parsing necessary.",
-      "Shared state in multi-agent networks must be tightly typed to avoid state pollution."
+      "Separating a deterministic quality gate from an LLM-based critic node reduces wasted model calls on findings that fail simple count or threshold checks.",
+      "Scoping retry decorators to specific exception types (rather than bare Exception) is necessary to avoid masking programming bugs as transient API failures."
     ],
     roadmap: [
-      "Add automated cron-triggered research campaigns.",
-      "Integrate PPTX/PDF export templates for instant presentations."
+      "Replace the SqliteSaver checkpointer and SQLite job store with distributed equivalents to allow horizontal scaling of the API tier.",
+      "Move the in-memory metrics collector to the official Prometheus client library with a pushgateway, so metrics survive process restarts and aggregate across replicas."
     ],
     links: {
       github: "https://github.com/Shafia-01/Stratix"
@@ -172,52 +306,116 @@ export const projects: Project[] = [
     slug: "cartverse",
     order: "03",
     title: "CartVerse",
-    oneLiner: "Emotion-based shopping and auto-reconciliation engine.",
-    pullQuote: "Shop what you feel — reimagining commerce around emotional resonance.",
+    oneLiner: "Mood-aware and habit-driven shopping assistant for Walmart product discovery.",
+    pullQuote: "Personalizing retail discovery using emotional state and purchase history.",
     metrics: [
-      "45% Relevance Lift",
-      "55% Faster Checkout",
-      "70% Cart Load Speedup",
-      "50% Recurrence Accuracy"
+      "SerpAPI responses cached for 3600 seconds per query to minimize quota usage",
+      "Retry loop handles rate-limit (429) responses with configurable delay and attempt count",
+      "Lazy classifier loading defers DistilBERT initialization until first mood submission",
+      "Direct keyword lookup resolves common moods without invoking the ML model"
     ],
     stack: {
-      backend: ["Python", "NLP", "SerpAPI"],
-      frontend: ["React", "TypeScript", "Tailwind CSS"],
-      aiml: ["NLP", "Behavior-Driven Recommendation Logic"],
-      infra: ["Docker"]
+      backend: [
+        "Python",
+        "requests",
+        "python-dotenv",
+        "nest_asyncio",
+        "SerpAPI (Walmart engine)"
+      ],
+      frontend: [
+        "Streamlit 1.33.0",
+        "Plotly 5.21.0"
+      ],
+      aiml: [
+        "HuggingFace Transformers (distilbert-base-uncased-emotion)",
+        "TextBlob (polarity fallback)"
+      ],
+      infra: [
+        "MySQL (mysql-connector-python)",
+        "JSON flat-file fallback (mood_history.json, user_history.json)",
+        "pandas 2.2.1",
+        "joblib",
+        "scikit-learn",
+        "Streamlit (three entry points: main_app.py, MOODCART/app.py, AUTOCART/app.py)"
+      ]
     },
-    problem: "Shopping apps treat every user the same — no signal for mood, urgency, or buying patterns — leaving recommendation engines generic and cart-building entirely manual.",
-    solution: "CartVerse unifies two engines into a single platform. MoodCart uses NLP to interpret a user's emotional state and maps it to product categories via SerpAPI-driven search. AutoCart analyzes purchase frequency, refill cycles, and trend signals to auto-generate carts.",
+    problem: "Standard e-commerce search relies on explicit queries, ignoring two signals that often drive real purchasing decisions: how a user currently feels, and what they habitually buy. Customers face decision fatigue when browsing without contextual guidance, and generic recommendation engines don't account for emotional state or replenishment cycles. The gap is a system that can interpret unstructured emotional input and infer refill needs from purchase history—without requiring the user to search explicitly.",
+    solution: "CartVerse addresses this through two independent pipelines unified under a single Streamlit interface. MoodCart accepts free-text mood descriptions, classifies them through a three-tier fallback chain, maps the result to a product category, and queries live Walmart listings via SerpAPI. AutoCart reads per-user purchase history, ranks items by frequency, applies a refill heuristic, and surfaces trending alternatives. Both pipelines share the same product search layer and Walmart-themed UI.",
     architecture: {
-      description: "Signal capture (emotional input or purchase history) flows into engine-specific processing before reaching a shared cart UI.",
+      description: "Dual-pipeline Streamlit application with layered sentiment classification and frequency-based cart generation.",
       steps: [
-        "User emotional or behavioral signal is captured.",
-        "MoodCart: NLP classifier interprets emotional state. AutoCart: purchase-history analyzer evaluates refill cycles and trends.",
-        "SerpAPI-driven product search returns candidate items.",
-        "Ranked recommendation set generated.",
-        "Unified cart interface presents results to the user."
+        {
+          title: "User Input Collection",
+          description: "MoodCart captures free-text mood descriptions alongside sidebar demographics (age, gender, interest). AutoCart reads pre-loaded JSON purchase histories and a user selector dropdown."
+        },
+        {
+          title: "Mood Classification (Three-Tier Fallback)",
+          description: "Input passes through direct regex keyword lookup against mood_map.json, then a HuggingFace DistilBERT emotion classifier, then TextBlob polarity scoring as a last resort."
+        },
+        {
+          title: "Category Resolution",
+          description: "The detected mood maps to a base category via mood_map.json. An adjust_category function then refines it using age group, gender, and interest—e.g., \"toys\" becomes \"collectibles or hobby kits for adults\" for users over 19."
+        },
+        {
+          title: "Product Search via SerpAPI",
+          description: "A search term is built from the adjusted category and interest, checked against a fallback keyword table, then sent to SerpAPI's Walmart engine with retry logic for 429 rate-limit responses."
+        },
+        {
+          title: "Persistence and Display",
+          description: "Mood interactions are written to mood_history.json and optionally to MySQL. A Plotly timeline visualizes historical mood data. Product results render in a two-column grid with images and Walmart links."
+        }
       ]
     },
     engineeringDecisions: [
-      { title: "Unified CartVerse Core Architecture", description: "Combined MoodCart and AutoCart into a single diptych platform, sharing the SerpAPI-driven recommendation infrastructure." },
-      { title: "Emotion Signal Processing (MoodCart)", description: "NLP-based classification of emotional input mapped directly to SerpAPI product search queries, lifting recommendation relevance by 45% and cutting decision time by 55%." },
-      { title: "Behavior-Driven Cart Automation (AutoCart)", description: "Purchase frequency, refill logic, and trend signals drive automated cart generation, accelerating cart creation by 70% with 50% accuracy on recurring items." }
+      {
+        title: "Three-Tier Sentiment Fallback",
+        description: "Rather than depending solely on the DistilBERT pipeline—which has startup latency and can fail in memory-constrained environments—the system first tries fast regex matching, then the ML model, then TextBlob. This keeps the app functional regardless of resource availability."
+      },
+      {
+        title: "Lazy Model Loading via Singleton",
+        description: "The HuggingFace pipeline is instantiated only on first use through a module-level singleton (get_emotion_classifier). This avoids blocking the Streamlit startup path and reduces perceived load time when the classifier is never invoked."
+      },
+      {
+        title: "Demographic Category Adjustment at Runtime",
+        description: "A deterministic adjust_category function modifies mood-derived categories using age, gender, and interest at query time rather than training a separate model. This makes the logic auditable and easy to extend without retraining."
+      },
+      {
+        title: "SerpAPI Caching with Retry",
+        description: "Product queries are wrapped in @st.cache_data(ttl=3600) to avoid redundant API calls within a session window. A retry loop with delay handles 429 responses before surfacing an error to the user."
+      },
+      {
+        title: "Dual Entry Points with Shared Logic",
+        description: "MOODCART/app.py and AUTOCART/app.py can run standalone, while main_app.py composes both under tabs. Shared utilities (SerpAPI client, mood model) are imported as packages, avoiding code duplication."
+      }
     ],
     features: [
-      { title: "MoodCart", description: "Maps real-time emotional signal to product recommendations via NLP and SerpAPI." },
-      { title: "AutoCart", description: "Automates cart generation from purchase frequency, refill logic, and trend signals." }
+      {
+        title: "Emotion-to-Product Mapping",
+        description: "Translates unstructured natural language mood descriptions into Walmart product categories, adjusted dynamically for user demographics across 26 mapped emotional states."
+      },
+      {
+        title: "Frequency-Based Cart Generation",
+        description: "Parses per-user purchase history JSON, ranks items by occurrence, applies a refill check, and retrieves trending Walmart alternatives via SerpAPI for each qualifying item."
+      },
+      {
+        title: "Mood History Timeline",
+        description: "Persists each mood interaction to local JSON and optionally MySQL, then renders an interactive Plotly line chart filterable by 7-day, 30-day, or all-time windows."
+      }
     ],
     performance: [
-      "45% relevance lift in recommendations.",
-      "55% faster decision time.",
-      "70% faster cart generation.",
-      "50% recurring-item accuracy."
+      "SerpAPI responses cached for 3600 seconds per query to minimize quota usage",
+      "Retry loop handles rate-limit (429) responses with configurable delay and attempt count",
+      "Lazy classifier loading defers DistilBERT initialization until first mood submission",
+      "Direct keyword lookup resolves common moods without invoking the ML model"
     ],
     lessons: [
-      "Emotion signals are noisy and need fallback logic.",
-      "Behavior-based automation needs guardrails so it doesn't override clear user intent."
+      "Multi-tiered fallback chains are more resilient than single-model pipelines in resource-variable deployment environments.",
+      "Building demographic heuristics as explicit deterministic code rather than learned behavior makes category logic transparent and easy to audit."
     ],
-    roadmap: [],
+    roadmap: [
+      "Implement real refill logic in needs_refill using purchase recency and quantity thresholds instead of the current always-true stub.",
+      "Add structured logging and unit tests around mood mapping, category adjustment, and SerpAPI response parsing to catch regressions as logic evolves."
+    ],
     links: {
       github: "https://github.com/Shafia-01/CartVerse"
     }
@@ -226,54 +424,118 @@ export const projects: Project[] = [
     slug: "mediscan",
     order: "04",
     title: "MediScan",
-    oneLiner: "Separating signal from noise — at the image level.",
-    pullQuote: "A medical-vs-non-medical image classifier to filter diagnostic pipelines.",
+    oneLiner: "Medical vs. non-medical image classifier built on fine-tuned ResNet18 with multi-modal input support.",
+    pullQuote: "Automating clinical image triage through staged transfer learning and confidence-aware inference.",
     metrics: [
-      "End-To-End Pipeline",
-      "CV Classifier",
-      "Deployed",
-      "MIT Licensed"
+      "100% accuracy on 101-image validation set (medical and non_medical, threshold 0.60, TTA disabled)",
+      "~52 ms average inference time per image on CPU (ResNet18, no TTA)",
+      "TTA doubles per-image inference cost; --no-tta flag available for throughput-sensitive runs",
+      "PDF and URL extraction capped at 50 images per source; files under 100 bytes skipped automatically"
     ],
     stack: {
-      backend: ["FastAPI", "Python"],
-      frontend: ["React", "Tailwind CSS"],
-      aiml: ["PyTorch", "OpenCV", "ResNet-50", "Albumentations"],
-      infra: ["Hugging Face Spaces", "Docker"]
+      backend: [
+        "Python 3.9+",
+        "Pillow",
+        "PyMuPDF (pymupdf)",
+        "requests",
+        "BeautifulSoup4"
+      ],
+      frontend: [
+        "Streamlit",
+        "pandas (results table, CSV export)",
+        "Matplotlib (CLI display mode)"
+      ],
+      aiml: [
+        "PyTorch 2.x",
+        "torchvision (ResNet18, ImageNet weights, transforms)",
+        "NumPy"
+      ],
+      infra: [
+        "Streamlit (local or Community Cloud)",
+        "atexit-based temp directory cleanup",
+        "argparse CLI"
+      ]
     },
-    problem: "Medical analytics pipelines are often flooded with garbage images, non-diagnostic documents, or patient selfies uploaded by mistake. Diagnostic algorithms break down when fed these out-of-domain images.",
-    solution: "MediScan is a dedicated computer vision classification model that sits in front of medical API routers, separating clinical scans (X-Rays, MRI, CT) from ordinary everyday photos before they enter expensive diagnostic processes.",
+    problem: "Medical data pipelines routinely receive mixed image streams — clinical scans alongside unrelated attachments — requiring manual review to separate them. At scale, this creates a bottleneck in database indexing, data ingestion, and patient privacy workflows. Generic classifiers lack the confidence calibration needed for clinical contexts, where a false positive (mislabeling a non-medical image as medical) carries real downstream consequences.",
+    solution: "MediScan wraps a ResNet18 backbone, fine-tuned via staged transfer learning, into a deployable Streamlit application and CLI. Users supply images directly, via PDF upload, or via URL. The extractor layer handles binary PDF parsing (PyMuPDF) and HTML scraping (BeautifulSoup) before passing images through the classifier. Predictions below a configurable softmax threshold are labeled uncertain rather than forced into a class, giving downstream systems a reliable signal.",
     architecture: {
-      description: "Pre-processing pipeline classifying and filtering inputs before downstream storage.",
+      description: "Single-model inference pipeline with multi-modal input extraction and confidence-gated output.",
       steps: [
-        "Client uploads an image candidate through the web dashboard.",
-        "OpenCV normalizes color spaces, handles resolution adjustments, and resizes data.",
-        "PyTorch classifier evaluates features using a custom-trained ResNet-50 backbone.",
-        "Thresholding algorithm verifies confidence levels.",
-        "Image is either rejected as non-medical or routed to downstream clinical workflows."
+        {
+          title: "Input ingestion",
+          description: "User supplies raw images, a PDF, or a URL. The Streamlit app or CLI routes to the appropriate extractor, saving inputs to a session-scoped temporary directory."
+        },
+        {
+          title: "Image extraction",
+          description: "PDFs are parsed via PyMuPDF XREF traversal; URLs are scraped with BeautifulSoup, filtered by content-type, and SSRF-checked via DNS resolution against private and loopback subnets."
+        },
+        {
+          title: "Preprocessing",
+          description: "Each image is resized to 256px, center-cropped to 224×224, and normalized using ImageNet mean and standard deviation values before tensor conversion."
+        },
+        {
+          title: "Inference with TTA",
+          description: "The model predicts on the original image and its horizontal flip; softmax probabilities are averaged across both passes to produce a more stable confidence estimate."
+        },
+        {
+          title: "Confidence-gated output",
+          description: "Predictions with max softmax below the configured threshold (default 0.60) are labeled uncertain. Remaining results are rendered in the UI grid or printed to CLI summary."
+        }
       ]
     },
     engineeringDecisions: [
-      { title: "Feature Extractor Architecture", description: "Evaluated MobileNetV3 and ResNet-50; chose ResNet-50 for superior feature representation of subtle medical textures, despite a slight latency tradeoff." },
-      { title: "Imbalanced-class Handling", description: "Used weighted cross-entropy loss and random oversampling to ensure non-medical images are accurately caught despite dataset imbalance." },
-      { title: "Confidence Thresholding Layer", description: "Implemented a strict confidence margin filter (92% target); outputs in-between trigger manual verification requests." },
-      { title: "Deployment Packaging", description: "Wrapped the pipeline inside a multi-stage Docker build, optimizing model size to fit Hugging Face Spaces free-tier instances." }
+      {
+        title: "Staged Transfer Learning",
+        description: "The ResNet18 backbone is frozen for the first 3 epochs while only the classification head trains at lr=1e-3. All layers are then unfrozen at lr=3e-4. This prevents catastrophic forgetting of ImageNet features while allowing domain adaptation."
+      },
+      {
+        title: "WeightedRandomSampler for Class Imbalance",
+        description: "Training sample weights are set inversely proportional to class frequency using WeightedRandomSampler. This ensures balanced gradient updates without discarding data, avoiding the accuracy inflation that majority-class overrepresentation causes."
+      },
+      {
+        title: "Confidence Thresholding",
+        description: "Rather than forcing every prediction into a binary class, outputs below the 0.60 softmax threshold are surfaced as uncertain. This trades recall for reliability — appropriate for pipelines where a wrong label is more costly than an abstention."
+      },
+      {
+        title: "Test-Time Augmentation",
+        description: "Horizontal flip augmentation is applied at inference time, with probabilities averaged across both orientations. The 2x inference cost is accepted in exchange for reduced sensitivity to image framing; the --no-tta flag lets CLI users skip this when throughput matters."
+      },
+      {
+        title: "SSRF Protection on URL Scraping",
+        description: "Before fetching any URL or resolved image src, the hostname is resolved via socket.getaddrinfo and each returned IP is checked against loopback, link-local, private ranges, and the AWS metadata address. Invalid schemes are also rejected outright."
+      }
     ],
     features: [
-      { title: "Instant Diagnostic Pipeline Filter", description: "Blocks non-clinical scans immediately, preventing wasted compute downstream." },
-      { title: "Interactive Web Playground", description: "Allows medical personnel to drag and drop images and instantly see confidence results." }
+      {
+        title: "Multi-modal input extraction",
+        description: "Accepts raw image uploads, embedded images from PDF documents (via PyMuPDF XREF traversal), and images scraped from public web pages — up to 50 images per source."
+      },
+      {
+        title: "Confidence-gated classification",
+        description: "Classifies images as medical, non_medical, or uncertain based on a configurable softmax threshold, preventing low-confidence outputs from propagating into downstream systems."
+      },
+      {
+        title: "SSRF-safe URL scraping",
+        description: "Validates all outbound image URLs against private IP ranges, loopback addresses, and cloud metadata endpoints before initiating any HTTP request."
+      },
+      {
+        title: "Headless-compatible CLI",
+        description: "Supports automated pipelines via argparse flags for threshold control, TTA toggling, result export, and uncertain-image collection. Falls back to saving Matplotlib output as PNG when no display is available."
+      }
     ],
     performance: [
-      "98.4% validation accuracy on mixed medical/general datasets.",
-      "Average processing latency of 45ms per image.",
-      "Docker image compressed to under 420MB including model weights."
+      "100% accuracy on 101-image validation set (medical and non_medical, threshold 0.60, TTA disabled)",
+      "~52 ms average inference time per image on CPU (ResNet18, no TTA)",
+      "TTA doubles per-image inference cost; --no-tta flag available for throughput-sensitive runs",
+      "PDF and URL extraction capped at 50 images per source; files under 100 bytes skipped automatically"
     ],
     lessons: [
-      "Data augmentation (rotations, contrast shifts) is critical for robustness across different scanner types.",
-      "Model outputs must fail safely; false positives (non-medical labeled as medical) are worse than false negatives."
+      "TTA measurably improves robustness against framing variation but introduces a fixed 2x latency penalty — exposing it as an optional flag is necessary for usability at document scale.",
+      "Softmax confidence thresholding requires empirical tuning; the right threshold is dataset-dependent, and using a single default value trades off recall against false positive control in ways that only become visible during domain-specific evaluation."
     ],
     roadmap: [
-      "Incorporate support for DICOM format parsing.",
-      "Add basic anatomical region tagging."
+      "Add per-class calibration curves or temperature scaling to improve the reliability of the softmax confidence scores as a true probability estimate.",
+      "Support multi-page PDF rendering (rasterizing pages to images) in addition to XObject extraction, to capture diagrams and figures not stored as embedded image objects."
     ],
     links: {
       github: "https://github.com/Shafia-01/MediScan"
@@ -284,53 +546,108 @@ export const projects: Project[] = [
     order: "05",
     title: "PacketWatch",
     oneLiner: "Watching the wire. In real time.",
-    pullQuote: "Analyzing network packets with machine learning to identify rogue Wi-Fi attacks.",
+    pullQuote: "Detecting network threats through ML-driven packet analysis.",
     metrics: [
-      "Live Packet Capture",
-      "ML Anomaly Detection",
-      "Wi-Fi & LAN Sniffing",
-      "Alert Pipeline"
+      "Sub-second inference on 100-row CSV uploads",
+      "O(n) feature extraction scaling linearly with packet count",
+      "20-second capture window optimized for flow-level statistical stability",
+      "Single-process deployment with no external service dependencies"
     ],
     stack: {
-      backend: ["Python", "Scapy", "FastAPI"],
-      frontend: ["Next.js", "Tailwind CSS"],
-      aiml: ["scikit-learn", "Isolation Forest", "Random Forest"],
-      infra: ["Docker", "Linux Capture Engine"]
+      backend: [
+        "Python",
+        "Scapy (packet capture and parsing)",
+        "pandas (DataFrame manipulation)",
+        "NumPy (numerical operations)"
+      ],
+      frontend: [
+        "Streamlit (dashboard and file upload UI)"
+      ],
+      aiml: [
+        "scikit-learn (RandomForestClassifier, SimpleImputer, StandardScaler)",
+        "joblib (model and pipeline serialization)"
+      ],
+      infra: [
+        "libpcap / Npcap (OS-level packet capture driver)",
+        "Local execution (requires administrator/root privileges for live capture)"
+      ]
     },
-    problem: "Traditional Wi-Fi intrusion detection systems rely on static signatures that miss zero-day deauthentication attacks, packet flood anomalies, or spoofed AP behavior.",
-    solution: "PacketWatch is an independent network sniffing and security utility. It captures local Wi-Fi packets, extracts statistical flow features, and detects anomalous traffic trends using unsupervised anomaly detection models.",
+    problem: "Home and public Wi-Fi networks are routinely exposed to DoS floods, port scans, and man-in-the-middle exploits. Traditional intrusion detection systems depend on static rule sets and known signatures—they cannot generalize to novel attack patterns or subtle statistical anomalies in traffic flow. Security engineers need a tool that evaluates multi-dimensional flow characteristics rather than matching fixed rules, and that works equally well against historical log exports and live captured traffic.",
+    solution: "PacketWatch captures raw packets via Scapy, extracts 27 statistical flow features per session, and runs them through a trained Random Forest classifier to produce a binary verdict—Normal or Threat. A Streamlit dashboard exposes two operating modes: offline CSV analysis for historical log review, and live sniffing against the auto-detected Wi-Fi interface. All preprocessing uses the exact imputer and scaler objects serialized during training, eliminating the risk of inference-time data leakage.",
     architecture: {
-      description: "Network capture adapter feeding a statistical ML evaluation pipeline.",
+      description: "Three-layer pipeline: packet ingestion → statistical feature extraction → ML inference, surfaced through a dual-mode Streamlit dashboard.",
       steps: [
-        "Scapy capture thread hooks onto the local network interface in monitor mode.",
-        "Flow metrics (packet size variance, arrival times, flags) are calculated.",
-        "Evaluation engine runs inferences on incoming feature vectors using Isolation Forest.",
-        "Alert processor flags anomalies exceeding threat thresholds.",
-        "Logs are transmitted to the monitoring dashboard interface."
+        {
+          title: "Packet Ingestion",
+          description: "Scapy sniffs the auto-detected Wi-Fi interface for a configurable timeout window, or a CSV of pre-captured flow records is uploaded directly through the dashboard."
+        },
+        {
+          title: "Feature Extraction",
+          description: "Raw packets are reduced to 27 flow-level statistical features—including IAT means and standard deviations, packet length stats, directional counts, and destination port—via feature_extraction.py."
+        },
+        {
+          title: "Preprocessing",
+          description: "The fitted SimpleImputer replaces NaN/Inf values with column means; the fitted StandardScaler normalizes the feature vector. Both objects are loaded from .pkl files produced at training time."
+        },
+        {
+          title: "Model Inference",
+          description: "The preprocessed feature array is passed to a 100-estimator Random Forest classifier that returns a binary label: 0 (Normal) or 1 (Threat)."
+        },
+        {
+          title: "Dashboard Presentation",
+          description: "Streamlit surfaces the verdict with per-row predictions on uploaded CSVs, downloadable scored results, and live interface metadata (SSID, channel, packet count) for real-time scans."
+        }
       ]
     },
     engineeringDecisions: [
-      { title: "Buffered Async Capture", description: "Created a dual-thread double-buffer architecture in Python, preventing packet dropouts by separating Scapy sniff routines from the ML inference worker." },
-      { title: "Flow-based Feature Engineering", description: "Configured sliding time-window features (packet counts over 1s/5s/10s, entropy of source IPs) rather than raw payload parsing, maintaining privacy." },
-      { title: "Anomaly Model Selection", description: "Benchmarked One-Class SVM against Isolation Forest; Isolation Forest selected for fast performance and lower memory footprint on edge nodes." },
-      { title: "Alert Deduplication & Severity Tiers", description: "Built a stateful debouncing algorithm to bundle repetitive deauthentication frames into single alerts, preventing alert fatigue." }
+      {
+        title: "Joblib Serialization of Preprocessing Objects",
+        description: "The imputer and scaler fitted during training are saved as .pkl files and reloaded at inference time. This guarantees the exact same transformation is applied to live data as was applied to training data, preventing subtle scaling mismatches that would silently degrade accuracy."
+      },
+      {
+        title: "Scapy over External CLI Tools",
+        description: "Scapy provides a Python-native packet parsing API, removing subprocess dependencies on tcpdump or tshark. This simplifies cross-platform deployment and gives direct programmatic access to packet fields without parsing text output."
+      },
+      {
+        title: "Dual-Mode Architecture",
+        description: "Offline CSV analysis and live sniffing share the same preprocessing and inference pipeline. This avoids duplicated logic and ensures predictions are consistent regardless of input source."
+      },
+      {
+        title: "Platform-Aware Interface Auto-Detection",
+        description: "realtime_detector.py queries OS-specific commands (netsh on Windows, iw dev on Linux, networksetup on macOS) to identify the active Wi-Fi interface at runtime, removing the need for manual configuration."
+      },
+      {
+        title: "Strict Feature Alignment at Inference",
+        description: "preprocess_dataframe loads the saved feature_names.pkl and reorders DataFrame columns to match training order exactly, raising a ValueError on missing features rather than silently producing a malformed input."
+      }
     ],
     features: [
-      { title: "Live Activity Monitor", description: "Real-time visualization of network volume, packet distributions, and anomaly scores." },
-      { title: "Intrusion Alerting System", description: "Instant UI notification popups detailing MAC addresses involved in suspicious activity." }
+      {
+        title: "Live Wi-Fi Threat Detection",
+        description: "Sniffs the active network interface, extracts flow statistics from captured packets, and returns a Threat or Normal verdict alongside interface metadata including SSID and channel."
+      },
+      {
+        title: "Offline CSV Log Analysis",
+        description: "Accepts uploaded CSV files of network flow records, scores each row individually, annotates results with prediction labels, and provides a downloadable scored CSV."
+      },
+      {
+        title: "Cross-Platform Interface Discovery",
+        description: "Automatically identifies the Wi-Fi interface on Windows, Linux, and macOS using native system commands, with privilege checks before attempting captures."
+      }
     ],
     performance: [
-      "Zero packet drop rate at network loads up to 10k packets/second.",
-      "Identifies Wi-Fi deauth floods within 1.2 seconds of launch.",
-      "Extremely low CPU profile (~4% total utilization on Raspberry Pi)."
+      "Sub-second inference on 100-row CSV uploads",
+      "O(n) feature extraction scaling linearly with packet count",
+      "20-second capture window optimized for flow-level statistical stability",
+      "Single-process deployment with no external service dependencies"
     ],
     lessons: [
-      "This is an independent personal project — CyArt's surveillance system is a separate engineering deliverable (see the Lab).",
-      "Monitor mode commands vary significantly between operating system kernels, requiring wrapper configuration scripts."
+      "Serializing preprocessing objects at training time and reloading them at inference is mandatory—fitting a new imputer or scaler on inference data produces different transformations and silently corrupts predictions.",
+      "Mapping frame-level Scapy attributes to flow-level statistical features requires explicit directional tracking per packet; treating all packets as equivalent discards the asymmetry that distinguishes attack traffic."
     ],
     roadmap: [
-      "Add automated mitigation scripts (e.g., auto-disconnecting from compromised networks).",
-      "Integrate Telegram alert bots."
+      "Replace hardcoded idle feature placeholders (Idle Mean/Max/Min) with actual inter-flow idle period measurement derived from packet timestamps, and retrain the model on updated features.",
+      "Add multi-class classification to distinguish attack subtypes (DoS, port scan, MITM) rather than returning only a binary Normal/Threat label."
     ],
     links: {
       github: "https://github.com/Shafia-01/PacketWatch"
@@ -340,53 +657,107 @@ export const projects: Project[] = [
     slug: "cinescope",
     order: "06",
     title: "CineScope",
-    oneLiner: "Your lens into the world of movies.",
-    pullQuote: "A refined search application wrapping database queries with clean interfaces.",
+    oneLiner: "Lightweight movie discovery and watchlist platform with a secure API proxy backend.",
+    pullQuote: "Re-imagining movie browsing through a clutter-free interface backed by a serverside API gateway.",
     metrics: [
-      "8 User Features",
-      "6 Validation Checks",
-      "5 Prod Issues Resolved",
-      "MIT Licensed"
+      "No external database — watchlist and review reads are synchronous localStorage operations",
+      "Static frontend with zero build step — deployable by opening index.html directly",
+      "Proxy endpoints handle one outbound fetch per request with no caching layer",
+      "CORS-compliant across origins via express cors middleware with default permissive config"
     ],
     stack: {
-      backend: ["Express.js", "Node.js"],
-      frontend: ["React", "Tailwind CSS", "Framer Motion"],
-      aiml: ["Semantic Search Emulation"],
-      infra: ["OMDb API"]
+      backend: [
+        "Node.js",
+        "Express.js",
+        "node-fetch",
+        "dotenv",
+        "cors"
+      ],
+      frontend: [
+        "HTML5",
+        "CSS3 (CSS Grid, Flexbox)",
+        "Vanilla JavaScript (ES6+)"
+      ],
+      aiml: [],
+      infra: [
+        "Browser localStorage API",
+        "OMDb REST API",
+        "Render (Express backend)",
+        "Netlify (Static frontend)"
+      ]
     },
-    problem: "Movie info sites are often cluttered, slow, and expose API keys client-side. There's room for a fast, minimal alternative with proper backend hygiene.",
-    solution: "CineScope is a React frontend backed by an Express proxy that handles all OMDb API communication — keeping API keys server-side, caching responses, and validating every search query. Delivers 8 features: search, ratings, reviews, watchlists, and more.",
+    problem: "Movie enthusiasts searching for a simple tool to browse films, leave reviews, and track a watchlist are pushed toward bloated platforms that require account creation before any meaningful interaction. Direct client-side API integrations expose private keys in browser network traffic, while heavy frontend frameworks add unnecessary overhead for a single-purpose utility. There was no lightweight, self-contained option that handled API security, local persistence, and a clean UI without requiring backend databases or user authentication.",
+    solution: "CineScope splits into a Vanilla JS frontend and a Node.js/Express proxy backend. The backend intercepts all OMDb API calls, injects the private API key server-side, and forwards sanitized JSON to the client—keeping credentials out of browser network tabs. The frontend handles all UI state: search results render dynamically into a CSS Grid layout, a modal presents full movie details, and localStorage persists both the watchlist and per-movie reviews across sessions without any server database.",
     architecture: {
-      description: "Express caching proxy connecting the React app to external movie indexes.",
+      description: "Single-page frontend with Express reverse proxy and client-side localStorage persistence.",
       steps: [
-        "User types movie title in search query bar.",
-        "Input validator checks format, length, and strips malicious parameters (6 checks).",
-        "Express server checks local memory cache; on miss, queries OMDb API.",
-        "OMDb payload is filtered, keeping only relevant fields.",
-        "React UI renders results with soft transitions."
+        {
+          title: "User Search Input",
+          description: "User types a query into the search bar; a keyup or button-click event triggers fetchMovies(), which sends a GET request to the Express proxy's /search endpoint."
+        },
+        {
+          title: "Express Proxy — Search Route",
+          description: "The /search route reads req.query.q, constructs the OMDb API URL with the server-side OMDB_KEY env variable, fetches results, and returns sanitized JSON to the client."
+        },
+        {
+          title: "Dynamic Card Rendering",
+          description: "The frontend receives the Search array, iterates via displayMovies(), and injects movie-card DOM elements into the CSS Grid container without page reload."
+        },
+        {
+          title: "Movie Detail Modal",
+          description: "Clicking a card calls openMovieDetails(imdbID), fetching from /details/:id on the proxy, which hits OMDb's full-plot endpoint and populates the modal's inner HTML."
+        },
+        {
+          title: "LocalStorage Persistence",
+          description: "Watchlist additions and review submissions are serialized to localStorage under fixed keys; both are loaded on page init and re-synced after every user interaction."
+        }
       ]
     },
     engineeringDecisions: [
-      { title: "Express Proxy Middleware", description: "Implemented a local caching proxy to prevent exposing OMDb API keys in the browser client, improving client response speeds by 60%." },
-      { title: "Strict Search Input Sanitation", description: "Constructed regex filters to block injection attempts and throttle invalid character strings at the client level." },
-      { title: "Graceful Image Fallbacks", description: "Created custom image loading hooks that swap missing posters with inline SVG grid layouts, maintaining aesthetic continuity." }
+      {
+        title: "Express Reverse Proxy for API Key Security",
+        description: "Direct browser-to-OMDb calls expose the API key in network inspector tabs and trigger CORS errors. Routing through Express keeps the key in a server-side .env file, resolves CORS with the cors middleware, and provides a single point to extend rate limiting or logging later."
+      },
+      {
+        title: "localStorage Over a Backend Database",
+        description: "Watchlist and review data are user-specific and low-volume. Using localStorage eliminates the need for a database, authentication, and session management, significantly reducing infrastructure overhead for a single-user utility. The tradeoff is data is browser-local and not portable."
+      },
+      {
+        title: "Vanilla JS Over a Frontend Framework",
+        description: "The interaction surface—search, modal, watchlist, reviews—is straightforward DOM manipulation. Vanilla JS with direct event listeners avoids framework build tooling, reduces bundle size, and keeps the frontend deployable as a plain static file with no compilation step."
+      },
+      {
+        title: "Dynamic Event Listener Assignment on Modal",
+        description: "reviewForm.onsubmit and addToWatchlistBtn.onclick are reassigned each time a modal opens, binding the current movie's IMDb ID into the closure. This avoids maintaining a global selected-movie state variable and keeps handler logic co-located with the modal lifecycle."
+      }
     ],
     features: [
-      { title: "Dynamic Suggestions", description: "Provides typeahead suggestion lists based on previous search keys." },
-      { title: "Visual Poster Grids", description: "Renders movie details with clean grids and subtle red/black line accents." }
+      {
+        title: "Secure OMDb API Gateway",
+        description: "All movie search and detail requests are proxied through Express, with the API key injected server-side. Client-side code never touches credentials directly."
+      },
+      {
+        title: "Persistent Watchlist and Reviews",
+        description: "Users can bookmark movies and submit star ratings with text reviews. Both datasets survive browser refreshes via localStorage serialization, with deduplication logic on watchlist additions."
+      },
+      {
+        title: "Full-Detail Movie Modals",
+        description: "Clicking any movie card fetches complete metadata—director, cast, full plot, poster—from OMDb's detailed endpoint and renders it inline without navigating away from the page."
+      }
     ],
     performance: [
-      "Average response latency of 80ms for cached queries.",
-      "100/100 Lighthouse performance score.",
-      "Perfect mobile responsive layout down to 320px."
+      "No external database — watchlist and review reads are synchronous localStorage operations",
+      "Static frontend with zero build step — deployable by opening index.html directly",
+      "Proxy endpoints handle one outbound fetch per request with no caching layer",
+      "CORS-compliant across origins via express cors middleware with default permissive config"
     ],
     lessons: [
-      "Subtle red/black accents must be used in section dividers only, without breaking the overarching paper/ink/brass style guidelines.",
-      "API rate-limits require client-side query debouncing to protect keys from exhaustion."
+      "Binding modal event handlers (onsubmit, onclick) on each open rather than once at init is necessary when the handler must close over dynamic per-movie state like imdbID.",
+      "localStorage is sufficient for single-device personal state but becomes the first bottleneck if cross-device sync or multi-user features are introduced; the schema should be designed with that migration in mind from the start."
     ],
     roadmap: [
-      "Expand details mapping to support local favorites lists saved in localStorage.",
-      "Implement offline page fallback."
+      "Replace localStorage with a cloud database (MongoDB or PostgreSQL) and introduce JWT-based authentication to enable cross-device watchlist and review sync.",
+      "Add server-side response caching on the Express proxy (e.g., in-memory or Redis) to reduce redundant OMDb API calls for repeated searches and detail lookups."
     ],
     links: {
       github: "https://github.com/Shafia-01/CineScope"

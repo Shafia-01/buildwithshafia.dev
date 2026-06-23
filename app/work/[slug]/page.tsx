@@ -148,16 +148,21 @@ export default async function ProjectDetailPage({ params }: Props) {
                 {/* Connected flow vertical spine */}
                 <div className="absolute left-[15px] top-4 bottom-4 w-px bg-brass md:hidden" />
 
-                <div className="grid md:grid-cols-5 gap-4 items-center">
+                <div className="grid md:grid-cols-5 gap-4 items-start">
                   {project.architecture.steps.map((step, idx) => (
                     <div key={idx} className="relative flex flex-col md:items-center text-left md:text-center">
-                      <div className="flex items-center gap-3 md:flex-col md:gap-2">
-                        <div className="w-8 h-8 rounded-full border border-brass flex items-center justify-center font-mono text-meta-xs text-brass bg-paper z-10 shrink-0">
+                      <div className="flex items-start gap-3 md:flex-col md:items-center md:gap-2">
+                        <div className="w-8 h-8 rounded-full border border-brass flex items-center justify-center font-mono text-meta-xs text-brass bg-paper z-10 shrink-0 mt-0.5 md:mt-0">
                           {idx + 1}
                         </div>
-                        <p className="text-[11px] font-medium text-ink leading-snug md:mt-2">
-                          {step}
-                        </p>
+                        <div>
+                          <p className="text-[11px] font-bold text-ink leading-snug md:mt-2">
+                            {step.title}
+                          </p>
+                          <p className="text-[9.5px] text-ink-muted leading-relaxed mt-1">
+                            {step.description}
+                          </p>
+                        </div>
                       </div>
                       {/* Connection lines on desktop */}
                       {idx < project.architecture.steps.length - 1 && (
