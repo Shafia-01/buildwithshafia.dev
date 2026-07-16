@@ -540,7 +540,8 @@ export const projects: Project[] = [
       "Support multi-page PDF rendering (rasterizing pages to images) in addition to XObject extraction, to capture diagrams and figures not stored as embedded image objects."
     ],
     links: {
-      github: "https://github.com/Shafia-01/MediScan"
+      github: "https://github.com/Shafia-01/MediScan",
+      watchDemo: "https://youtu.be/DnP0gZCNxh0"
     }
   },
   {

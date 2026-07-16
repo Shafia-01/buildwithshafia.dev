@@ -103,13 +103,13 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
   const videoId = project.links.watchDemo ? getYouTubeId(project.links.watchDemo) : null;
 
   return (
-    <FadeRise key={project.slug} delay={index * 0.05}>
+    <FadeRise key={project.slug} delay={index * 0.05} className="h-full">
       <Link
         href={`/work/${project.slug}`}
         data-testid={`project-card-${project.slug}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="group block relative overflow-hidden border border-rule-strong bg-paper-soft hover:border-brass transition-all duration-base"
+        className="group flex flex-col h-full relative overflow-hidden border border-rule-strong bg-paper-soft hover:border-brass transition-all duration-base"
       >
         {/* Poster image placeholder matching FeaturedWork styling */}
         <div className="aspect-[16/10] relative bg-gradient-to-br from-linen via-paper-soft to-linen-deep overflow-hidden">
@@ -135,12 +135,11 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
           />
 
           {/* Center play icon */}
-          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-            <div className="flex flex-col items-center gap-2 text-ink-soft group-hover:text-brass transition-colors duration-base">
-              <Play className="w-12 h-12 stroke-[1] fill-transparent" />
-              <MetaLabel>Demo preview</MetaLabel>
+          {(!videoId || !isHovered) && (
+            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+              <Play className="w-12 h-12 stroke-[1] fill-transparent text-ink-soft group-hover:text-brass transition-colors duration-base" />
             </div>
-          </div>
+          )}
 
           {/* YouTube Video Preview on Hover */}
           {videoId && isHovered && (
@@ -164,7 +163,7 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
         </div>
 
         {/* Caption info */}
-        <div className="p-6 flex flex-col justify-between min-h-[180px]">
+        <div className="p-6 flex flex-col justify-between flex-1 min-h-[180px]">
           <div>
             <div className="flex items-center justify-between gap-4">
               <MetaLabel className={isFlagship ? "text-brass font-bold" : "text-ink-muted"}>

@@ -80,12 +80,11 @@ export function FeaturedWork() {
                 }}
               />
               {/* Center play icon */}
-              <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                <div className="flex flex-col items-center gap-3 text-ink-soft group-hover:text-brass transition-colors duration-base">
-                  <PlayCircle className="w-16 h-16 stroke-[1]" />
-                  <MetaLabel>Demo preview · autoplay on hover</MetaLabel>
+              {(!videoId || !isHovered) && (
+                <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                  <PlayCircle className="w-16 h-16 stroke-[1] text-ink-soft group-hover:text-brass transition-colors duration-base" />
                 </div>
-              </div>
+              )}
 
               {/* YouTube Video Preview on Hover */}
               {videoId && isHovered && (
