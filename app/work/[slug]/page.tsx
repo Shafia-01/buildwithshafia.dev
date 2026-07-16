@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight, Github, Play, ArrowRight, Video } from "lucide
 import { projects } from "@/content/projects";
 import { LetterStagger, FadeRise } from "@/components/motion/primitives";
 import { SectionNumber, MetaLabel, PullQuote } from "@/components/typography";
+import { VideoPlayer } from "@/components/sections/video-player";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -76,7 +77,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
             {project.links.watchDemo ? (
               <a
-                href={project.links.watchDemo}
+                href="#demo-video"
                 className="inline-flex items-center gap-2 px-4 py-2 border border-brass text-brass font-mono text-meta-xs uppercase hover:bg-brass hover:text-paper transition-colors rounded-sm"
               >
                 <Play className="w-3.5 h-3.5" /> ▶ Watch Demo
@@ -109,6 +110,11 @@ export default async function ProjectDetailPage({ params }: Props) {
             ))}
           </div>
         </div>
+
+        {/* Inline YouTube Video Player */}
+        {project.links.watchDemo && (
+          <VideoPlayer url={project.links.watchDemo} projectTitle={project.title} />
+        )}
 
         {/* Details Layout */}
         <div className="grid lg:grid-cols-[1.8fr_1fr] gap-12 lg:gap-16">

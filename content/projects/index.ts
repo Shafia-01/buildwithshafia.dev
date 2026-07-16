@@ -177,7 +177,8 @@ export const projects: Project[] = [
       "Replace synchronous LLM chain invocations with Server-Sent Events streaming to deliver token-by-token output to the frontend, reducing perceived latency on longer analytical responses."
     ],
     links: {
-      github: "https://github.com/Shafia-01/Learnify-AI"
+      github: "https://github.com/Shafia-01/Learnify-AI",
+      watchDemo: "https://youtu.be/oSdFB1jBh4M"
     }
   },
   {
