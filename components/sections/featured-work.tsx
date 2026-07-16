@@ -1,12 +1,32 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, PlayCircle } from "lucide-react";
 import { FadeRise } from "@/components/motion/primitives";
 import { MetaLabel, SectionNumber } from "@/components/typography";
 import { featuredProject } from "@/content/meta/site";
+import { projects } from "@/content/projects";
 
 export function FeaturedWork() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Find the project configuration and get watchDemo link
+  const project = projects.find((p) => p.slug === featuredProject.slug);
+  const watchDemoUrl = project?.links?.watchDemo;
+
+  const getYouTubeId = (urlStr: string): string | null => {
+    try {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = urlStr.match(regExp);
+      return match && match[2].length === 11 ? match[2] : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const videoId = watchDemoUrl ? getYouTubeId(watchDemoUrl) : null;
+
   return (
     <section
       data-testid="featured-work"
@@ -33,6 +53,8 @@ export function FeaturedWork() {
           <Link
             href={featuredProject.href}
             data-testid={`featured-card-${featuredProject.slug}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             className="group block relative overflow-hidden border border-rule-strong bg-paper-soft"
           >
             {/* Poster placeholder — replaceable */}
@@ -47,14 +69,29 @@ export function FeaturedWork() {
                 }}
               />
               {/* Center play icon */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                 <div className="flex flex-col items-center gap-3 text-ink-soft group-hover:text-brass transition-colors duration-base">
                   <PlayCircle className="w-16 h-16 stroke-[1]" />
                   <MetaLabel>Demo preview · autoplay on hover</MetaLabel>
                 </div>
               </div>
+
+              {/* YouTube Video Preview on Hover */}
+              {videoId && isHovered && (
+                <div className="absolute inset-0 z-20 transition-opacity duration-500">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&playsinline=1&rel=0&modestbranding=1&enablejsapi=1`}
+                    className="absolute inset-0 w-full h-full border-0 pointer-events-none scale-105"
+                    allow="autoplay; encrypted-media"
+                    title={`${project?.title || "Project"} Demo Video`}
+                  />
+                  {/* Overlay to ensure clicks register on the Link and not the iframe */}
+                  <div className="absolute inset-0 bg-transparent" />
+                </div>
+              )}
+
               {/* Brass corner-tick (appears on hover) */}
-              <div className="absolute top-4 right-4 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-base">
+              <div className="absolute top-4 right-4 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-base z-30">
                 <div className="absolute top-0 right-0 w-full h-px bg-brass" />
                 <div className="absolute top-0 right-0 w-px h-full bg-brass" />
               </div>

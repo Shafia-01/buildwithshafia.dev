@@ -77,90 +77,124 @@ export default function WorkPage() {
 
         {/* Editorial 2-column desktop / 1-column mobile Grid */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-          {filteredProjects.map((project, index) => {
-            const isFlagship = project.slug === "learnify-ai";
-            return (
-              <FadeRise key={project.slug} delay={index * 0.05}>
-                <Link
-                  href={`/work/${project.slug}`}
-                  data-testid={`project-card-${project.slug}`}
-                  className="group block relative overflow-hidden border border-rule-strong bg-paper-soft hover:border-brass transition-all duration-base"
-                >
-                  {/* Poster image placeholder matching FeaturedWork styling */}
-                  <div className="aspect-[16/10] relative bg-gradient-to-br from-linen via-paper-soft to-linen-deep overflow-hidden">
-                    {/* Decorative grid pattern */}
-                    <div
-                      className="absolute inset-0 opacity-20"
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px)",
-                        backgroundSize: "48px 48px",
-                      }}
-                    />
-
-                    {/* Center play icon */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="flex flex-col items-center gap-2 text-ink-soft group-hover:text-brass transition-colors duration-base">
-                        <Play className="w-12 h-12 stroke-[1] fill-transparent" />
-                        <MetaLabel>Demo preview</MetaLabel>
-                      </div>
-                    </div>
-
-                    {/* Brass corner-tick (appears on hover) */}
-                    <div className="absolute top-4 right-4 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-base">
-                      <div className="absolute top-0 right-0 w-full h-px bg-brass" />
-                      <div className="absolute top-0 right-0 w-px h-full bg-brass" />
-                    </div>
-                  </div>
-
-                  {/* Caption info */}
-                  <div className="p-6 flex flex-col justify-between min-h-[180px]">
-                    <div>
-                      <div className="flex items-center justify-between gap-4">
-                        <MetaLabel className={isFlagship ? "text-brass font-bold" : "text-ink-muted"}>
-                          {isFlagship ? `${project.order} · FLAGSHIP` : `${project.order} · PROJECT`}
-                        </MetaLabel>
-                        {/* Domain Tags */}
-                        <div className="flex gap-1.5">
-                          {project.slug === "learnify-ai" && (
-                            <span className="px-2 py-0.5 bg-brass-glow text-brass text-[9px] font-mono rounded-sm">
-                              AI-RAG
-                            </span>
-                          )}
-                          {project.slug === "stratix" && (
-                            <span className="px-2 py-0.5 bg-brass-glow text-brass text-[9px] font-mono rounded-sm">
-                              AGENTIC AI
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <h2 className="mt-3 font-display text-headline-md text-ink leading-tight">
-                        {project.title}
-                      </h2>
-                      <p className="mt-2 font-editorial italic text-body-sm text-ink-soft line-clamp-2">
-                        {project.oneLiner}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-4 border-t border-rule flex items-center justify-between">
-                      <div className="flex gap-2 flex-wrap">
-                        {PROJECT_TOP_TECH[project.slug]?.slice(0, 5).map((tech) => (
-                          <span key={tech} className="font-mono text-[9px] text-ink-muted">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase text-brass font-medium">
-                        Explore <ArrowUpRight className="w-3 h-3" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </FadeRise>
-            );
-          })}
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index} />
+          ))}
         </div>
       </div>
     </main>
+  );
+}
+
+function ProjectCard({ project, index }: { project: typeof projects[number]; index: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const isFlagship = project.slug === "learnify-ai";
+
+  const getYouTubeId = (urlStr: string): string | null => {
+    try {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = urlStr.match(regExp);
+      return match && match[2].length === 11 ? match[2] : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const videoId = project.links.watchDemo ? getYouTubeId(project.links.watchDemo) : null;
+
+  return (
+    <FadeRise key={project.slug} delay={index * 0.05}>
+      <Link
+        href={`/work/${project.slug}`}
+        data-testid={`project-card-${project.slug}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="group block relative overflow-hidden border border-rule-strong bg-paper-soft hover:border-brass transition-all duration-base"
+      >
+        {/* Poster image placeholder matching FeaturedWork styling */}
+        <div className="aspect-[16/10] relative bg-gradient-to-br from-linen via-paper-soft to-linen-deep overflow-hidden">
+          {/* Decorative grid pattern */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage:
+                "linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+            }}
+          />
+
+          {/* Center play icon */}
+          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+            <div className="flex flex-col items-center gap-2 text-ink-soft group-hover:text-brass transition-colors duration-base">
+              <Play className="w-12 h-12 stroke-[1] fill-transparent" />
+              <MetaLabel>Demo preview</MetaLabel>
+            </div>
+          </div>
+
+          {/* YouTube Video Preview on Hover */}
+          {videoId && isHovered && (
+            <div className="absolute inset-0 z-20 transition-opacity duration-500">
+              <iframe
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoId}&playsinline=1&rel=0&modestbranding=1&enablejsapi=1`}
+                className="absolute inset-0 w-full h-full border-0 pointer-events-none scale-105"
+                allow="autoplay; encrypted-media"
+                title={`${project.title} Demo Video`}
+              />
+              {/* Overlay to ensure clicks register on the Link and not the iframe */}
+              <div className="absolute inset-0 bg-transparent" />
+            </div>
+          )}
+
+          {/* Brass corner-tick (appears on hover) */}
+          <div className="absolute top-4 right-4 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-base z-30">
+            <div className="absolute top-0 right-0 w-full h-px bg-brass" />
+            <div className="absolute top-0 right-0 w-px h-full bg-brass" />
+          </div>
+        </div>
+
+        {/* Caption info */}
+        <div className="p-6 flex flex-col justify-between min-h-[180px]">
+          <div>
+            <div className="flex items-center justify-between gap-4">
+              <MetaLabel className={isFlagship ? "text-brass font-bold" : "text-ink-muted"}>
+                {isFlagship ? `${project.order} · FLAGSHIP` : `${project.order} · PROJECT`}
+              </MetaLabel>
+              {/* Domain Tags */}
+              <div className="flex gap-1.5">
+                {project.slug === "learnify-ai" && (
+                  <span className="px-2 py-0.5 bg-brass-glow text-brass text-[9px] font-mono rounded-sm">
+                    AI-RAG
+                  </span>
+                )}
+                {project.slug === "stratix" && (
+                  <span className="px-2 py-0.5 bg-brass-glow text-brass text-[9px] font-mono rounded-sm">
+                    AGENTIC AI
+                  </span>
+                )}
+              </div>
+            </div>
+            <h2 className="mt-3 font-display text-headline-md text-ink leading-tight">
+              {project.title}
+            </h2>
+            <p className="mt-2 font-editorial italic text-body-sm text-ink-soft line-clamp-2">
+              {project.oneLiner}
+            </p>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-rule flex items-center justify-between">
+            <div className="flex gap-2 flex-wrap">
+              {PROJECT_TOP_TECH[project.slug]?.slice(0, 5).map((tech) => (
+                <span key={tech} className="font-mono text-[9px] text-ink-muted">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase text-brass font-medium">
+              Explore <ArrowUpRight className="w-3 h-3" />
+            </span>
+          </div>
+        </div>
+      </Link>
+    </FadeRise>
   );
 }
