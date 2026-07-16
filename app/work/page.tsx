@@ -113,9 +113,20 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
       >
         {/* Poster image placeholder matching FeaturedWork styling */}
         <div className="aspect-[16/10] relative bg-gradient-to-br from-linen via-paper-soft to-linen-deep overflow-hidden">
+          {/* YouTube Thumbnail Background if available */}
+          {videoId && (
+            <img
+              src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+              alt={`${project.title} Thumbnail`}
+              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-base z-0"
+              onError={(e) => {
+                e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+              }}
+            />
+          )}
           {/* Decorative grid pattern */}
           <div
-            className="absolute inset-0 opacity-20"
+            className="absolute inset-0 opacity-20 z-10"
             style={{
               backgroundImage:
                 "linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px)",
@@ -124,7 +135,7 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
           />
 
           {/* Center play icon */}
-          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
             <div className="flex flex-col items-center gap-2 text-ink-soft group-hover:text-brass transition-colors duration-base">
               <Play className="w-12 h-12 stroke-[1] fill-transparent" />
               <MetaLabel>Demo preview</MetaLabel>

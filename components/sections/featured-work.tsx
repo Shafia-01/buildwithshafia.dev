@@ -59,9 +59,20 @@ export function FeaturedWork() {
           >
             {/* Poster placeholder — replaceable */}
             <div className="aspect-[16/10] relative bg-gradient-to-br from-linen via-paper-soft to-linen-deep overflow-hidden">
+              {/* YouTube Thumbnail Background if available */}
+              {videoId && (
+                <img
+                  src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                  alt={`${project?.title} Thumbnail`}
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-base z-0"
+                  onError={(e) => {
+                    e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                  }}
+                />
+              )}
               {/* Decorative grid pattern */}
               <div
-                className="absolute inset-0 opacity-30"
+                className="absolute inset-0 opacity-30 z-10"
                 style={{
                   backgroundImage:
                     "linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px)",
@@ -69,7 +80,7 @@ export function FeaturedWork() {
                 }}
               />
               {/* Center play icon */}
-              <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+              <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                 <div className="flex flex-col items-center gap-3 text-ink-soft group-hover:text-brass transition-colors duration-base">
                   <PlayCircle className="w-16 h-16 stroke-[1]" />
                   <MetaLabel>Demo preview · autoplay on hover</MetaLabel>
