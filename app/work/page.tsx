@@ -17,10 +17,10 @@ const FILTER_DOMAINS = [
 ];
 
 const PROJECT_TOP_TECH: Record<string, string[]> = {
-  "learnify-ai": ["FastAPI", "React", "LangChain", "FAISS", "MongoDB", "Ollama"],
-  "stratix": ["LangGraph", "LangChain", "FastAPI", "Streamlit", "SQLite"],
+  "learnify-ai": ["FastAPI", "React", "LangChain", "FAISS", "MongoDB", "JWT"],
+  "stratix": ["FastAPI", "Streamlit", "LangGraph", "LangSmith", "SQLite"],
   "cartverse": ["Python", "Streamlit", "Transformers", "SerpAPI", "MySQL"],
-  "mediscan": ["PyTorch", "Streamlit", "ResNet18", "PyMuPDF", "SSRF Protection"],
+  "mediscan": ["PyTorch", "torchvision", "Streamlit", "PyMuPDF", "BeautifulSoup4"],
   "packetwatch": ["Python", "Streamlit", "Scapy", "scikit-learn", "Npcap"],
   "cinescope": ["Vanilla JS", "Node.js", "Express.js", "OMDb API", "localStorage"]
 };

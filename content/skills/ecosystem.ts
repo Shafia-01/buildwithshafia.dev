@@ -18,7 +18,7 @@ export const skillEcosystem: SkillGroup[] = [
       "Generative AI",
       "RAG",
       "Prompt Engineering",
-      "AI Agents",
+      "Agentic AI",
       "Hugging Face Transformers",
       "LangChain",
       "LangGraph",
@@ -37,11 +37,6 @@ export const skillEcosystem: SkillGroup[] = [
   {
     id: "data-cloud-devops",
     title: "Data, Cloud & DevOps",
-    skills: ["NumPy", "Pandas", "Plotly", "Power BI", "MySQL", "MongoDB", "AWS", "Docker", "Hugging Face Spaces", "Git", "GitHub", "CI/CD"]
-  },
-  {
-    id: "networking-security",
-    title: "Networking & Security",
-    skills: ["Scapy"]
+    skills: ["NumPy", "Pandas", "Plotly", "Matplotlib", "MySQL", "SQLite","MongoDB", "AWS", "Docker", "Hugging Face Spaces", "Git", "GitHub", "CI/CD"]
   }
 ];
