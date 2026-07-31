@@ -419,7 +419,8 @@ export const projects: Project[] = [
       "Add structured logging and unit tests around mood mapping, category adjustment, and SerpAPI response parsing to catch regressions as logic evolves."
     ],
     links: {
-      github: "https://github.com/Shafia-01/CartVerse"
+      github: "https://github.com/Shafia-01/CartVerse",
+      watchDemo: "https://youtu.be/K6MSzLlotrs"
     }
   },
   {
@@ -653,7 +654,8 @@ export const projects: Project[] = [
       "Add multi-class classification to distinguish attack subtypes (DoS, port scan, MITM) rather than returning only a binary Normal/Threat label."
     ],
     links: {
-      github: "https://github.com/Shafia-01/PacketWatch"
+      github: "https://github.com/Shafia-01/PacketWatch",
+      watchDemo: "https://youtu.be/hAt71wGmWVI"
     }
   },
   {
@@ -763,7 +765,8 @@ export const projects: Project[] = [
       "Add server-side response caching on the Express proxy (e.g., in-memory or Redis) to reduce redundant OMDb API calls for repeated searches and detail lookups."
     ],
     links: {
-      github: "https://github.com/Shafia-01/CineScope"
+      github: "https://github.com/Shafia-01/CineScope",
+      watchDemo: "https://youtu.be/kz-9Yrg-rS4"
     }
   }
 ];
