@@ -47,7 +47,6 @@ export const projects: Project[] = [
     metrics: [
       "3x faster contextual retrieval",
       "3 swappable LLMs",
-      "5 difficulty tiers",
       "6 AI-mini-games",
       "40% personalization improvement"
     ],

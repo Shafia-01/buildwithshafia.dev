@@ -169,19 +169,6 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
               <MetaLabel className={isFlagship ? "text-brass font-bold" : "text-ink-muted"}>
                 {isFlagship ? `${project.order} · FLAGSHIP` : `${project.order} · PROJECT`}
               </MetaLabel>
-              {/* Domain Tags */}
-              <div className="flex gap-1.5">
-                {project.slug === "learnify-ai" && (
-                  <span className="px-2 py-0.5 bg-brass-glow text-brass text-[9px] font-mono rounded-sm">
-                    AI-RAG
-                  </span>
-                )}
-                {project.slug === "stratix" && (
-                  <span className="px-2 py-0.5 bg-brass-glow text-brass text-[9px] font-mono rounded-sm">
-                    AGENTIC AI
-                  </span>
-                )}
-              </div>
             </div>
             <h2 className="mt-3 font-display text-headline-md text-ink leading-tight">
               {project.title}
