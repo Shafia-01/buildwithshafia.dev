@@ -171,7 +171,7 @@ export default function ContactPage() {
         {/* Status spread bar */}
         <FadeRise delay={0.2} className="p-8 border border-brass bg-brass-glow text-center rounded-sm">
           <p className="font-mono text-meta-sm tracking-wide text-ink-soft leading-relaxed">
-            Available for <span className="text-ink font-semibold">AI Engineer</span> · <span className="text-ink font-semibold">GenAI</span> · <span className="text-ink font-semibold">Software Engineer</span> · <span className="text-ink font-semibold">Founding Engineer</span> roles.
+            Available for <span className="text-ink font-semibold">AI Engineer</span> · <span className="text-ink font-semibold">GenAI Engineer</span> · <span className="text-ink font-semibold">Software Engineer</span> · <span className="text-ink font-semibold">Founding Engineer</span> roles.
           </p>
           <p className="font-mono text-meta-xs tracking-wider text-ink-muted uppercase mt-3">
             Based in India · Open to remote
