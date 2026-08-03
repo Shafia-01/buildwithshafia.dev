@@ -33,10 +33,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: site.title,
-    template: "%s · Shafia Ameeruddin — AI Engineer",
+    template: "%s · Shafia Ameeruddin - AI Engineer",
   },
   description:
-    "Shafia Ameeruddin — AI Engineer building intelligent products from idea to production. Multimodal AI, RAG pipelines, GenAI orchestration, and full-stack systems.",
+    "Shafia Ameeruddin - AI Engineer building intelligent products from idea to production. Multimodal AI, RAG pipelines, GenAI orchestration, and full-stack systems.",
   keywords: [
     "AI Engineer",
     "GenAI Engineer",

@@ -17,11 +17,11 @@ export interface Milestone {
 export const milestones: Milestone[] = [
   {
     id: "education-btech",
-    date: "Sep 2022 – May 2026",
+    date: "Sep 2022 – June 2026",
     title: "Bachelor of Technology in Computer Science and Engineering",
     organization: "Jamia Hamdard University",
     category: "education",
-    description: "CGPA 8.46/10. Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, DBMS."
+    description: "CGPA 8.55/10. Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, Database Management Systems."
   },
   {
     id: "ieee-jhsb",
@@ -82,15 +82,15 @@ export const milestones: Milestone[] = [
   {
     id: "stratix-shipped",
     date: "Oct 2025 – Nov 2025",
-    title: "Stratix Shipped",
+    title: "Stratix",
     organization: "Independent Project",
     category: "milestone",
     description: "Agentic AI-powered SEO platform automating keyword and SERP analysis, cutting research time by 60%, improving accuracy by 35%, and scaling results to 50+ keywords per query."
   },
   {
     id: "learnify-ai-flagship",
-    date: "Jan 2026 – Mar 2026",
-    title: "Learnify AI — Flagship Build",
+    date: "Feb 2026 – April 2026",
+    title: "Learnify AI - Flagship Build",
     organization: "Independent Project",
     category: "milestone",
     highlight: true,
@@ -99,9 +99,9 @@ export const milestones: Milestone[] = [
   {
     id: "graduation",
     date: "May 2026",
-    title: "Graduation — B.Tech Computer Science and Engineering",
+    title: "Graduation - B.Tech Computer Science and Engineering",
     organization: "Jamia Hamdard University",
     category: "education",
-    description: "Completed Bachelor of Technology in Computer Science and Engineering, CGPA 8.46/10."
+    description: "Completed Bachelor of Technology in Computer Science and Engineering, CGPA 8.55/10."
   }
 ];

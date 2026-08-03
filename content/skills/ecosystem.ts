@@ -35,8 +35,13 @@ export const skillEcosystem: SkillGroup[] = [
     skills: ["FastAPI", "React", "Next.js", "Node.js", "Express.js", "Streamlit", "REST APIs", "API Integration", "WebSockets"]
   },
   {
-    id: "data-cloud-devops",
-    title: "Data, Cloud & DevOps",
-    skills: ["NumPy", "Pandas", "Plotly", "Matplotlib", "MySQL", "SQLite","MongoDB", "AWS", "Docker", "Hugging Face Spaces", "Git", "GitHub", "CI/CD"]
+    id: "data-engineering-databases",
+    title: "Data Engineering & Databases",
+    skills: ["NumPy", "Pandas", "Plotly", "Matplotlib", "MySQL", "SQLite","MongoDB"]
+  },
+  {
+    id: "cloud-devops-version-control",
+    title: "Cloud, DevOps & Version Control",
+    skills: ["AWS", "Docker", "Hugging Face Spaces", "Vercel","Git", "GitHub", "CI/CD"]
   }
 ];

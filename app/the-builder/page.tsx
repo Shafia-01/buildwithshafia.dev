@@ -71,7 +71,7 @@ export default function TheBuilderPage() {
             "We build things not to occupy space, but to create meaning."
           </h3>
           <p className="font-mono text-meta-xs uppercase tracking-wider text-brass">
-            Shafia Ameeruddin — 2026 Manifesto
+            Shafia Ameeruddin - 2026 Manifesto
           </p>
         </FadeRise>
       </div>

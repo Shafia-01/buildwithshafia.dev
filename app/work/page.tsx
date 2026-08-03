@@ -29,7 +29,7 @@ const PROJECT_TOP_TECH: Record<string, string[]> = {
 function matchesFilter(projectSlug: string, filter: string): boolean {
   if (filter === "All") return true;
   if (filter === "AI-RAG") return projectSlug === "learnify-ai";
-  if (filter === "Full-Stack") return projectSlug === "learnify-ai" || projectSlug === "cartverse" || projectSlug === "cinescope";
+  if (filter === "Full-Stack") return projectSlug === "learnify-ai" || projectSlug === "cartverse" || projectSlug === "cinescope" || projectSlug === "stratix";
   if (filter === "Agentic AI") return projectSlug === "stratix" || projectSlug === "learnify-ai";
   if (filter === "CV") return projectSlug === "mediscan" || projectSlug === "cartverse";
   if (filter === "Security") return projectSlug === "packetwatch";
