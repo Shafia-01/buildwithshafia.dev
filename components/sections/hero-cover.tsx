@@ -47,7 +47,7 @@ export function HeroCover() {
           {/* Pull quote — floats lower-right on desktop */}
           <FadeRise delay={1.2} className="mt-14 md:mt-20 md:ml-auto md:max-w-md">
             <PullQuote className="text-2xl md:text-3xl">
-              "{site.differentiator}"
+              "I ship complete AI products,<br />not just AI models."
             </PullQuote>
           </FadeRise>
         </div>
