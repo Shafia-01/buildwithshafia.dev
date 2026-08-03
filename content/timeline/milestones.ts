@@ -98,7 +98,7 @@ export const milestones: Milestone[] = [
   },
   {
     id: "graduation",
-    date: "May 2026",
+    date: "June 2026",
     title: "Graduation - B.Tech Computer Science and Engineering",
     organization: "Jamia Hamdard University",
     category: "education",

@@ -23,5 +23,5 @@ export const contact: Contact = {
     github: "https://github.com/Shafia-01",
     resumePath: "/resume/Shafia_Ameeruddin_AI_Engineer_Resume.pdf"
   },
-  statusLine: "Open to AI Engineering, GenAI Engineering, Machine Learning Engineering, and Software Engineering opportunities. India · Open to Relocation · Open to Remote."
+  statusLine: "Open to AI / GenAI / Software Engineering opportunities · India · Open to Relocation · Open to Remote"
 };

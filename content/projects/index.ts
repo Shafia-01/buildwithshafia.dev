@@ -662,7 +662,7 @@ export const projects: Project[] = [
     slug: "cinescope",
     order: "06",
     title: "CineScope",
-    oneLiner: "Developed and deployed CineScope, a full-stack movie discovery platform with a secure Express proxy backend and 8 user-facing features.",
+    oneLiner: "A full-stack movie discovery platform with a secure Express proxy backend and 8 user-facing features.",
     pullQuote: "Integrating the OMDb API to deliver search, reviews, ratings, and personalized watchlists with robust server-side security.",
     metrics: [
       "8 user-facing features",
