@@ -33,9 +33,9 @@ export default function CommunityPage() {
         </div>
 
         {/* Stats Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
           {communityStats.map((stat, i) => (
-            <div key={i} className="p-5 border border-rule-strong bg-paper-soft text-center rounded-sm">
+            <div key={i} className="w-[calc((100%-16px)/2)] md:w-[calc((100%-32px)/3)] p-5 border border-rule-strong bg-paper-soft text-center rounded-sm">
               <span className="block font-display text-display-xs text-brass font-bold leading-none">
                 {stat.metric}
               </span>

@@ -58,8 +58,8 @@ export const milestones: Milestone[] = [
   {
     id: "cartverse-shipped",
     date: "Feb 2025 – Mar 2025",
-    title: "CartVerse Shipped",
-    organization: "Independent Project",
+    title: "CartVerse",
+    organization: "Walmart Sparkathon 2025",
     category: "milestone",
     description: "Dual-module AI shopping assistant (MoodCart + AutoCart) using NLP and SerpAPI, boosting recommendation relevance by 45% and reducing decision time by 55%."
   },

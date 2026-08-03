@@ -18,15 +18,15 @@ export default function SkillsPage() {
           <h1 className="mt-6 font-display text-display-md md:text-display-lg text-ink leading-[0.95] tracking-tight">
             The capability map
           </h1>
-          <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-4xl leading-relaxed">
+          <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-none lg:whitespace-nowrap leading-relaxed">
             The engineering toolkit behind everything I build - from intelligent systems to production applications.
           </p>
         </div>
 
         {/* 9 Constellation clusters as simple CSS-grid star map cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {skillEcosystem.map((group, idx) => (
-            <FadeRise key={group.id} delay={idx * 0.04}>
+            <FadeRise key={group.id} delay={idx * 0.04} className="w-full md:w-[calc((100%-48px)/3)]">
               <div className="p-6 border border-rule-strong bg-paper-soft hover:border-brass transition-all duration-base h-full flex flex-col justify-between rounded-sm">
                 <div>
                   <div className="flex items-center gap-2 mb-4">
