@@ -19,7 +19,7 @@ export default function SkillsPage() {
             The capability map
           </h1>
           <p className="mt-6 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft max-w-4xl leading-relaxed">
-            Consellation map of language proficiency, machine learning modules, and deployment stacks.
+            The engineering toolkit behind everything I build - from intelligent systems to production applications.
           </p>
         </div>
 
