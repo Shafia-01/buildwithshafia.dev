@@ -56,7 +56,7 @@ export function HeroCover() {
         <FadeRise delay={1.5} className="mt-16 md:mt-24">
           <div className="flex items-center gap-2 mb-6">
             <span className="inline-block w-2 h-2 rounded-full bg-success animate-brass-pulse" aria-hidden />
-            <MetaLabel>↳ Available for AI Engineer / GenAI / Founding Eng roles · 2026</MetaLabel>
+            <MetaLabel> Available for AI / GenAI / Software / Founding Engineer roles · 2026</MetaLabel>
           </div>
 
           <div className="flex flex-wrap gap-3">

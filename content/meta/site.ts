@@ -5,7 +5,7 @@ export const site = {
   tagline: "Building intelligent products from idea to production.",
   differentiator: "I ship complete AI products, not just AI models.",
   location: "India · Open to Relocation · Open to Remote",
-  status: "Available · AI Engineering, GenAI Engineering, Machine Learning Engineering, and Software Engineering opportunities",
+  status: "Available · AI / GenAI / Software Engineering opportunities",
   email: "shafiaameeruddin637@gmail.com",
   linkedin: "https://linkedin.com/in/shafia-ameeruddin01",
   github: "https://github.com/Shafia-01",
