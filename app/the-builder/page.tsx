@@ -34,11 +34,19 @@ export default function TheBuilderPage() {
             <h2 className="font-mono text-meta-xs uppercase tracking-wider text-brass font-bold border-b border-rule pb-2">
               [WHO I AM] The Engineer
             </h2>
-            <p className="text-body-sm text-ink-soft leading-relaxed">
-              I have gradually become an engineer who enjoys building complete products rather than isolated features. What excites me isn't a single framework, model, or technology - it's understanding how an entire system comes together. I naturally gravitate toward work that spans architecture, backend services, AI integration, user experience, and deployment because each layer contributes to the reliability of the final product.
-              As my projects have grown in complexity, I've become less interested in proving that something can work and more interested in making sure it continues to work under changing conditions. That shift has shaped how I approach engineering today. I enjoy taking loosely defined ideas, understanding the underlying problem, and turning them into structured systems that people can actually use.
-              I also enjoy the iterative nature of building. Even after a feature works, I'm usually asking what could make it clearer, simpler, or more valuable. The most rewarding part of engineering, for me, isn't reaching the finish line - it's continuously refining a product until both the technology and the experience feel intentional.
-            </p>
+            <div className="space-y-5 text-body-sm text-ink-soft leading-relaxed">
+              <p>
+                I have gradually become an engineer who enjoys building complete products rather than isolated features. What excites me isn't a single framework, model, or technology - it's understanding how an entire system comes together. I naturally gravitate toward work that spans architecture, backend services, AI integration, user experience, and deployment because each layer contributes to the reliability of the final product.
+              </p>
+
+              <p>
+                As my projects have grown in complexity, I've become less interested in proving that something can work and more interested in making sure it continues to work under changing conditions. That shift has shaped how I approach engineering today. I enjoy taking loosely defined ideas, understanding the underlying problem, and turning them into structured systems that people can actually use.
+              </p>
+
+              <p>
+                I also enjoy the iterative nature of building. Even after a feature works, I'm usually asking what could make it clearer, simpler, or more valuable. The most rewarding part of engineering, for me, isn't reaching the finish line - it's continuously refining a product until both the technology and the experience feel intentional.
+              </p>
+            </div>
           </FadeRise>
 
           <FadeRise delay={0.1} className="space-y-4">
