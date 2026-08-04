@@ -119,10 +119,11 @@ body,
 .drop-cap::first-letter {
   font-family: var(--font-fraunces), serif;
   font-weight: 300;
-  font-size: 5.5em;
-  line-height: 0.85;
+  font-size: 5.2em;
+  line-height: 0.78;
   float: left;
-  padding: 0.05em 0.12em 0 0;
+  padding: 0;
+  margin: -0.06em 0.12em 0 0;
   color: var(--brass);
 }
 
