@@ -34,7 +34,7 @@ export default function TheBuilderPage() {
             <h2 className="font-mono text-meta-xs uppercase tracking-wider text-brass font-bold border-b border-rule pb-2">
               [WHO I AM] The Engineer
             </h2>
-            <div className="space-y-5 text-body-sm text-ink-soft leading-relaxed">
+            <div className="space-y-6 text-body-sm text-ink-soft leading-8">
               <p>
                 I have gradually become an engineer who enjoys building complete products rather than isolated features. What excites me isn't a single framework, model, or technology - it's understanding how an entire system comes together. I naturally gravitate toward work that spans architecture, backend services, AI integration, user experience, and deployment because each layer contributes to the reliability of the final product.
               </p>
