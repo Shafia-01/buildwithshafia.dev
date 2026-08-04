@@ -21,11 +21,20 @@ export default function TheBuilderPage() {
 
         {/* Drop cap opener & intro */}
         <div className="max-w-3xl mx-auto mb-20">
-          <p className="font-editorial italic text-headline-sm md:text-headline-md text-ink-soft leading-relaxed drop-cap">
-            I don't build software simply because I enjoy writing code. I build because I enjoy solving problems, refining ideas, and creating products that people genuinely find useful. Engineering is the foundation, but usefulness is always the goal.
-            Every project begins with an unfamiliar problem, imperfect constraints, and a series of decisions that gradually transform ideas into reliable systems. Over time, I've found myself spending less energy chasing the newest technologies and more energy understanding how different pieces fit together. Whether I'm building AI-powered applications, backend services, evaluation pipelines, or developer tools, I'm drawn to systems that can be understood, tested, improved, and trusted.
-            For me, good engineering doesn't stop at making something work - it also considers how people experience it. I enjoy building software that is technically sound, practically useful, and thoughtfully designed, where reliability, usability, and visual clarity evolve together rather than competing for attention.
-          </p>
+          <div className="space-y-5 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft leading-relaxed">
+            <p className="drop-cap">
+              I don't build software simply because I enjoy writing code. I build because I enjoy solving problems, refining ideas, and creating products that people genuinely find useful. Engineering is the foundation, but usefulness is always the goal.
+            </p>
+
+            <p>
+              Every project begins with an unfamiliar problem, imperfect constraints, and a series of decisions that gradually transform ideas into reliable systems. Over time, I've found myself spending less energy chasing the newest technologies and more energy understanding how different pieces fit together. Whether I'm building AI-powered applications, backend services, evaluation pipelines, or developer tools, I'm drawn to systems that can be understood, tested, improved, and trusted.
+            </p>
+
+            <p>
+              For me, good engineering doesn't stop at making something work—it also considers how people experience it. I enjoy building software that is technically sound, practically useful, and thoughtfully designed, where reliability, usability, and visual clarity evolve together rather than competing for attention.
+            </p>
+
+          </div>
         </div>
 
         {/* 4 Essay panels: Who, What, Why, How */}
