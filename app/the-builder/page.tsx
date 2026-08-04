@@ -20,7 +20,7 @@ export default function TheBuilderPage() {
         </div>
 
         {/* Drop cap opener & intro */}
-        <div className="max-w-3xl mx-auto mb-20">
+        <div className="max-w-4xl mx-auto mb-20">
           <div className="space-y-5 font-editorial italic text-headline-sm md:text-headline-md text-ink-soft leading-relaxed drop-cap">
             <p>
               I don't build software simply because I enjoy writing code. I build because I enjoy solving problems, refining ideas, and creating products that people genuinely find useful. Engineering is the foundation, but usefulness is always the goal.
