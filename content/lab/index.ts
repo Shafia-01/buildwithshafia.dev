@@ -18,95 +18,99 @@ export const labItems: LabItem[] = [
     slug: "news-sentiment-pipeline",
     title: "News Sentiment Pipeline",
     category: "CyArt Tech",
-    objective: "Engineered an automated crawler and ingestion pipeline that parses RSS feeds in real time to assess financial and technical market sentiment.",
+    objective: "Built a concurrent scraping-to-sentiment pipeline that pulls headlines from 20 RSS sources and scores them in parallel to compare threading and multiprocessing bridging patterns across three interchangeable sentiment backends.",
     architecture: {
-      description: "Distributed async workers processing live XML streams into an NLP pipeline.",
+      description: "Threaded RSS scraper feeding a multiprocessing pool through a shared queue, with sentiment results appended to disk as each worker returns.",
       steps: [
-        "Cron tasks scan 20 RSS news endpoints every 60 seconds.",
-        "Payload filter parses XML articles and handles duplicate stories using hashes.",
-        "Text chunks are analyzed by three sentiment models (VADER, FinBERT, and a custom classifier).",
-        "Results are indexed in a time-series cache."
+        "One RSSScraperThread per feed URL parses RSS via feedparser and pushes headline dicts (source, title, link, published) onto a shared multiprocessing.Queue.",
+        "The main loop drains the queue with a 1-second poll and dispatches each headline to a multiprocessing.Pool via apply_async, running one of three interchangeable SentimentAnalyzer backends (VADER, Transformers, rule-based).",
+        "Each worker result is appended as a JSON line to outputs/results.json1 through a threading.Lock-protected callback, with tqdm progress bars tracking feeds scraped and headlines analyzed.",
+        "analyze_results.py reloads the JSON lines into a pandas DataFrame, flattens the nested analysis dict, and exports sentiment distribution and per-source averages to results.csv."
       ]
     },
-    stack: ["Python", "FastAPI", "FinBERT", "Redis", "Celery"],
+    stack: ["Python", "feedparser", "NLTK VADER", "Hugging Face Transformers (optional)", "threading", "multiprocessing", "Flask", "pandas", "tqdm"],
     engineeringWork: [
-      "Wrote non-blocking parsing adapters that process 494 headlines across 20 RSS feeds concurrently.",
-      "Optimized model inference queue, reaching average processing speed of 19 headlines/second.",
-      "Set up a deduplication index storing story hashes in Redis to skip repetitive content."
+      "Implemented a two-layer concurrency model: threading.Thread instances for I/O-bound RSS scraping and a multiprocessing.Pool for CPU-bound sentiment scoring, bridged by a multiprocessing.Queue.",
+      "Built a pluggable SentimentAnalyzer wrapper supporting VADER, a HuggingFace transformers pipeline, and a rule-based positive/negative word-list fallback, selectable via a CLI flag.",
+      "Added a threading.Lock-guarded append-only JSON-lines writer, plus a Flask dashboard (app.py) that reuses the same scraper and worker classes for live visualization."
     ],
     results: [
-      "Processed 494 headlines concurrently.",
-      "Tracked across 20 global tech RSS sources.",
-      "Reached an ingestion rate of 19 headlines/sec.",
-      "Integrated 3 parallel NLP engines for cross-validation.",
-      "Generated 1,877+ sentiment classifications.",
-      "20% ingestion performance improvement."
+      "20 RSS feeds configured across news and tech sources",
+      "17 distinct sources represented in analyzed results",
+      "2,163 sentiment records written to outputs/results.json1",
+      "1,877 records exported to results.csv via analyze_results.py",
+      "Sentiment split of 805 negative, 775 neutral, 583 positive headlines",
+      "Default concurrency of 20 scraper threads and (CPU count − 1) analysis processes"
     ],
     lessons: [
-      "XML formatting rules are highly inconsistent; built-in regex sanitizers are crucial to normalize titles.",
-      "GPU memory leaks in Celery workers require auto-restarting processes after every 1000 inferences."
+      "Feed parsing with feedparser needs defensive .get() lookups, since RSS entries from different publishers use inconsistent field names (title/updated/published) and malformed feeds return empty entry lists rather than raising.",
+      "Bridging threads and a multiprocessing pool through one mp.Queue works but requires polling with a timeout in the consumer loop, since a bare queue.get() call blocks the main loop from checking thread liveness or a stop event."
     ]
   },
   {
     slug: "surveillance-engineering",
     title: "Surveillance Engineering",
     category: "CyArt Tech",
-    objective: "Built a high-integrity multi-stream RTSP feed monitoring pipeline to detect network video drops, tamper signs, and frame-rate discrepancies.",
+    objective: "Built a real-time integrity-monitoring pipeline for four camera streams to flag motion and detect visual tampering (blur, coverage, uniform color) without external ML models.",
     architecture: {
-      description: "Asynchronous OpenCV capture loops feeding frame integrity assessors.",
+      description: "Four independent StreamProcessor instances read, analyze, and annotate frames per stream, composited into one 2x2 mosaic window each loop iteration.",
       steps: [
-        "OpenCV hooks onto 4 distinct camera network simulation links.",
-        "Buffer threads grab frame matrices independently from processing cycles.",
-        "An integrity assessor calculates frame differences and monitors for signal loss.",
-        "Trigger reports alert monitoring consoles if frame rate drops below thresholds."
+        "Each of four video sources (RTSP URLs or local files) is opened via cv2.VideoCapture inside its own StreamProcessor and resized to a fixed 640x360 processing resolution.",
+        "Motion is detected per frame with an MOG2 background subtractor, a morphological opening pass to remove noise, and contour-area filtering (>500px) to reject spurious triggers.",
+        "Two integrity signals are computed per frame: Laplacian variance for blur (threshold 100) and per-channel histogram dominance for uniform-color/coverage (threshold 0.6), combined into a compromise_percent score checked against a 75% cutoff.",
+        "The four annotated frames are stacked into a 2x2 mosaic with an FPS overlay via cv2.imshow, and pressing 's' writes a screenshot to diagrams/."
       ]
     },
-    stack: ["Python", "OpenCV", "FFmpeg", "GStreamer"],
+    stack: ["Python", "OpenCV", "NumPy", "psutil (optional)"],
     engineeringWork: [
-      "Developed a custom video stream capture thread to bypass standard OpenCV buffer lag.",
-      "Configured 2 motion-estimation algorithms executing in parallel (MOG2 background subtraction and optical flow).",
-      "Wrote 4 structural frame integrity tests verifying black screen, color bars, frozen streams, and high noise."
+      "Implemented per-stream motion detection using MOG2 background subtraction with a morphological opening pass and contour-area thresholding to separate genuine motion from sensor noise.",
+      "Built two independent camera integrity checks — Laplacian variance for blur and histogram channel dominance for uniform-color/coverage — combined into a single compromise heuristic.",
+      "Assembled four StreamProcessor instances into a 2x2 mosaic display with rolling per-stream FPS averaging and keyboard-triggered screenshot capture."
     ],
     results: [
-      "Orchestrates 4 concurrent live camera simulation streams.",
-      "Operates at an average of 7.4 frames per second per stream.",
-      "Utilizes 2 specialized motion detection algorithms.",
-      "Maintains 4 real-time stream integrity safety checks."
+      "4 concurrent camera streams processed into one mosaic window",
+      "2 integrity checks per frame (blur variance, histogram uniformity)",
+      "1 motion-detection method (MOG2 background subtraction with contour filtering)",
+      "Blur flagged below a Laplacian variance threshold of 100",
+      "Uniform-color/coverage flagged above a 0.6 histogram dominance score",
+      "Stream marked compromised at a combined heuristic score of 75% or higher"
     ],
     lessons: [
-      "Network packets fluctuate; socket timeouts must be dynamic to prevent locks on lost connections.",
-      "RTSP stream buffer overflow is mitigated by dropping older frames from queue blocks."
+      "MOG2 background subtraction needs a morphological opening pass and a minimum contour-area cutoff, otherwise single noisy pixels in the foreground mask register as motion.",
+      "Frame differencing was evaluated as a fallback to background subtraction but written up as more brittle to noise; the shipped implementation kept a single background-subtraction method rather than a dual-algorithm setup."
     ]
   },
   {
     slug: "voice-cloning-benchmarks",
     title: "Voice Cloning Benchmarks",
     category: "CyArt Tech",
-    objective: "Created a rigorous comparative testing framework evaluating neural text-to-speech voice cloning systems.",
+    objective: "Evaluated VALL-E-X's zero-shot voice cloning and general TTS accuracy using Whisper transcription, word error rate, and Wav2Vec2 speaker-embedding cosine similarity across CPU inference runs.",
     architecture: {
-      description: "Audio benchmarking harness comparing synthetic speech outputs against target reference waveforms.",
+      description: "Three standalone scripts generate audio from VALL-E-X, transcribe it with Whisper, and score either transcription accuracy or speaker similarity against a reference clip.",
       steps: [
-        "Target reference audio is normalized for sample rate and decibel range.",
-        "Audio is run through XTTS-v2 and VALL-E-X generation scripts.",
-        "Cosine similarity measures distance between speaker embedding vectors.",
-        "Wav2Vec evaluates output semantic clarity."
+        "preload_models() loads the VALL-E-X checkpoint once per script; each fixed test sentence (4 for accuracy, 1 long paragraph, 5 for cloning) is passed to generate_audio() with latency timed via time.time().",
+        "Generated audio is written to disk with scipy.io.wavfile.write, then reloaded and transcribed by openai-whisper's 'base' model.",
+        "jiwer.wer() compares the Whisper transcript against the original text for accuracy and long-paragraph runs; for cloning runs, a Facebook Wav2Vec2-base-960h model embeds both the reference clip and each cloned clip.",
+        "Cosine similarity between the mean-pooled Wav2Vec2 embeddings of the reference and cloned audio scores speaker fidelity, printed alongside WER and latency per sentence."
       ]
     },
-    stack: ["Python", "XTTS-v2", "VALL-E-X", "PyTorch", "Librosa"],
+    stack: ["Python", "VALL-E-X", "PyTorch (CPU)", "torchaudio", "Whisper (openai-whisper)", "Wav2Vec2 (facebook/wav2vec2-base-960h via transformers)", "jiwer", "soundfile"],
     engineeringWork: [
-      "Developed an automated evaluation harness running 15 distinct text-to-speech speaker cloning test variations.",
-      "Compared cosine distances between audio embeddings generated by different models.",
-      "Evaluated performance across noise profiles, accents, and phrase complexities."
+      "Built a Wav2Vec2-based speaker-similarity scorer that loads audio with soundfile, resamples to 16kHz with torchaudio, mean-pools the last hidden state, and computes cosine similarity against a fixed reference clip.",
+      "Automated latency and WER measurement around VALL-E-X's generate_audio() call for both short fixed sentences and a longer paragraph, using Whisper transcription as the accuracy ground truth.",
+      "Wrote three separate evaluation entry points (accuracy, long-paragraph stability, voice cloning) sharing the same model-preload and Whisper-transcription steps but scoring different criteria."
     ],
     results: [
-      "Compared performance metrics of XTTS-v2 vs VALL-E-X architectures.",
-      "Executed 15 speaker configuration test cycles.",
-      "Averaged a Speaker Embedding Cosine Similarity score of 0.965.",
-      "Achieved sub-2.1s generation times on consumer GPUs."
+      "4 fixed sentences run through the TTS accuracy script",
+      "3 of 4 accuracy sentences transcribed with zero word errors",
+      "Average WER of 0.053 on the 4-sentence accuracy set",
+      "5 cloned sentences scored against one fixed reference clip via Wav2Vec2 cosine similarity",
+      "Best cloning cosine similarity of 0.965 across the 5 sentences",
+      "CPU generation latency of 18–22 seconds per short sentence"
     ],
     lessons: [
-      "Reference audio under 3 seconds produces high speaker distortion; 5-10s clips are ideal for stability.",
-      "Model outputs suffer from high-frequency artifacts if sample rate conversions are not strictly matching."
+      "Wav2Vec2 speaker embeddings require consistent preprocessing — mono conversion and 16kHz resampling — applied identically to the reference and cloned clip, or the cosine similarity score degrades without an obvious cause.",
+      "Whisper-derived WER is sensitive to reference-clip quality and duration; the repo's own notes flag prompts under 5 seconds as unreliable for cloning fidelity, independent of the TTS model itself."
     ]
   },
   {
