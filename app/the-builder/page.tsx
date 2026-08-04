@@ -34,7 +34,7 @@ export default function TheBuilderPage() {
             <h2 className="font-mono text-meta-xs uppercase tracking-wider text-brass font-bold border-b border-rule pb-2">
               [WHO I AM] The Engineer
             </h2>
-            <div className="space-y-6 text-body-sm text-ink-soft leading-8">
+            <div className="space-y-5 text-body-sm text-ink-soft leading-relaxed">
               <p>
                 I have gradually become an engineer who enjoys building complete products rather than isolated features. What excites me isn't a single framework, model, or technology - it's understanding how an entire system comes together. I naturally gravitate toward work that spans architecture, backend services, AI integration, user experience, and deployment because each layer contributes to the reliability of the final product.
               </p>
@@ -53,34 +53,61 @@ export default function TheBuilderPage() {
             <h2 className="font-mono text-meta-xs uppercase tracking-wider text-brass font-bold border-b border-rule pb-2">
               [WHAT I BUILD] The Craft
             </h2>
-            <p className="text-body-sm text-ink-soft leading-relaxed">
-              Across my work, the technologies evolve, but the engineering patterns remain remarkably consistent. I tend to build systems that combine intelligent decision-making with dependable software engineering. Some retrieve and organize knowledge, others coordinate multiple AI components, evaluate machine learning models, process live data streams, or automate repetitive workflows. Although the domains vary, the objective rarely changes: transform complex technology into products that solve real problems in a reliable and maintainable way.
-              Rather than treating artificial intelligence as the product itself, I see it as one component within a larger engineering system. APIs, databases, backend services, evaluation pipelines, frontend experiences, and deployment workflows all contribute equally to whether a product succeeds. The most valuable software, in my experience, isn't defined by the sophistication of a single model, but by how seamlessly every part of the system works together.
-              I'm also constantly thinking about what could make a product better - not just technically, but experientially. Sometimes that's a new capability, sometimes it's a simpler workflow, and sometimes it's a small interaction that makes an application feel more intuitive. I enjoy designing products that people don't just use, but genuinely enjoy using.
-            </p>
+            <div className="space-y-5 text-body-sm text-ink-soft leading-relaxed">
+              <p>
+                Across my work, the technologies evolve, but the engineering patterns remain remarkably consistent. I tend to build systems that combine intelligent decision-making with dependable software engineering. Some retrieve and organize knowledge, others coordinate multiple AI components, evaluate machine learning models, process live data streams, or automate repetitive workflows. Although the domains vary, the objective rarely changes: transform complex technology into products that solve real problems in a reliable and maintainable way.
+              </p>
+
+              <p>
+                Rather than treating artificial intelligence as the product itself, I see it as one component within a larger engineering system. APIs, databases, backend services, evaluation pipelines, frontend experiences, and deployment workflows all contribute equally to whether a product succeeds. The most valuable software, in my experience, isn't defined by the sophistication of a single model, but by how seamlessly every part of the system works together.
+              </p>
+
+              <p>
+                I'm also constantly thinking about what could make a product better - not just technically, but experientially. Sometimes that's a new capability, sometimes it's a simpler workflow, and sometimes it's a small interaction that makes an application feel more intuitive. I enjoy designing products that people don't just use, but genuinely enjoy using.
+              </p>
+            </div>
           </FadeRise>
 
           <FadeRise delay={0.15} className="space-y-4">
             <h2 className="font-mono text-meta-xs uppercase tracking-wider text-brass font-bold border-b border-rule pb-2">
               [WHY I BUILD] The Purpose
             </h2>
-            <p className="text-body-sm text-ink-soft leading-relaxed">
-              My perspective on engineering has been shaped as much by experimentation as by building products. Working on benchmarking pipelines, real-time monitoring systems, computer vision applications, and production-oriented AI software reinforced an important lesson: impressive demonstrations are easier to create than dependable systems. Reliability comes from careful evaluation, thoughtful architecture, and continuous refinement - not from adding more complexity.
-              That experience has made me value engineering practices that often receive less attention than new technologies. Clear interfaces, measurable outcomes, repeatable evaluation, documentation, observability, and graceful failure handling consistently have a greater impact on the quality of a product than any individual framework or model.
-              More importantly, I believe technology should simplify complexity, not introduce it. I enjoy building software that helps people make better decisions, reduces friction in their workflow, or makes something that once felt complicated feel natural. For me, that's where engineering becomes meaningful.
-            </p>
+            <div className="space-y-5 text-body-sm text-ink-soft leading-relaxed">
+              <p>
+                My perspective on engineering has been shaped as much by experimentation as by building products. Working on benchmarking pipelines, real-time monitoring systems, computer vision applications, and production-oriented AI software reinforced an important lesson: impressive demonstrations are easier to create than dependable systems. Reliability comes from careful evaluation, thoughtful architecture, and continuous refinement - not from adding more complexity.
+              </p>
+
+              <p>
+                That experience has made me value engineering practices that often receive less attention than new technologies. Clear interfaces, measurable outcomes, repeatable evaluation, documentation, observability, and graceful failure handling consistently have a greater impact on the quality of a product than any individual framework or model.
+              </p>
+
+              <p>
+                More importantly, I believe technology should simplify complexity, not introduce it. I enjoy building software that helps people make better decisions, reduces friction in their workflow, or makes something that once felt complicated feel natural. For me, that's where engineering becomes meaningful.
+              </p>
+            </div>
           </FadeRise>
 
           <FadeRise delay={0.2} className="space-y-4">
             <h2 className="font-mono text-meta-xs uppercase tracking-wider text-brass font-bold border-b border-rule pb-2">
               [HOW I WORK] The Method
             </h2>
-            <p className="text-body-sm text-ink-soft leading-relaxed">
-              I usually begin with architecture before implementation. I prefer understanding how information flows through a system, identifying potential failure points, and defining clear responsibilities between components before writing significant amounts of code. Once that foundation is in place, I work iteratively - building small pieces, validating assumptions early, documenting important decisions, and refining the system through testing and observation rather than intuition alone.
-              I also believe engineering doesn't end when a feature works. Evaluation, debugging, profiling, and incremental improvement are integral parts of the development process. Every iteration should leave the system a little clearer, a little more maintainable, and a little easier to extend than before.
-              Beyond functionality, I pay close attention to how software feels. Visual design, interaction, and information hierarchy aren't separate from engineering - they're part of how people understand a system. I enjoy refining interfaces until they feel intuitive, not because aesthetics are the goal, but because thoughtful design reduces cognitive effort and helps people focus on what they're trying to accomplish.
-              When I build something, I'm rarely asking, "Is it finished?" More often, I'm asking, "How can this be more useful?" That question continues to shape every product I create.
-            </p>
+            <div className="space-y-5 text-body-sm text-ink-soft leading-relaxed">
+              <p>
+                I usually begin with architecture before implementation. I prefer understanding how information flows through a system, identifying potential failure points, and defining clear responsibilities between components before writing significant amounts of code. Once that foundation is in place, I work iteratively - building small pieces, validating assumptions early, documenting important decisions, and refining the system through testing and observation rather than intuition alone.
+              </p>
+
+              <p>
+                I also believe engineering doesn't end when a feature works. Evaluation, debugging, profiling, and incremental improvement are integral parts of the development process. Every iteration should leave the system a little clearer, a little more maintainable, and a little easier to extend than before.
+              </p>
+
+              <p>
+                Beyond functionality, I pay close attention to how software feels. Visual design, interaction, and information hierarchy aren't separate from engineering - they're part of how people understand a system. I enjoy refining interfaces until they feel intuitive, not because aesthetics are the goal, but because thoughtful design reduces cognitive effort and helps people focus on what they're trying to accomplish.
+              </p>
+
+              <p>
+                When I build something, I'm rarely asking, "Is it finished?" More often, I'm asking, "How can this be more useful?" That question continues to shape every product I create.
+              </p>
+            </div>
           </FadeRise>
         </div>
 
