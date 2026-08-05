@@ -19,7 +19,7 @@ export const milestones: Milestone[] = [
     id: "education-btech",
     date: "Sep 2022 – June 2026",
     title: "Bachelor of Technology in Computer Science and Engineering",
-    organization: "Jamia Hamdard University",
+    organization: "Jamia Hamdard",
     category: "education",
     description: "Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, Database Management Systems."
   },
@@ -100,7 +100,7 @@ export const milestones: Milestone[] = [
     id: "graduation",
     date: "June 2026",
     title: "Graduation - B.Tech Computer Science and Engineering",
-    organization: "Jamia Hamdard University",
+    organization: "Jamia Hamdard",
     category: "education",
     description: "Completed | CGPA 8.55/10"
   }
