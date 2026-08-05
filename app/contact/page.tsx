@@ -58,8 +58,12 @@ export default function ContactPage() {
           <SectionNumber number="07" name="LET'S BUILD" />
           <div className="mt-8">
             <LetterStagger
-              text="Let's build something meaningful"
-              className="font-display text-[clamp(1rem,6vw,4.5rem)] text-ink leading-[0.9] tracking-tight whitespace-nowrap"
+              text="Let's build something"
+              className="font-display text-display-md md:text-display-lg text-ink leading-[0.9] tracking-tight block"
+            />
+            <LetterStagger
+              text="meaningful"
+              className="font-display text-display-md md:text-display-lg text-brass leading-[0.9] tracking-tight block mt-2"
             />
           </div>
         </div>
