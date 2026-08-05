@@ -8,40 +8,41 @@ export const skillEcosystem: SkillGroup[] = [
   {
     id: "languages",
     title: "Languages",
-    skills: ["Python", "JavaScript", "SQL", "HTML", "CSS"]
+    skills: ["Python", "SQL", "JavaScript", "HTML", "CSS"]
   },
   {
     id: "ai-ml-genai",
-    title: "AI / ML & GenAI",
+    title: "AI/ML & GenerativeAI",
     skills: [
       "LLMs",
-      "Generative AI",
+      "Agentic AI",
       "RAG",
       "Prompt Engineering",
-      "Agentic AI",
-      "Hugging Face Transformers",
+      "NLP",
+      "Computer Vision",
       "LangChain",
       "LangGraph",
+      "Hugging Face Transformers",
       "PyTorch",
+      "FAISS",
       "Scikit-learn",
       "OpenCV",
-      "FAISS",
-      "NLP"
+      "NLTK"   
     ]
   },
   {
     id: "software-engineering",
     title: "Software Engineering",
-    skills: ["FastAPI", "React", "Next.js", "Node.js", "Express.js", "Streamlit", "REST APIs", "API Integration", "WebSockets"]
+    skills: ["FastAPI", "React", "Node.js", "REST APIs", "API Integration", "Streamlit"]
   },
   {
-    id: "data-engineering-databases",
-    title: "Data Engineering & Databases",
-    skills: ["NumPy", "Pandas", "Plotly", "Matplotlib", "MySQL", "SQLite","MongoDB"]
+    id: "data-databases",
+    title: "Data & Databases",
+    skills: ["NumPy", "Pandas", "Matplotlib", "Plotly", "MySQL", "SQLite","MongoDB"]
   },
   {
-    id: "cloud-devops-version-control",
-    title: "Cloud, DevOps & Version Control",
-    skills: ["AWS", "Docker", "Hugging Face Spaces", "Vercel","Git", "GitHub", "CI/CD"]
+    id: "cloud-devops-tools",
+    title: "Cloud, DevOps & Tools",
+    skills: ["AWS", "Docker","Git", "GitHub", "CI/CD"]
   }
 ];
