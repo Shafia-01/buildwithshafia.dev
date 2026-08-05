@@ -75,7 +75,7 @@ export const milestones: Milestone[] = [
     id: "cyart-internship",
     date: "Sep 2025 – Dec 2025",
     title: "AI Engineer Intern",
-    organization: "CyArt Tech",
+    organization: "CyArt",
     category: "internship",
     description: "Engineered a concurrent Python news analytics pipeline processing 494+ headlines from 20 RSS sources (19 headlines/sec, 20% ingestion improvement, 1,877+ sentiment classifications via 3 NLP engines). Developed a real-time OpenCV surveillance system monitoring 4 concurrent camera streams at ~7.4 FPS with 2 motion-detection algorithms and 4 integrity checks. Researched and benchmarked XTTS-v2 and VALL-E-X through 15+ voice-cloning experiments, achieving 0.965 speaker similarity."
   },

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function LabLandingPage() {
-  const cyArtItems = labItems.filter((item) => item.category === "CyArt Tech");
+  const cyArtItems = labItems.filter((item) => item.category === "CyArt");
   const edunetItems = labItems.filter((item) => item.category === "Edunet Foundation");
 
   return (
@@ -29,12 +29,12 @@ export default function LabLandingPage() {
         </div>
 
         <div className="space-y-16">
-          {/* Group 1: CyArt Tech */}
+          {/* Group 1: CyArt */}
           <section className="space-y-6">
             <div className="flex items-center gap-3 border-b border-rule pb-3">
               <FlaskConical className="w-5 h-5 text-brass" />
               <h2 className="font-mono text-meta-sm uppercase tracking-wider text-ink font-bold">
-                CyArt Tech Deliverables
+                CyArt Deliverables
               </h2>
             </div>
 

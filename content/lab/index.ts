@@ -1,7 +1,7 @@
 export interface LabItem {
   slug: string;
   title: string;
-  category: "CyArt Tech" | "Edunet Foundation";
+  category: "CyArt" | "Edunet Foundation";
   objective: string;
   architecture: {
     description: string;
@@ -17,7 +17,7 @@ export const labItems: LabItem[] = [
   {
     slug: "news-sentiment-pipeline",
     title: "News Sentiment Pipeline",
-    category: "CyArt Tech",
+    category: "CyArt",
     objective: "Built a concurrent scraping-to-sentiment pipeline that pulls headlines from 20 RSS sources and scores them in parallel to compare threading and multiprocessing bridging patterns across three interchangeable sentiment backends.",
     architecture: {
       description: "Threaded RSS scraper feeding a multiprocessing pool through a shared queue, with sentiment results appended to disk as each worker returns.",
@@ -50,7 +50,7 @@ export const labItems: LabItem[] = [
   {
     slug: "surveillance-engineering",
     title: "Surveillance Engineering",
-    category: "CyArt Tech",
+    category: "CyArt",
     objective: "Built a real-time integrity-monitoring pipeline for four camera streams to flag motion and detect visual tampering (blur, coverage, uniform color) without external ML models.",
     architecture: {
       description: "Four independent StreamProcessor instances read, analyze, and annotate frames per stream, composited into one 2x2 mosaic window each loop iteration.",
@@ -83,7 +83,7 @@ export const labItems: LabItem[] = [
   {
     slug: "voice-cloning-benchmarks",
     title: "Voice Cloning Benchmarks",
-    category: "CyArt Tech",
+    category: "CyArt",
     objective: "Evaluated VALL-E-X's zero-shot voice cloning and general TTS accuracy using Whisper transcription, word error rate, and Wav2Vec2 speaker-embedding cosine similarity across CPU inference runs.",
     architecture: {
       description: "Three standalone scripts generate audio from VALL-E-X, transcribe it with Whisper, and score either transcription accuracy or speaker similarity against a reference clip.",
