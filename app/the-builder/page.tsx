@@ -31,7 +31,7 @@ export default function TheBuilderPage() {
             </p>
 
             <p>
-              For me, good engineering doesn't stop at making something work—it also considers how people experience it. I enjoy building software that is technically sound, practically useful, and thoughtfully designed, where reliability, usability, and visual clarity evolve together rather than competing for attention.
+              For me, good engineering doesn't stop at making something work - it also considers how people experience it. I enjoy building software that is technically sound, practically useful, and thoughtfully designed, where reliability, usability, and visual clarity evolve together rather than competing for attention.
             </p>
 
           </div>

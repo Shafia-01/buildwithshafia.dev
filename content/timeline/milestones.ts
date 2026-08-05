@@ -21,7 +21,7 @@ export const milestones: Milestone[] = [
     title: "Bachelor of Technology in Computer Science and Engineering",
     organization: "Jamia Hamdard University",
     category: "education",
-    description: "CGPA 8.55/10. Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, Database Management Systems."
+    description: "Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, Database Management Systems."
   },
   {
     id: "ieee-jhsb",
@@ -42,7 +42,7 @@ export const milestones: Milestone[] = [
   {
     id: "placement-cell",
     date: "Mar 2024 – May 2025",
-    title: "Student Coordinator, Placement Cell",
+    title: "Student Coordinator",
     organization: "The Department of Placement and Alumni Affairs, Jamia Hamdard",
     category: "experience",
     description: "Facilitated connections between 200+ students and industry recruiters, enhancing placement opportunities through proactive outreach. Coordinated placement activities with cell heads and team members."
@@ -102,6 +102,6 @@ export const milestones: Milestone[] = [
     title: "Graduation - B.Tech Computer Science and Engineering",
     organization: "Jamia Hamdard University",
     category: "education",
-    description: "Completed Bachelor of Technology in Computer Science and Engineering, CGPA 8.55/10."
+    description: "Completed | CGPA 8.55/10."
   }
 ];
