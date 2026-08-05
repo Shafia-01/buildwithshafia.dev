@@ -102,6 +102,6 @@ export const milestones: Milestone[] = [
     title: "Graduation - B.Tech Computer Science and Engineering",
     organization: "Jamia Hamdard University",
     category: "education",
-    description: "Completed | CGPA 8.55/10."
+    description: "Completed | CGPA 8.55/10"
   }
 ];
