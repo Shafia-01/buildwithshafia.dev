@@ -187,10 +187,10 @@ export const projects: Project[] = [
     oneLiner: "Agentic SEO market intelligence with human approval gates and confidence-scored findings.",
     pullQuote: "Re-imagining keyword research through a stateful, human-supervised multi-agent pipeline.",
     metrics: [
-      "7-node LangGraph pipeline",
-      "5 tools executed",
-      "173 test cases",
-      "100% core test coverage"
+      "5 research tools",
+      "2 human approval gates",
+      "238 tests passing",
+      "3 automated LLM evaluations"
     ],
     stack: {
       backend: [
