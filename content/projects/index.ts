@@ -184,120 +184,130 @@ export const projects: Project[] = [
     slug: "stratix",
     order: "02",
     title: "Stratix",
-    oneLiner: "Autonomous multi-agent market intelligence platform.",
-    pullQuote: "Re-imagining SEO research through stateful, multi-agent orchestration.",
+    oneLiner: "Agentic SEO market intelligence with human approval gates and confidence-scored findings.",
+    pullQuote: "Re-imagining keyword research through a stateful, human-supervised multi-agent pipeline.",
     metrics: [
       "7-node LangGraph pipeline",
-      "6 tools executed",
+      "5 tools executed",
       "173 test cases",
       "100% core test coverage"
     ],
     stack: {
       backend: [
+        "Python 3.11",
         "FastAPI",
-        "Pydantic v2",
-        "SQLAlchemy",
+        "Uvicorn",
+        "Pydantic",
+        "Tenacity",
         "APScheduler",
-        "Tenacity"
+        "Server-Sent Events streaming",
+        "DataForSEO, SerpApi, pytrends"
       ],
       frontend: [
         "Streamlit",
-        "Plotly"
+        "Plotly",
+        "Pandas"
       ],
       aiml: [
         "LangGraph",
-        "LangChain Core",
-        "langchain-google-genai (Gemini)",
-        "LangSmith"
+        "LangChain (langchain-core, langchain-google-genai, langchain-groq)",
+        "Google Gemini",
+        "Groq",
+        "LangSmith (tracing metadata and configuration)"
       ],
       infra: [
         "SQLite (WAL mode)",
+        "SQLAlchemy",
+        "LangGraph SqliteSaver checkpointer",
         "Docker",
         "Docker Compose",
-        "Uvicorn",
-        "GitHub Actions CI"
+        "GitHub Actions",
+        "Ruff",
+        "Pytest",
+        "Prometheus-format in-process metrics",
+        "Hugging Face Spaces (deployed from CI on the main branch)"
       ]
     },
-    problem: "SEO and market research tools typically return raw, disconnected data — keyword lists, SERP snippets, competitor rankings — and leave the analyst to manually cross-reference them into a strategy. Each data source (search volume, SERP structure, competitor gaps, trends) has different reliability, and tools rarely expose how confident their own output is. The result is research workflows that require constant manual judgment calls about which data to trust, with no systematic way to catch incomplete or low-quality findings before they influence a final recommendation.",
-    solution: "Stratix runs keyword research through a seven-node LangGraph pipeline: a planner drafts a research scope, a ReAct agent executes registered tools (keyword research, SERP analysis, competitor gap, trend forecasting, topic clustering, intent classification), a deterministic aggregator computes per-tool confidence scores, a quality gate enforces minimum data thresholds, an adversarial critic LLM reviews findings for weak claims, and a strategy agent synthesizes a report. Human-in-the-loop interrupts pause execution for plan and report approval, with state checkpointed via SqliteSaver so runs survive restarts.",
+    problem: "Keyword and market research is spread across volume tools, SERP scrapers, trend sources, and competitor lookups, and each returns data of uneven quality. A single LLM summary over that data hides the gaps. Missing volumes, thin SERP results, or estimated values can read as facts. Recommendations also need human sign-off before anyone acts on them, and tracked topics have to be re-checked over time to see what changed. Market intelligence therefore needs orchestrated data collection, explicit quality signals, review checkpoints, and a record of how each conclusion was produced, not just generated prose.",
+    solution: "Stratix runs research as a LangGraph pipeline. A planner LLM drafts a research plan, and the operator approves it at an interrupt checkpoint. A ReAct agent then calls only the tools the plan requests: keyword research, SERP analysis, competitor gap, trend forecasting, and topic clustering. A deterministic aggregator scores each tool's output, a quality gate and an LLM critic challenge the findings, and a strategy node writes the report for a second human approval. Results persist to SQLite and are surfaced through a Streamlit UI backed by a FastAPI service.",
     architecture: {
-      description: "Seven-node LangGraph state machine with two human-in-the-loop interrupts and two retry loops.",
+      description: "Stateful LangGraph pipeline with two human-in-the-loop interrupts, tool-restricted ReAct research, and a deterministic gate plus LLM critic before strategy synthesis.",
       steps: [
         {
-          title: "Planning",
-          description: "planner_node calls Gemini to produce a structured ResearchPlan (objectives, requested modules, max_keywords) as JSON, falling back to a default plan on parse failure, then interrupts for human approval."
+          title: "Plan and Approve",
+          description: "plan_generation_node asks the LLM for a structured ResearchPlan validated by Pydantic, with a fallback plan on failure. plan_approval_node interrupts so the operator can approve, edit, or reject it."
         },
         {
-          title: "Research Execution",
-          description: "research_agent_node runs a LangChain create_react_agent against six StructuredTool adapters backed by invoke_tool(), which validates input via Pydantic and returns errors as structured dicts instead of raising."
+          title: "Tool-Restricted Research",
+          description: "research_agent_node builds a ReAct agent (create_react_agent) exposing only the tools mapped to the plan's modules. Tool calls run through invoke_tool, which returns errors as data instead of raising."
         },
         {
-          title: "Aggregation & Confidence Scoring",
-          description: "aggregator_node deterministically builds IntelligenceFindings from collected tool outputs and computes a 0.0–1.0 confidence score per tool using rule-based rubrics (fill ratio, result counts, gap scores)."
+          title: "Aggregate and Score",
+          description: "aggregator_node, pure Python with no LLM call, builds typed IntelligenceFindings from the collected tool output and computes per-tool confidence scores using explicit rubrics."
         },
         {
-          title: "Quality Gate & Critic",
-          description: "quality_gate_node enforces minimum keyword count and confidence thresholds before an LLM-based critic_node reviews findings for weak claims and data gaps, routing back to research on REVISE verdicts within a retry budget."
+          title: "Quality Gate and Critic",
+          description: "quality_gate_node enforces minimum keyword count and confidence. critic_node adds an LLM PASS/REVISE review. Either can trigger one bounded, targeted retry of only the failing tools."
         },
         {
-          title: "Strategy Synthesis & Persistence",
-          description: "strategy_agent_node synthesizes a StrategyReport via Gemini, interrupts for report approval, then persist_node saves keyword findings to SQLite and triggers LLM-as-judge evaluation of plan, report, and tool reliability."
+          title: "Strategy, Approval, Persist",
+          description: "strategy_generation_node writes the report, and strategy_approval_node interrupts for review or one regeneration. persist_node saves keywords and run status to SQLite and starts background LLM-as-judge evaluations."
         }
       ]
     },
     engineeringDecisions: [
       {
-        title: "SQLite + WAL over PostgreSQL",
-        description: "Chosen for trivial single-node deployment. WAL mode and a 5000ms busy_timeout pragma (set via SQLAlchemy connect event) allow concurrent agent tool writes without external database infrastructure, at the cost of a single-writer ceiling under high concurrency."
+        title: "LangGraph interrupts with SQLite checkpointing",
+        description: "Human approval is implemented with interrupt() and a SqliteSaver-based checkpointer, so runs pause and resume from persisted state. The tradeoff is that state must fit the AgentState TypedDict, and the checkpointer subclass needed a lock plus thread-delegated async methods to support streaming."
       },
       {
-        title: "Quality gate before critic node",
-        description: "A cheap deterministic check (keyword count, confidence threshold) runs before the LLM-based critic to fail fast on obviously insufficient data, avoiding wasted LLM calls on findings that wouldn't pass review anyway."
+        title: "Provider fallback chain with empty-response detection",
+        description: "LLM calls go through a chain built with with_fallbacks(): Gemini (gemini-3.8-flash, then gemini-3.5-flash-lite) and optionally Groq (openai/gpt-oss-120b, then 20b), configured by env vars. Empty non-tool responses raise to trigger fallback. Output style can vary between models."
       },
       {
-        title: "Tenacity retries scoped to specific exceptions",
-        description: "Retry decorators target only KeylyticsAPIError and requests.RequestException, never bare Exception, so programming errors (TypeError, AttributeError) fail immediately instead of being silently retried and masked."
+        title: "Deterministic gate before the LLM critic",
+        description: "Confidence scoring and the quality gate are plain Python, so basic data-density failures are caught and retried before any critic LLM tokens are spent. The cost is maintaining explicit thresholds alongside prompts. Retries target only failing tools and have fixed budgets."
       },
       {
-        title: "Multi-model Gemini fallback chain",
-        description: "LLM calls use LangChain's with_fallbacks() across a list of Gemini models (gemma-4-31b-it down to gemini-2.5-flash) so quota exhaustion or transient errors on one model don't break the pipeline mid-run."
+        title: "Errors as data at the tool boundary",
+        description: "A central tool registry validates inputs with Pydantic and dispatches through invoke_tool(), which converts failures into {error, tool} results so the agent loop keeps running. REST routes call the tools directly and surface failures as HTTP errors instead."
       },
       {
-        title: "Exception-eating tool dispatch",
-        description: "invoke_tool() validates input against each tool's Pydantic model and catches execution errors, returning {\"error\": ..., \"tool\": name} instead of raising — so the ReAct agent receives structured failures and continues rather than crashing the graph."
+        title: "Retries scoped to recoverable exceptions",
+        description: "Tenacity retries apply only to KeylyticsAPIError and requests-level errors, never bare Exception, so programming bugs fail immediately. The tradeoff is that an unanticipated exception type from an API client will not be retried."
       }
     ],
     features: [
       {
-        title: "Human-in-the-loop checkpoints",
-        description: "Graph execution pauses at plan_approval and report_approval interrupts, letting an operator approve, edit, or reject before continuing."
+        title: "Human-supervised research runs",
+        description: "Operators review and edit the research plan, then approve or regenerate the final report. Progress streams live to the Streamlit UI over SSE, showing node stages, tool calls, confidence scores, and the critic verdict."
       },
       {
-        title: "Per-tool confidence scoring",
-        description: "Each research tool's output is scored 0.0–1.0 using deterministic rubrics (fill ratios, result counts, gap scores) surfaced to the strategy agent."
+        title: "Confidence and provenance tracking",
+        description: "Each tool gets a rubric-based confidence score, and each keyword records whether its data is live, cached, estimated, or unavailable. Executive reports display both, so estimated values are not presented as measured."
       },
       {
-        title: "Adversarial critique loop",
-        description: "An LLM critic reviews aggregated findings for weak claims and low-confidence data being used as if reliable, routing back to research when issues are found."
+        title: "Scheduled monitoring with report diffs",
+        description: "Keywords can be re-researched on an interval in auto-approve mode. Each completed run is diffed against the previous one for score changes, recommendation changes, and confidence shifts. Jobs pause after three consecutive failures."
       },
       {
-        title: "Scheduled monitoring with report diffing",
-        description: "APScheduler-backed recurring jobs re-run research in auto-approve mode and compute keyword score, recommendation, and confidence deltas between runs."
+        title: "Execution timeline and quality analytics",
+        description: "Run timelines are reconstructed from checkpoint history, and LLM-as-judge scores for plan quality, report quality, and tool reliability are stored and shown alongside Prometheus-format metrics and health endpoints."
       }
     ],
     performance: [
-      "Six-tool registry with uniform dispatch: All tools (keyword_research, serp_analysis, competitor_gap, trend_forecast, topic_cluster, intent_classifier) share one validated invocation path via TOOL_REGISTRY.",
-      "Retry-safe external API calls: SerpAPI, DataForSEO, and Google Trends calls use exponential backoff with jitter, scoped to recoverable network and API exceptions only.",
-      "Dual-container deployment: Separate Dockerfiles for FastAPI and Streamlit share a SQLite volume via Docker Compose, with a healthcheck gating Streamlit startup on API readiness.",
-      "In-process Prometheus-compatible metrics: Thread-safe counters, histograms, and gauges exposed via /metrics in Prometheus text format, with no external metrics infrastructure required."
+      "Provider fallback path: Ordered Gemini and Groq model chains with a 45-second request timeout and empty-response detection, configurable through environment variables.",
+      "Bounded retry budgets: Quality-gate, critic, planner-edit, and strategy-regeneration loops each have fixed limits, so agent cycles cannot run unbounded.",
+      "Automated evaluation infrastructure: Three rubric-based LLM-as-judge evaluations run in a background thread after each completed run and persist to an eval_results table.",
+      "Test coverage across layers: Pytest suites cover unit logic, graph routing, API routes, and end-to-end runs of the full graph and monitoring pipeline, with external APIs mocked."
     ],
     lessons: [
-      "Separating a deterministic quality gate from an LLM-based critic node reduces wasted model calls on findings that fail simple count or threshold checks.",
-      "Scoping retry decorators to specific exception types (rather than bare Exception) is necessary to avoid masking programming bugs as transient API failures."
+      "In agent systems, explicit state and bounded control flow matter more than prompts. Checkpointed state, typed schemas, and fixed retry budgets are what make interrupts, resumes, and retries predictable.",
+      "Separating cheap deterministic checks from LLM judgment keeps quality control inspectable. Confidence rubrics and a quality gate make data limitations visible before a model writes any recommendation."
     ],
     roadmap: [
-      "Replace the SqliteSaver checkpointer and SQLite job store with distributed equivalents to allow horizontal scaling of the API tier.",
-      "Move the in-memory metrics collector to the official Prometheus client library with a pushgateway, so metrics survive process restarts and aggregate across replicas."
+      "Replace the SQLite checkpointer and APScheduler with distributed equivalents, such as a Redis- or PostgreSQL-backed checkpointer and an out-of-process job queue, so runs and monitoring can scale beyond a single process.",
+      "Add PDF export of executive reports, building on the existing Markdown export in the Executive Reports page."
     ],
     links: {
       github: "https://github.com/Shafia-01/Stratix"
