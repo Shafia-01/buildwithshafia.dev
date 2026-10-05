@@ -177,7 +177,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/Learnify-AI",
-      watchDemo: "https://youtu.be/oSdFB1jBh4M"
+      watchDemo: "https://youtu.be/hLlHuXDPo_8"
     }
   },
   {
@@ -310,7 +310,8 @@ export const projects: Project[] = [
       "Add PDF export of executive reports, building on the existing Markdown export in the Executive Reports page."
     ],
     links: {
-      github: "https://github.com/Shafia-01/Stratix"
+      github: "https://github.com/Shafia-01/Stratix",
+      watchDemo: "https://youtu.be/Q5ThyrZ4mFs"
     }
   },
   {
@@ -429,7 +430,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/CartVerse",
-      watchDemo: "https://youtu.be/K6MSzLlotrs"
+      watchDemo: "https://youtu.be/Y6hZm9dS240"
     }
   },
   {
@@ -551,7 +552,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/MediScan",
-      watchDemo: "https://youtu.be/DnP0gZCNxh0"
+      watchDemo: "https://youtu.be/Za6AwIF4w8Q"
     }
   },
   {
@@ -664,7 +665,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/PacketWatch",
-      watchDemo: "https://youtu.be/hAt71wGmWVI"
+      watchDemo: "https://youtu.be/7xAmwPxWTj4"
     }
   },
   {
@@ -775,7 +776,7 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/CineScope",
-      watchDemo: "https://youtu.be/kz-9Yrg-rS4"
+      watchDemo: "https://youtu.be/YoLwDTEHoXk"
     }
   }
 ];
