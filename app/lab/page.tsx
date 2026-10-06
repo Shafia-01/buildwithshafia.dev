@@ -102,8 +102,8 @@ export default function LabLandingPage() {
                     </div>
 
                     <div className="mt-6 pt-4 border-t border-rule flex items-center justify-between">
-                      <div className="flex gap-2">
-                        {item.stack.map((s) => (
+                      <div className="flex flex-wrap gap-1">
+                        {item.stack.slice(0, 2).map((s) => (
                           <span key={s} className="font-mono text-[9px] text-ink-muted">
                             {s}
                           </span>
