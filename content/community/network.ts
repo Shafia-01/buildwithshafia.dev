@@ -26,11 +26,11 @@ export const communityNetwork: NetworkConnection[] = [
         ]
       },
       {
-        label: "Social Media Manager",
+        label: "Social Media Manager & Team Lead",
         date: "Sep 2024 – Aug 2025",
         subImpacts: [
           "Led a 10-member social media team, revamping the organization's social media presence and executing data-driven content strategies.",
-          "Drove 85% growth in digital reach and 40% higher content efficiency.",
+          "Drove 65% growth in digital reach and 40% higher content efficiency.",
           "Secured 5+ new industry partnerships."
         ]
       }
@@ -42,7 +42,7 @@ export const communityNetwork: NetworkConnection[] = [
     date: "Aug 2023 – Jul 2025",
     connections: [
       {
-        label: "Design & Creative Member / Core Volunteer / Event Host & Coordinator",
+        label: "Student Coordinator",
         subImpacts: [
           "Designed 10+ visual assets including event posters, invitations, and the IEEE JHSB Annual Magazine cover.",
           "Hosted 5+ flagship events including Think Tank Trivia (Technozova 4.0) and Hack-IEEE-thon RPA Bootcamp.",
@@ -82,7 +82,7 @@ export const communityNetwork: NetworkConnection[] = [
 ];
 
 export const communityStats = [
-  { metric: "85%", label: "Digital reach growth (GDG)" },
+  { metric: "65%", label: "Digital reach growth (GDG)" },
   { metric: "40%", label: "Content efficiency lift (GDG)" },
   { metric: "5+", label: "New industry partnerships (GDG)" },
   { metric: "30%", label: "Event participation lift (IEEE)" },

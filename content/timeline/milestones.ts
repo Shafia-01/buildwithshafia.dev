@@ -28,7 +28,7 @@ export const milestones: Milestone[] = [
     date: "Aug 2023 – Jul 2025",
     title: "Student Coordinator",
     organization: "IEEE Jamia Hamdard Student Branch",
-    category: "achievement",
+    category: "experience",
     description: "Contributed to 25+ flagship IEEE events impacting 700+ participants, boosting engagement and branch visibility by 40% and event participation by 30% through design support, hosting, and cross-functional coordination."
   },
   {
@@ -53,7 +53,7 @@ export const milestones: Milestone[] = [
     title: "Social Media Manager",
     organization: "Google Developer Groups on Campus, Jamia Hamdard",
     category: "experience",
-    description: "Led a 10-member social media team, revamping the organization's social media presence and executing data-driven content strategies, driving 85% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
+    description: "Led a 10-member social media team, revamping the organization's social media presence and executing data-driven content strategies, driving 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
   },
   {
     id: "cartverse-shipped",
@@ -80,14 +80,6 @@ export const milestones: Milestone[] = [
     description: "Engineered a concurrent Python news analytics pipeline processing 494+ headlines from 20 RSS sources (19 headlines/sec, 20% ingestion improvement, 1,877+ sentiment classifications via 3 NLP engines). Developed a real-time OpenCV surveillance system monitoring 4 concurrent camera streams at ~7.4 FPS with 2 motion-detection algorithms and 4 integrity checks. Researched and benchmarked XTTS-v2 and VALL-E-X through 15+ voice-cloning experiments, achieving 0.965 speaker similarity."
   },
   {
-    id: "stratix-shipped",
-    date: "Oct 2025 – Nov 2025",
-    title: "Stratix",
-    organization: "Independent Project",
-    category: "milestone",
-    description: "Agentic AI-powered SEO platform automating keyword and SERP analysis, cutting research time by 60%, improving accuracy by 35%, and scaling results to 50+ keywords per query."
-  },
-  {
     id: "learnify-ai-flagship",
     date: "Feb 2026 – April 2026",
     title: "Learnify AI - Flagship Build",
@@ -103,5 +95,13 @@ export const milestones: Milestone[] = [
     organization: "Jamia Hamdard",
     category: "education",
     description: "Completed | CGPA 8.55/10"
+  },
+  {
+    id: "stratix-shipped",
+    date: "Jul 2026 – Sep 2026",
+    title: "Stratix",
+    organization: "Independent Project",
+    category: "milestone",
+    description: "Agentic AI-powered autonomous SEO market intelligence platform transforming seed keywords into strategy reports through 5 research tools, a 9-node LangGraph ReAct pipeline, and 2 human approval checkpoints."
   }
 ];
