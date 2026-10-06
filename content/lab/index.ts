@@ -117,31 +117,34 @@ export const labItems: LabItem[] = [
     slug: "cinescope-build-journey",
     title: "CineScope Build Journey",
     category: "Edunet Foundation",
-    objective: "Engineered and shipped a clean, single-page search web application using React client architectures and validation filters.",
+    objective: "Engineered and shipped a full-stack movie discovery platform integrating the OMDb API with 8 user-facing features, a secure Express proxy, and zero client-side credential exposure.",
     architecture: {
-      description: "Client search app connected to verified Node proxies to bypass rate limit blocks.",
+      description: "Single-page frontend with Express reverse proxy and client-side localStorage persistence.",
       steps: [
-        "React search input fields capture user typing strings.",
-        "Client validator evaluates length and characters prior to network requests.",
-        "Node proxy forwards verified queries to OMDb API services.",
-        "React elements animate layout changes dynamically."
+        "User types a query into the search bar; a keyup or button-click event triggers fetchMovies(), which sends a GET request to the Express proxy's /search endpoint.",
+        "The /search route reads req.query.q, constructs the OMDb API URL with the server-side OMDB_KEY env variable, fetches results, and returns sanitized JSON to the client.",
+        "The frontend receives the Search array, iterates via displayMovies(), and injects movie-card DOM elements into the CSS Grid container without page reload.",
+        "Clicking a card calls openMovieDetails(imdbID), fetching from /details/:id on the proxy, which hits OMDb's full-plot endpoint and populates the modal's inner HTML.",
+        "Watchlist additions and review submissions are serialized to localStorage under fixed keys; both are loaded on page init and re-synced after every user interaction."
       ]
     },
-    stack: ["React", "Express.js", "Node.js", "OMDb API"],
+    stack: ["HTML5", "CSS3", "Vanilla JavaScript (ES6+)", "Node.js", "Express.js", "node-fetch", "dotenv", "cors", "OMDb REST API", "Browser localStorage API", "Render", "Netlify"],
     engineeringWork: [
-      "Configured client-side debouncing limits (300ms delay) to prevent typing queries from draining API quotas.",
-      "Built 6 custom state validator tests checking empty inputs, character limits, specials, and numerical filters.",
-      "Integrated Express route middlewares resolving cross-origin resource sharing errors in local testing environments."
+      "Engineered a secure Express proxy architecture to prevent API key exposure, injecting the OMDb key server-side so client-side code never touches credentials directly.",
+      "Implemented 6 query validation checks and 3 recovery mechanisms (rate limits, fallback handles) to resolve 5 production-critical issues and improve deployment readiness.",
+      "Used localStorage for watchlist and review persistence, eliminating the need for a backend database, authentication, or session management.",
+      "Chose Vanilla JS with direct event listeners over a frontend framework to avoid build tooling overhead and keep the frontend deployable as a plain static file.",
+      "Reassigned reviewForm.onsubmit and addToWatchlistBtn.onclick on each modal open, binding the current movie's IMDb ID into the closure to avoid a global selected-movie state variable."
     ],
     results: [
-      "Implemented 8 core client features including favorites list and search histories.",
-      "Set up 6 strict query parameter validation checks.",
-      "Resolved 5 critical CORS and API key exposure bugs.",
-      "Fully documented and released under the open-source MIT license."
+      "8 user-facing features fully integrated and running with zero framework overhead.",
+      "6 request validation checks and 3 recovery mechanisms safeguarding the backend proxy.",
+      "5 production-critical errors resolved, making the project ready for hosting and deployment.",
+      "Zero client-side credential exposure under network inspection."
     ],
     lessons: [
-      "Exposing API tokens in client scripts is dangerous; a simple server proxy prevents security vulnerabilities.",
-      "Network failures should not block client interaction; setup fallback mock databases."
+      "Binding modal event handlers (onsubmit, onclick) on each open rather than once at init is necessary when the handler must close over dynamic per-movie state like imdbID.",
+      "localStorage is sufficient for single-device personal state but becomes the first bottleneck if cross-device sync or multi-user features are introduced; the schema should be designed with that migration in mind from the start."
     ]
   }
 ];
