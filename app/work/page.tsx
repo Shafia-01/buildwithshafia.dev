@@ -9,10 +9,10 @@ import { SectionNumber, MetaLabel } from "@/components/typography";
 
 const FILTER_DOMAINS = [
   { label: "All", value: "All" },
-  { label: "AI-RAG", value: "AI-RAG" },
-  { label: "Full-Stack", value: "Full-Stack" },
   { label: "Agentic AI", value: "Agentic AI" },
+  { label: "AI/RAG", value: "AI/RAG" },
   { label: "CV", value: "CV" },
+  { label: "Full-Stack", value: "Full-Stack" },
   { label: "Security", value: "Security" }
 ];
 
@@ -28,10 +28,10 @@ const PROJECT_TOP_TECH: Record<string, string[]> = {
 // Helper to check if a project belongs to a domain tag filter
 function matchesFilter(projectSlug: string, filter: string): boolean {
   if (filter === "All") return true;
-  if (filter === "AI-RAG") return projectSlug === "learnify-ai";
-  if (filter === "Full-Stack") return projectSlug === "learnify-ai" || projectSlug === "cartverse" || projectSlug === "cinescope" || projectSlug === "stratix";
-  if (filter === "Agentic AI") return projectSlug === "stratix" || projectSlug === "learnify-ai";
-  if (filter === "CV") return projectSlug === "mediscan" || projectSlug === "cartverse";
+  if (filter === "AI/RAG") return projectSlug === "learnify-ai";
+  if (filter === "Full-Stack") return projectSlug === "learnify-ai" || projectSlug === "cartverse" || projectSlug === "cinescope";
+  if (filter === "Agentic AI") return projectSlug === "stratix";
+  if (filter === "CV") return projectSlug === "mediscan";
   if (filter === "Security") return projectSlug === "packetwatch";
   return false;
 }
