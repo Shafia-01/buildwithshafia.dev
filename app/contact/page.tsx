@@ -59,11 +59,11 @@ export default function ContactPage() {
           <div className="mt-8">
             <LetterStagger
               text="Let's build something"
-              className="font-display text-display-md md:text-display-lg text-ink leading-[0.9] tracking-tight block"
+              className="font-display text-headline-xl sm:text-display-md md:text-display-lg text-ink leading-[0.9] tracking-tight block"
             />
             <LetterStagger
               text="meaningful"
-              className="font-display text-display-md md:text-display-lg text-brass leading-[0.9] tracking-tight block mt-2"
+              className="font-display text-headline-xl sm:text-display-md md:text-display-lg text-brass leading-[0.9] tracking-tight block mt-2"
             />
           </div>
         </div>

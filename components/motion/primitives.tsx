@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { type ReactNode } from "react";
+import { type ReactNode, Fragment } from "react";
 
 const EASE_EDITORIAL: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -47,7 +47,8 @@ export function LetterStagger({
   as?: "h1" | "h2" | "h3" | "div";
 }) {
   const reduce = useReducedMotion();
-  const letters = Array.from(text);
+  const words = text.split(" ");
+  let charCounter = 0;
 
   if (reduce) {
     const MotionTag = motion[Tag] as typeof motion.div;
@@ -85,16 +86,26 @@ export function LetterStagger({
       className={className}
       aria-label={text}
     >
-      {letters.map((char, i) => (
-        <span
-          key={i}
-          aria-hidden
-          style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}
-        >
-          <motion.span variants={letter} style={{ display: "inline-block" }}>
-            {char === " " ? "\u00A0" : char}
-          </motion.span>
-        </span>
+      {words.map((word, wordIndex) => (
+        <Fragment key={wordIndex}>
+          <span className="inline-block whitespace-nowrap">
+            {Array.from(word).map((char) => {
+              const charKey = charCounter++;
+              return (
+                <span
+                  key={charKey}
+                  aria-hidden
+                  style={{ display: "inline-block", overflow: "hidden", verticalAlign: "top" }}
+                >
+                  <motion.span variants={letter} style={{ display: "inline-block" }}>
+                    {char}
+                  </motion.span>
+                </span>
+              );
+            })}
+          </span>
+          {wordIndex < words.length - 1 && " "}
+        </Fragment>
       ))}
     </Wrapper>
   );

@@ -91,9 +91,9 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Pull Quote & Metric Strip */}
-        <div className="grid lg:grid-cols-[1.5fr_1fr] gap-12 items-start mb-16">
+        <div className="grid lg:grid-cols-[1.8fr_1fr] gap-12 lg:gap-16 items-start mb-16">
           <div className="space-y-6">
-            <PullQuote className="font-display not-italic text-headline-md leading-tight max-w-2xl">{project.pullQuote}</PullQuote>
+            <PullQuote className="font-display not-italic text-headline-md leading-tight">{project.pullQuote}</PullQuote>
           </div>
 
           {/* Metric Strip (4 cards) */}
