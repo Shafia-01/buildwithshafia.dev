@@ -45,7 +45,6 @@ const config: Config = {
         "headline-lg": ["2.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
         "headline-md": ["1.75rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
         quote: ["2rem", { lineHeight: "1.35", letterSpacing: "-0.01em" }],
-        "quote-lg": ["2.75rem", { lineHeight: "1.25", letterSpacing: "-0.02em" }],
         "body-lg": ["1.25rem", { lineHeight: "1.65" }],
         body: ["1.0625rem", { lineHeight: "1.6" }],
         "body-sm": ["0.9375rem", { lineHeight: "1.55" }],
