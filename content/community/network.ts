@@ -53,7 +53,7 @@ export const communityNetwork: NetworkConnection[] = [
   },
   {
     id: "placement-cell",
-    label: "Placement Cell, Jamia Hamdard",
+    label: "The Department of Placement and Alumni Affairs, Jamia Hamdard",
     date: "Mar 2024 – May 2025",
     connections: [
       {
