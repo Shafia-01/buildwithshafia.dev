@@ -36,11 +36,13 @@ export const labItems: LabItem[] = [
     ],
     results: [
       "20 RSS feeds configured across news and tech sources",
-      "17 distinct sources represented in analyzed results",
-      "2,163 sentiment records written to outputs/results.json1",
-      "1,877 records exported to results.csv via analyze_results.py",
-      "Sentiment split of 805 negative, 775 neutral, 583 positive headlines",
-      "Default concurrency of 20 scraper threads and (CPU count − 1) analysis processes"
+      "494+ headlines analyzed in a pipeline run",
+      "1,877+ sentiment classifications generated",
+      "Sentiment split of 619 negative, 775 neutral, 483 positive headlines",
+      "Approximately 20% improvement in ingestion-stage performance in the recorded comparison",
+      "Observed throughput of approximately 19 headlines per second",
+      "3 sentiment-analysis backends: VADER, Hugging Face Transformers, and rule-based analysis",
+      "Results exported in 2 Output Formats: JSONL and CSV"
     ],
     lessons: [
       "Feed parsing with feedparser needs defensive .get() lookups, since RSS entries from different publishers use inconsistent field names (title/updated/published) and malformed feeds return empty entry lists rather than raising.",
@@ -70,6 +72,7 @@ export const labItems: LabItem[] = [
     results: [
       "4 concurrent camera streams processed into one mosaic window",
       "2 integrity checks per frame (blur variance, histogram uniformity)",
+      "Average combined processing rate of approximately 7.4 FPS across four recorded readings",
       "1 motion-detection method (MOG2 background subtraction with contour filtering)",
       "Blur flagged below a Laplacian variance threshold of 100",
       "Uniform-color/coverage flagged above a 0.6 histogram dominance score",
@@ -101,12 +104,13 @@ export const labItems: LabItem[] = [
       "Wrote three separate evaluation entry points (accuracy, long-paragraph stability, voice cloning) sharing the same model-preload and Whisper-transcription steps but scoring different criteria."
     ],
     results: [
-      "4 fixed sentences run through the TTS accuracy script",
+      "15+ voice-cloning and TTS experiments across XTTS-v2 research/testing and VALL-E-X evaluation",
+      "4 fixed sentences run through the VALL-E-X TTS accuracy script",
       "3 of 4 accuracy sentences transcribed with zero word errors",
       "Average WER of 0.053 on the 4-sentence accuracy set",
       "5 cloned sentences scored against one fixed reference clip via Wav2Vec2 cosine similarity",
-      "Best cloning cosine similarity of 0.965 across the 5 sentences",
-      "CPU generation latency of 18–22 seconds per short sentence"
+      "Best cloning cosine similarity of 0.965 across the 5 VALL-E-X evaluation sentences",
+      "CPU generation latency of 18–22 seconds per short sentence in the documented VALL-E-X evaluation"
     ],
     lessons: [
       "Wav2Vec2 speaker embeddings require consistent preprocessing — mono conversion and 16kHz resampling — applied identically to the reference and cloned clip, or the cosine similarity score degrades without an obvious cause.",
