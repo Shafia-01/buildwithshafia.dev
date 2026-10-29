@@ -8,32 +8,30 @@ export const skillEcosystem: SkillGroup[] = [
   {
     id: "languages",
     title: "Languages",
-    skills: ["Python", "SQL", "JavaScript", "HTML", "CSS"]
+    skills: ["Python", "JavaScript", "SQL", "HTML", "CSS"]
   },
   {
-    id: "ai-ml-genai",
-    title: "AI/ML & GenerativeAI",
+    id: "ai-ml",
+    title: "AI/ML",
     skills: [
-      "LLMs",
+      "Large Language Models (LLMs)",
       "Agentic AI",
-      "RAG",
+      "Generative AI",
       "Prompt Engineering",
       "NLP",
       "Computer Vision",
+      "RAG",
       "LangChain",
       "LangGraph",
       "Hugging Face Transformers",
       "PyTorch",
-      "FAISS",
-      "Scikit-learn",
-      "OpenCV",
-      "NLTK"   
+      "Scikit-learn",   
     ]
   },
   {
     id: "software-engineering",
     title: "Software Engineering",
-    skills: ["FastAPI", "React", "Node.js", "REST APIs", "API Integration", "Streamlit"]
+    skills: ["FastAPI", "React", "Node.js", "REST APIs", "Streamlit"]
   },
   {
     id: "data-databases",
