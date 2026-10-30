@@ -105,14 +105,29 @@ export default function JourneyPage() {
                           </div>
                           {/* Visual Promotion Connector (Desktop) */}
                           <div 
-                            className="hidden md:block absolute right-full top-1/2 w-8 border-y-2 border-r-2 border-dashed border-brass/40 rounded-r-md pointer-events-none"
+                            className="hidden md:block absolute right-full top-1/2 w-10 border-y-[3px] border-r-[3px] border-dashed border-brass rounded-r-md pointer-events-none"
                             style={{ height: "38.5rem" }}
                           >
-                            <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 rotate-90 text-brass">
-                              <svg className="w-3 h-3 fill-brass" viewBox="0 0 24 24">
+                            {/* Glow overlay */}
+                            <div
+                              className="absolute inset-0 border-y-[3px] border-r-[3px] border-dashed border-brass/30 rounded-r-md blur-[3px]"
+                            />
+                            <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 rotate-90 text-brass drop-shadow-[0_0_4px_var(--color-brass)]">
+                              <svg className="w-4 h-4 fill-brass" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                               </svg>
                             </div>
+                          </div>
+                          {/* Visual Promotion Connector (Mobile) */}
+                          <div className="md:hidden mt-3 flex flex-col items-center gap-1 text-brass">
+                            <div className="w-full flex items-center justify-between px-1">
+                              <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">Promotion Path</span>
+                              <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full font-bold">↓ See next card</span>
+                            </div>
+                            <div className="w-0.5 h-6 bg-brass rounded-full opacity-80" />
+                            <svg className="w-3 h-3 fill-brass opacity-80 rotate-90" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
                           </div>
                         </>
                       )}
