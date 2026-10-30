@@ -41,6 +41,8 @@ export default function JourneyPage() {
                   ? Award
                   : School;
 
+              const isAssociate = item.id === "gdg-pr-associate";
+
               return (
                 <div
                   key={item.id}
@@ -92,82 +94,26 @@ export default function JourneyPage() {
                         {item.description}
                       </p>
 
-                      {/* GDG Promotion Path badges */}
-                      {item.id === "gdg-pr-associate" && (
-                        <>
-                          <div className="mt-4 pt-3 border-t border-rule/50 flex items-center justify-between">
-                            <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">
-                              Promotion Path
-                            </span>
-                            <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full flex items-center gap-1 font-bold">
-                              Promoted to Manager ↓
-                            </span>
-                          </div>
-                          {/* Visual Promotion Connector (Desktop) — curves right from card edge down to next card */}
-                          <div
-                            className="hidden md:block absolute left-full top-1/2 pointer-events-none"
-                            style={{ width: "3.5rem", height: "38.5rem" }}
-                          >
-                            <svg
-                              width="100%"
-                              height="100%"
-                              viewBox="0 0 56 616"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              preserveAspectRatio="none"
-                            >
-                              <defs>
-                                <filter id="promo-glow" x="-60%" y="-2%" width="220%" height="104%">
-                                  <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
-                                  <feMerge>
-                                    <feMergeNode in="blur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                  </feMerge>
-                                </filter>
-                              </defs>
-                              {/* Glow layer */}
-                              <path
-                                d="M 4,0 C 54,0 54,616 4,616"
-                                stroke="var(--color-brass)"
-                                strokeWidth="6"
-                                strokeDasharray="8 6"
-                                strokeLinecap="round"
-                                fill="none"
-                                opacity="0.25"
-                              />
-                              {/* Main curve */}
-                              <path
-                                d="M 4,0 C 54,0 54,616 4,616"
-                                stroke="var(--color-brass)"
-                                strokeWidth="3"
-                                strokeDasharray="8 6"
-                                strokeLinecap="round"
-                                fill="none"
-                                filter="url(#promo-glow)"
-                              />
-                              {/* Arrowhead pointing down at curve end */}
-                              <path
-                                d="M -3,603 L 4,616 L 11,603"
-                                stroke="var(--color-brass)"
-                                strokeWidth="2.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                fill="none"
-                              />
-                            </svg>
-                          </div>
-                          {/* Visual Promotion Connector (Mobile) */}
-                          <div className="md:hidden mt-3 flex flex-col items-center gap-1 text-brass">
-                            <div className="w-full flex items-center justify-between px-1">
-                              <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">Promotion Path</span>
-                              <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full font-bold">↓ See next card</span>
-                            </div>
-                            <div className="w-0.5 h-6 bg-brass rounded-full opacity-80" />
-                            <svg className="w-3 h-3 fill-brass opacity-80 rotate-90" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z" />
-                            </svg>
-                          </div>
-                        </>
+                      {/* GDG Promotion Path badge */}
+                      {isAssociate && (
+                        <div className="mt-4 pt-3 border-t border-rule/50 flex items-center justify-between">
+                          <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">
+                            Promotion Path
+                          </span>
+                          <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full flex items-center gap-1 font-bold">
+                            Promoted to Manager ↓
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Mobile connector — inside card so it sits naturally in flow */}
+                      {isAssociate && (
+                        <div className="md:hidden mt-3 flex flex-col items-center gap-1">
+                          <div className="w-0.5 h-6 bg-brass rounded-full opacity-80" />
+                          <svg className="w-3 h-3 fill-brass opacity-80 rotate-90" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
                       )}
 
                       {item.id === "gdg-social-media-manager" && (
@@ -189,6 +135,78 @@ export default function JourneyPage() {
                       {item.date}
                     </span>
                   </div>
+
+                  {/*
+                    Visual Promotion Connector (Desktop only).
+                    Placed as a sibling to FadeRise — outside the card div —
+                    so it is NOT clipped by the card's bounds.
+                    Positioned absolute relative to the milestone row div.
+                    gdg-pr-associate is index 3 → isEven=false → card is on LEFT half.
+                    The connector curves out to the RIGHT of the card.
+                    left-1/2 = spine centre; we offset right into the card's half with ml-8 equivalent.
+                  */}
+                  {isAssociate && (
+                    <div
+                      className="hidden md:block absolute pointer-events-none z-20"
+                      style={{
+                        /* sits just past the right edge of the left-half card:
+                           left half = 50% wide, card has px-8 (2rem) padding,
+                           so card right edge ≈ 50% − 2rem from centre → use left:calc(50% - 2rem) */
+                        left: "calc(50% - 1.5rem)",
+                        top: "50%",
+                        width: "3.5rem",
+                        height: "38.5rem",
+                      }}
+                    >
+                      <svg
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 56 616"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        overflow="visible"
+                      >
+                        <defs>
+                          <filter id="promo-glow" x="-80%" y="-5%" width="260%" height="110%">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                            <feMerge>
+                              <feMergeNode in="blur" />
+                              <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                          </filter>
+                        </defs>
+                        {/* Soft glow behind curve */}
+                        <path
+                          d="M 4,0 C 54,0 54,616 4,616"
+                          stroke="var(--color-brass)"
+                          strokeWidth="8"
+                          strokeDasharray="9 7"
+                          strokeLinecap="round"
+                          fill="none"
+                          opacity="0.2"
+                        />
+                        {/* Main dashed curve */}
+                        <path
+                          d="M 4,0 C 54,0 54,616 4,616"
+                          stroke="var(--color-brass)"
+                          strokeWidth="3"
+                          strokeDasharray="9 7"
+                          strokeLinecap="round"
+                          fill="none"
+                          filter="url(#promo-glow)"
+                        />
+                        {/* Arrowhead at bottom */}
+                        <path
+                          d="M -4,602 L 4,616 L 12,602"
+                          stroke="var(--color-brass)"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="none"
+                        />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               );
             })}
