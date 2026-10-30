@@ -103,20 +103,58 @@ export default function JourneyPage() {
                               Promoted to Manager ↓
                             </span>
                           </div>
-                          {/* Visual Promotion Connector (Desktop) */}
-                          <div 
-                            className="hidden md:block absolute right-full top-1/2 w-10 border-y-[3px] border-r-[3px] border-dashed border-brass rounded-r-md pointer-events-none"
-                            style={{ height: "38.5rem" }}
+                          {/* Visual Promotion Connector (Desktop) — curves right from card edge down to next card */}
+                          <div
+                            className="hidden md:block absolute left-full top-1/2 pointer-events-none"
+                            style={{ width: "3.5rem", height: "38.5rem" }}
                           >
-                            {/* Glow overlay */}
-                            <div
-                              className="absolute inset-0 border-y-[3px] border-r-[3px] border-dashed border-brass/30 rounded-r-md blur-[3px]"
-                            />
-                            <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 rotate-90 text-brass drop-shadow-[0_0_4px_var(--color-brass)]">
-                              <svg className="w-4 h-4 fill-brass" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z" />
-                              </svg>
-                            </div>
+                            <svg
+                              width="100%"
+                              height="100%"
+                              viewBox="0 0 56 616"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              preserveAspectRatio="none"
+                            >
+                              <defs>
+                                <filter id="promo-glow" x="-60%" y="-2%" width="220%" height="104%">
+                                  <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
+                                  <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                  </feMerge>
+                                </filter>
+                              </defs>
+                              {/* Glow layer */}
+                              <path
+                                d="M 4,0 C 54,0 54,616 4,616"
+                                stroke="var(--color-brass)"
+                                strokeWidth="6"
+                                strokeDasharray="8 6"
+                                strokeLinecap="round"
+                                fill="none"
+                                opacity="0.25"
+                              />
+                              {/* Main curve */}
+                              <path
+                                d="M 4,0 C 54,0 54,616 4,616"
+                                stroke="var(--color-brass)"
+                                strokeWidth="3"
+                                strokeDasharray="8 6"
+                                strokeLinecap="round"
+                                fill="none"
+                                filter="url(#promo-glow)"
+                              />
+                              {/* Arrowhead pointing down at curve end */}
+                              <path
+                                d="M -3,603 L 4,616 L 11,603"
+                                stroke="var(--color-brass)"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                fill="none"
+                              />
+                            </svg>
                           </div>
                           {/* Visual Promotion Connector (Mobile) */}
                           <div className="md:hidden mt-3 flex flex-col items-center gap-1 text-brass">
