@@ -672,11 +672,11 @@ export const projects: Project[] = [
     slug: "cinescope",
     order: "06",
     title: "CineScope",
-    oneLiner: "A full-stack movie discovery platform with a secure Express proxy backend and 8 user-facing features.",
-    pullQuote: "Integrating the OMDb API to deliver search, reviews, ratings, and personalized watchlists with robust server-side security.",
+    oneLiner: "A full-stack movie discovery platform with an Express proxy backend that keeps the API key server-side and 8 user-facing features.",
+    pullQuote: "Integrating the OMDb API to deliver search, reviews, ratings, and personalized watchlists, with the API key kept server-side behind an Express proxy.",
     metrics: [
       "8 user-facing features",
-      "6 request validation checks",
+      "6 client-side validation and verification checks",
       "3 error recovery mechanisms",
       "5 production-critical issues resolved"
     ],
@@ -702,17 +702,17 @@ export const projects: Project[] = [
       ]
     },
     problem: "Movie enthusiasts searching for a simple tool to browse films, leave reviews, and track a watchlist are pushed toward bloated platforms that require account creation before any meaningful interaction. Direct client-side API integrations expose private keys in browser network traffic, while heavy frontend frameworks add unnecessary overhead for a single-purpose utility. There was no lightweight, self-contained option that handled API security, local persistence, and a clean UI without requiring backend databases or user authentication.",
-    solution: "CineScope is a full-stack movie discovery platform using HTML, CSS, JavaScript, Node.js, and Express, integrating the OMDb API to deliver 8 user-facing features. To protect API credentials, it uses a secure Express proxy architecture with robust validation and error handling, implementing 6 validation checks, 3 recovery mechanisms, and resolving 5 production-critical issues to improve reliability and deployment readiness. Watchlist and review data persist via localStorage, eliminating the need for a database.",
+    solution: "CineScope is a full-stack movie discovery platform using HTML, CSS, JavaScript, Node.js, and Express, integrating the OMDb API to deliver 8 user-facing features. To protect API credentials, it uses an Express proxy that holds the OMDb key server-side, paired with client-side validation and error handling: 6 validation and verification checks, 3 recovery mechanisms, and 5 production-critical issues resolved to improve reliability and deployment readiness. Watchlist and review data persist via localStorage, eliminating the need for a database.",
     architecture: {
       description: "Single-page frontend with Express reverse proxy and client-side localStorage persistence.",
       steps: [
         {
           title: "User Search Input",
-          description: "User types a query into the search bar; a keyup or button-click event triggers fetchMovies(), which sends a GET request to the Express proxy's /search endpoint."
+          description: "User types a query into the search bar; pressing Enter (keyup) or clicking the Search button triggers fetchMovies() once the trimmed query is non-empty, which sends a GET request to the Express proxy's /search endpoint."
         },
         {
           title: "Express Proxy — Search Route",
-          description: "The /search route reads req.query.q, constructs the OMDb API URL with the server-side OMDB_KEY env variable, fetches results, and returns sanitized JSON to the client."
+          description: "The /search route reads req.query.q, constructs the OMDb API URL with the server-side OMDB_KEY env variable, fetches results, and returns the OMDb JSON response to the client unmodified (the route performs no server-side validation of the query)."
         },
         {
           title: "Dynamic Card Rendering",
@@ -724,14 +724,14 @@ export const projects: Project[] = [
         },
         {
           title: "LocalStorage Persistence",
-          description: "Watchlist additions and review submissions are serialized to localStorage under fixed keys; both are loaded on page init and re-synced after every user interaction."
+          description: "Watchlist additions and review submissions are serialized to localStorage under fixed keys; the watchlist is loaded on page init, reviews are loaded when a movie's modal opens, and the relevant list is re-rendered after each add or submit."
         }
       ]
     },
     engineeringDecisions: [
       {
-        title: "Secure Express Proxy with Robust Validation",
-        description: "Engineered a secure Express proxy architecture to prevent API key exposure. Implemented 6 query validation checks and 3 recovery mechanisms (such as rate limits and fallback handles) to resolve 5 production-critical issues, dramatically improving application reliability and deployment readiness."
+        title: "Express Proxy with Client-Side Validation and Error Handling",
+        description: "Engineered an Express proxy so the OMDb API key lives only in a server-side environment variable and never reaches the browser. Implemented 6 client-side validation and verification checks. Resolved 5 production-critical issues."
       },
       {
         title: "localStorage Over a Backend Database",
@@ -749,22 +749,22 @@ export const projects: Project[] = [
     features: [
       {
         title: "8 User-Facing Features",
-        description: "Provides a full-suite discovery experience including dynamic search, detailed info modals, user ratings, star reviews, and personalized watchlists."
+        description: "Keyword search by movie title (Search button or Enter key), a dynamic results grid, a movie details modal, adding a movie to the watchlist, a personal watchlist view, 1–5 numeric rating submission, text review submission and display, and modal dismissal via the close button or backdrop click."
       },
       {
-        title: "Secure OMDb API Gateway",
-        description: "All movie search and detail requests are proxied through Express, with the API key injected server-side. Client-side code never touches credentials directly."
+        title: "OMDb API Proxy",
+        description: "All movie search and detail requests are proxied through Express, with the API key injected server-side. The frontend code and the browser's network requests never contain the OMDb API key."
       },
       {
-        title: "Robust Request Validation",
-        description: "Enforces 6 distinct query verification checks server-side to block malformed requests, injection attempts, and API quota abuse."
+        title: "Client-Side Validation and Verification",
+        description: "6 checks run in the browser: (1) trimmed, non-empty search query; (2) OMDb response must contain a Search array before rendering; (3) detection of OMDb's \"N/A\" poster value; (4) duplicate watchlist prevention by IMDb ID; (5) required rating constrained to 1–5 via HTML5 form constraints; (6) required review text via HTML5 form constraints. The Express proxy itself does not validate requests, rate-limit, or restrict origins."
       }
     ],
     performance: [
-      "8 user-facing features fully integrated and running with zero framework overhead",
-      "6 request validation checks and 3 recovery mechanisms safeguarding the backend proxy",
-      "5 production-critical errors resolved, making the project ready for hosting/deployment",
-      "Zero client-side credential exposure under network inspection"
+      "8 user-facing features integrated in a vanilla JavaScript frontend with no frontend framework or build step",
+      "6 client-side validation and verification checks and 3 recovery mechanisms (client-side failure fallback, backend try/catch with HTTP 500 JSON, null-safe localStorage reads)",
+      "5 production-critical issues resolved (API key isolation, committed .env removal, CORS, dynamic port binding, frontend/backend route alignment), making the project ready for hosting/deployment",
+      "No OMDb API key in frontend code or browser network requests (key held in a server-side environment variable)"
     ],
     lessons: [
       "Binding modal event handlers (onsubmit, onclick) on each open rather than once at init is necessary when the handler must close over dynamic per-movie state like imdbID.",
