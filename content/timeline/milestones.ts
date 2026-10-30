@@ -17,7 +17,7 @@ export interface Milestone {
 export const milestones: Milestone[] = [
   {
     id: "education-btech",
-    date: "Sep 2022 – June 2026",
+    date: "Sep 2022 – Jun 2026",
     title: "Bachelor of Technology in Computer Science and Engineering",
     organization: "Jamia Hamdard",
     category: "education",
@@ -64,6 +64,14 @@ export const milestones: Milestone[] = [
     description: "Led a 10-member social media team, revamping the organization's social media presence and executing data-driven content strategies, driving 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
   },
   {
+    id: "packetwatch",
+    date: "Dec 2024",
+    title: "PacketWatch",
+    organization: "Independent Project",
+    category: "milestone",
+    description: "Built a Scapy and Random Forest threat detector extracting 27 flow features from 20-second live Wi-Fi captures, with sub-second inference on 100-row CSV logs via a Streamlit dashboard."
+  },
+  {
     id: "dssywlc",
     date: "Feb 2025",
     title: "Participant",
@@ -88,12 +96,20 @@ export const milestones: Milestone[] = [
     description: "Coordinated conference operations and hosted one track at the 5th International Conference on ICT for Digital, Smart and Sustainable Development (ICIDSSD ’25), supporting session execution, scripts, and award arrangements with a 50-member team at an 8-track, 2-day conference with 100+ participants."
   },
   {
+    id: "mediscan",
+    date: "May 2025",
+    title: "MediScan",
+    organization: "Independent Project",
+    category: "milestone",
+    description: "Developed a medical vs. non-medical image classifier by fine-tuning ResNet18 in PyTorch with staged transfer learning and early stopping, achieving 100% validation accuracy (101/101), with Streamlit and CLI interfaces at ~52 ms CPU latency."
+  },
+  {
     id: "cartverse-shipped",
     date: "June 2025 – July 2025",
     title: "CartVerse",
     organization: "Walmart Sparkathon 2025",
     category: "milestone",
-    description: "Built a dual-module Walmart shopping assistant with 2 independent pipelines (MoodCart + AutoCart), mapping 26 emotional states to product categories and generating frequency-based carts across 10 mock user purchase histories."
+    description: "Built a Walmart shopping assistant with 2 independent pipelines, mapping 26 emotional states to categories via a 3-tier sentiment fallback and generating frequency-based carts for 10 mock users using cached SerpAPI search."
   },
   {
     id: "adobe",
@@ -109,7 +125,7 @@ export const milestones: Milestone[] = [
     title: "Front-End Web Developer Intern",
     organization: "Edunet Foundation",
     category: "internship",
-    description: "Developed and deployed 'CineScope', a full-stack movie discovery platform using HTML, CSS, JavaScript, Node.js, & Express, integrating the OMDb API to deliver 8 user-facing features including search, reviews, ratings, and personalized watchlists."
+    description: "Developed and deployed 'CineScope', a full-stack movie platform (Node.js, Express, OMDb API) with 8 features, a server-side API-key proxy, 6 validation checks, 3 recovery mechanisms, 5 production fixes."
   },
   {
     id: "cyart-internship",

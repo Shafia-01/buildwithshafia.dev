@@ -3,6 +3,7 @@ import { milestones } from "@/content/timeline/milestones";
 import { FadeRise, WordStagger } from "@/components/motion/primitives";
 import { SectionNumber, MetaLabel } from "@/components/typography";
 import { Award, Briefcase, GraduationCap, School } from "lucide-react";
+import { PromotionConnector } from "@/components/journey/promotion-connector";
 
 export const metadata: Metadata = {
   title: "Journey",
@@ -24,7 +25,7 @@ export default function JourneyPage() {
           </p>
         </div>
 
-        {/* Timeline container */}
+        {/* Timeline container — position:relative so PromotionConnector anchors here */}
         <div className="relative max-w-4xl mx-auto pl-8 md:pl-0">
           {/* Vertical spine line */}
           <div className="absolute left-[11px] md:left-1/2 top-0 bottom-0 w-[2px] bg-rule -translate-x-[1px]" />
@@ -42,6 +43,7 @@ export default function JourneyPage() {
                   : School;
 
               const isAssociate = item.id === "gdg-pr-associate";
+              const isManager = item.id === "gdg-social-media-manager";
 
               return (
                 <div
@@ -61,7 +63,12 @@ export default function JourneyPage() {
 
                   {/* Card Block */}
                   <FadeRise delay={index * 0.05} className="w-full md:w-1/2 px-0 md:px-8">
+                    {/*
+                      id is set on the outer card div so PromotionConnector can
+                      getBoundingClientRect() on it to find its right edge and vertical midpoint.
+                    */}
                     <div
+                      id={isAssociate ? "gdg-associate-card" : isManager ? "gdg-manager-card" : undefined}
                       className={`relative p-6 border rounded-sm bg-paper-soft hover:border-brass transition-all duration-base ${
                         item.highlight ? "border-brass ring-1 ring-brass-glow" : "border-rule-strong"
                       }`}
@@ -94,29 +101,29 @@ export default function JourneyPage() {
                         {item.description}
                       </p>
 
-                      {/* GDG Promotion Path badge */}
+                      {/* GDG Promotion Path badge — Associate card */}
                       {isAssociate && (
-                        <div className="mt-4 pt-3 border-t border-rule/50 flex items-center justify-between">
-                          <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">
-                            Promotion Path
-                          </span>
-                          <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full flex items-center gap-1 font-bold">
-                            Promoted to Manager ↓
-                          </span>
-                        </div>
+                        <>
+                          <div className="mt-4 pt-3 border-t border-rule/50 flex items-center justify-between">
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">
+                              Promotion Path
+                            </span>
+                            <span className="font-mono text-[9px] uppercase tracking-wider text-brass-deep bg-linen px-2 py-0.5 rounded-full flex items-center gap-1 font-bold">
+                              Promoted to Manager ↓
+                            </span>
+                          </div>
+                          {/* Mobile connector — stays in normal flow, no stacking issues */}
+                          <div className="md:hidden mt-3 flex flex-col items-center gap-1">
+                            <div className="w-0.5 h-5 bg-brass rounded-full opacity-70" />
+                            <svg className="w-3 h-3 fill-brass opacity-80 rotate-90" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </>
                       )}
 
-                      {/* Mobile connector — inside card so it sits naturally in flow */}
-                      {isAssociate && (
-                        <div className="md:hidden mt-3 flex flex-col items-center gap-1">
-                          <div className="w-0.5 h-6 bg-brass rounded-full opacity-80" />
-                          <svg className="w-3 h-3 fill-brass opacity-80 rotate-90" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </div>
-                      )}
-
-                      {item.id === "gdg-social-media-manager" && (
+                      {/* GDG Promotion Path badge — Manager card */}
+                      {isManager && (
                         <div className="mt-4 pt-3 border-t border-rule/50 flex items-center justify-between">
                           <span className="font-mono text-[9px] uppercase tracking-wider text-brass font-bold">
                             Promotion Path
@@ -135,82 +142,20 @@ export default function JourneyPage() {
                       {item.date}
                     </span>
                   </div>
-
-                  {/*
-                    Visual Promotion Connector (Desktop only).
-                    Placed as a sibling to FadeRise — outside the card div —
-                    so it is NOT clipped by the card's bounds.
-                    Positioned absolute relative to the milestone row div.
-                    gdg-pr-associate is index 3 → isEven=false → card is on LEFT half.
-                    The connector curves out to the RIGHT of the card.
-                    left-1/2 = spine centre; we offset right into the card's half with ml-8 equivalent.
-                  */}
-                  {isAssociate && (
-                    <div
-                      className="hidden md:block absolute pointer-events-none z-20"
-                      style={{
-                        /* sits just past the right edge of the left-half card:
-                           left half = 50% wide, card has px-8 (2rem) padding,
-                           so card right edge ≈ 50% − 2rem from centre → use left:calc(50% - 2rem) */
-                        left: "calc(50% - 1.5rem)",
-                        top: "50%",
-                        width: "3.5rem",
-                        height: "38.5rem",
-                      }}
-                    >
-                      <svg
-                        width="100%"
-                        height="100%"
-                        viewBox="0 0 56 616"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        overflow="visible"
-                      >
-                        <defs>
-                          <filter id="promo-glow" x="-80%" y="-5%" width="260%" height="110%">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-                            <feMerge>
-                              <feMergeNode in="blur" />
-                              <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                          </filter>
-                        </defs>
-                        {/* Soft glow behind curve */}
-                        <path
-                          d="M 4,0 C 54,0 54,616 4,616"
-                          stroke="var(--color-brass)"
-                          strokeWidth="8"
-                          strokeDasharray="9 7"
-                          strokeLinecap="round"
-                          fill="none"
-                          opacity="0.2"
-                        />
-                        {/* Main dashed curve */}
-                        <path
-                          d="M 4,0 C 54,0 54,616 4,616"
-                          stroke="var(--color-brass)"
-                          strokeWidth="3"
-                          strokeDasharray="9 7"
-                          strokeLinecap="round"
-                          fill="none"
-                          filter="url(#promo-glow)"
-                        />
-                        {/* Arrowhead at bottom */}
-                        <path
-                          d="M -4,602 L 4,616 L 12,602"
-                          stroke="var(--color-brass)"
-                          strokeWidth="3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          fill="none"
-                        />
-                      </svg>
-                    </div>
-                  )}
                 </div>
               );
             })}
           </div>
+
+          {/*
+            PromotionConnector renders as the LAST child of this relative container,
+            so it is painted above every card stacking context (Framer Motion transform).
+            It uses getBoundingClientRect() to precisely locate both cards at runtime.
+          */}
+          <PromotionConnector
+            fromId="gdg-associate-card"
+            toId="gdg-manager-card"
+          />
         </div>
       </div>
     </main>
