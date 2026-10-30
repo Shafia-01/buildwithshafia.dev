@@ -47,10 +47,12 @@ export const projects: Project[] = [
     oneLiner: "Multimodal AI tutor with emotion-aware adaptive learning and RAG-powered document chat.",
     pullQuote: "Personalizing academic study using real-time affective computing, retrieval-augmented generation, and gamified quizzing.",
     metrics: [
-      "3x faster contextual retrieval",
-      "3 swappable LLMs",
-      "6 AI-mini-games",
-      "40% personalization improvement"
+      "3 swappable LLM providers",
+      "6 AI-powered, document-driven mini-games",
+      "5-tier adaptive quiz engine",
+      "6 languages",
+      "3 level-adaptive prompts",
+      "7 raw emotions mapped"
     ],
     stack: {
       backend: [
@@ -111,7 +113,7 @@ export const projects: Project[] = [
         },
         {
           title: "RAG Query Execution",
-          description: "The query is embedded, FAISS returns 50 candidates, MongoDB filters by user_id, results are reranked by distance, and the top 5 chunks are injected into a level-specific prompt."
+          description: "The query is embedded, FAISS returns 50 candidates, MongoDB filters by user_id, results are reordered by distance, and the top 5 chunks are injected into a level-specific prompt."
         },
         {
           title: "LLM Generation",
@@ -138,7 +140,7 @@ export const projects: Project[] = [
       },
       {
         title: "Decoupled Emotion Analysis Thread",
-        description: "DeepFace inference takes up to 1.5 seconds per frame. Running it inside asyncio.to_thread() decouples it from the WebSocket receive loop, keeping the connection alive and the video preview smooth without blocking the event loop."
+        description: "DeepFace inference is CPU-bound and slow relative to frame arrival. Running it inside asyncio.to_thread() keeps the WebSocket receive loop and event loop unblocked, at the cost of analysis lagging behind the live feed."
       },
       {
         title: "User-Scoped Vector Retrieval",
@@ -148,30 +150,34 @@ export const projects: Project[] = [
     features: [
       {
         title: "Level-Adaptive RAG Responses",
-        description: "Three distinct PromptTemplates (beginner, intermediate, advanced) adjust explanation depth and vocabulary. The active template is selected per request based on stored user level."
+        description: "Three distinct PromptTemplates (beginner, intermediate, advanced) adjust explanation depth and vocabulary. The active template is selected per request based on the user's chosen level."
       },
       {
         title: "Real-Time Emotion Interventions",
-        description: "WebSocket streams webcam frames to DeepFace. Detected confusion triggers a quiz difficulty reduction and simplification mode; fatigue triggers a break recommendation; frustration triggers an analogy-based explanation."
+        description: "WebSocket streams webcam frames to DeepFace. Detected confusion lowers the topic quiz score and triggers a simplification message; fatigue triggers a break recommendation; frustration triggers an analogy-based explanation."
       },
       {
         title: "Runtime LLM Hot-Swapping",
         description: "A mutable runtime_config singleton allows switching between Gemini, Groq, and Ollama mid-session via a POST endpoint, persisting the preference to MongoDB without restarting the server."
       },
       {
-        title: "Gamified Content-Driven Mini-Games",
-        description: "Six games (Snake Quiz, Falling Quiz, Memory Match, Word Scramble, Flashcard Flip, Tic-Tac-Toe) generate questions and vocabulary by sampling the user's own uploaded document chunks through the LLM."
+        title: "Document-Driven Mini-Games",
+        description: "Six games (Snake Quiz, Falling Quiz, Memory Match, Word Scramble, Flashcard Flip, Tic-Tac-Toe) draw content from the user's own uploaded chunks, using LLM generation for questions, pairs, and flashcards and local extraction for scramble words."
       }
     ],
     performance: [
-      "Sub-2-second Groq LLaMA inference path for RAG responses on typical chunk sets",
-      "FAISS IndexFlatL2 exact nearest-neighbor search across thousands of chunks without a separate vector database process",
-      "On-device Whisper base model transcription with no audio data sent to external APIs",
-      "Emotion smoothing deque reduces false-positive intervention triggers across 5-frame majority vote window"
+      "Exact FAISS IndexFlatL2 nearest-neighbor search runs in-process, with no separate vector database service",
+      "Local Whisper base model transcribes voice input on-device, with no audio sent to external APIs",
+      "Per-endpoint rate limits enforced with SlowAPI: 5/min uploads, 15/min RAG queries, 10/min quiz generation",
+      "Multi-stage Docker build with automated GitHub Actions deployment to Hugging Face Spaces",
+      "3 swappable LLM providers, switchable at runtime without a restart",
+      "6 document-driven mini-games across 5 adaptive difficulty tiers",
+      "7 raw emotions mapped to 4 learning states with 5-frame majority-vote smoothing",
+      "0 cloud calls in Privacy Mode: local Ollama, Whisper, and embeddings only"
     ],
     lessons: [
       "Ephemeral container storage breaks stateful ML indexes silently; startup validation and auto-rebuild are necessary, not optional, for any vector store deployed on serverless infrastructure.",
-      "Decoupling CPU-bound ML inference from the async event loop with asyncio.to_thread is straightforward but requires careful state management to avoid race conditions when multiple WebSocket sessions share session buffers."
+      "CPU-bound ML inference must be moved off the async event loop, otherwise a single slow DeepFace call stalls every connected WebSocket session."
     ],
     roadmap: [
       "Migrate FAISS IndexFlatL2 to IndexIVFFlat to maintain sub-millisecond retrieval as chunk counts exceed 100k, and partition indexes by user to prevent under-retrieval from cross-user filtering.",
