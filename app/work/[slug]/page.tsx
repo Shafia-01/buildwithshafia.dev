@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Github, Play, ArrowRight, Video } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Github, Play, ArrowRight, Video, Globe } from "lucide-react";
 import { projects } from "@/content/projects";
 import { LetterStagger, FadeRise } from "@/components/motion/primitives";
 import { SectionNumber, MetaLabel, PullQuote } from "@/components/typography";
@@ -65,12 +65,12 @@ export default async function ProjectDetailPage({ params }: Props) {
             </p>
           </div>
 
-          <div className="flex gap-3 shrink-0 md:mb-2">
+          <div className="flex flex-wrap gap-3 shrink-0 md:mb-2">
             <a
               href={project.links.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass transition-colors rounded-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass hover:text-paper transition-colors rounded-sm"
             >
               <Github className="w-3.5 h-3.5" /> ↗ GitHub
             </a>
@@ -78,13 +78,28 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.links.watchDemo ? (
               <a
                 href="#demo-video"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-brass text-brass font-mono text-meta-xs uppercase hover:bg-brass hover:text-paper transition-colors rounded-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass hover:text-paper transition-colors rounded-sm"
               >
                 <Play className="w-3.5 h-3.5" /> ▶ Watch Demo
               </a>
             ) : (
               <div className="inline-flex items-center gap-2 px-4 py-2 border border-rule-strong bg-paper-soft text-ink-whisper font-mono text-meta-xs uppercase cursor-not-allowed rounded-sm">
                 <Video className="w-3.5 h-3.5" /> Demo coming soon
+              </div>
+            )}
+
+            {project.links.app ? (
+              <a
+                href={project.links.app}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass hover:text-paper transition-colors rounded-sm"
+              >
+                <Globe className="w-3.5 h-3.5" /> ↗ App
+              </a>
+            ) : (
+              <div className="inline-flex items-center gap-2 px-4 py-2 border border-rule-strong bg-paper-soft text-ink-whisper font-mono text-meta-xs uppercase cursor-not-allowed rounded-sm">
+                <Globe className="w-3.5 h-3.5" /> App coming soon
               </div>
             )}
           </div>

@@ -34,6 +34,7 @@ export interface Project {
   links: {
     github: string;
     watchDemo?: string;
+    app?: string;
   };
 }
 
@@ -177,7 +178,8 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/Learnify-AI",
-      watchDemo: "https://youtu.be/hLlHuXDPo_8"
+      watchDemo: "https://youtu.be/hLlHuXDPo_8",
+      app: "https://shafia01-learnify-ai.hf.space/"
     }
   },
   {
@@ -311,7 +313,8 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/Stratix",
-      watchDemo: "https://youtu.be/Q5ThyrZ4mFs"
+      watchDemo: "https://youtu.be/Q5ThyrZ4mFs",
+      app: "https://shafia01-stratix-intelligence.hf.space/"
     }
   },
   {
@@ -430,7 +433,8 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/CartVerse",
-      watchDemo: "https://youtu.be/Y6hZm9dS240"
+      watchDemo: "https://youtu.be/Y6hZm9dS240",
+      app: "https://cartverse.streamlit.app/"
     }
   },
   {
@@ -552,7 +556,8 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/MediScan",
-      watchDemo: "https://youtu.be/Za6AwIF4w8Q"
+      watchDemo: "https://youtu.be/Za6AwIF4w8Q",
+      app: "https://trymediscan.streamlit.app/"
     }
   },
   {
@@ -665,7 +670,8 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/PacketWatch",
-      watchDemo: "https://youtu.be/7xAmwPxWTj4"
+      watchDemo: "https://youtu.be/7xAmwPxWTj4",
+      app: "https://packetwatch.streamlit.app"
     }
   },
   {
@@ -776,7 +782,8 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/CineScope",
-      watchDemo: "https://youtu.be/YoLwDTEHoXk"
+      watchDemo: "https://youtu.be/YoLwDTEHoXk",
+      app: "https://cinescope-worldofmovies.netlify.app/"
     }
   }
 ];
