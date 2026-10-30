@@ -88,19 +88,21 @@ export default async function ProjectDetailPage({ params }: Props) {
               </div>
             )}
 
-            {project.links.app ? (
-              <a
-                href={project.links.app}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass hover:text-paper transition-colors rounded-sm"
-              >
-                <Globe className="w-3.5 h-3.5" /> ↗ App
-              </a>
-            ) : (
-              <div className="inline-flex items-center gap-2 px-4 py-2 border border-rule-strong bg-paper-soft text-ink-whisper font-mono text-meta-xs uppercase cursor-not-allowed rounded-sm">
-                <Globe className="w-3.5 h-3.5" /> App coming soon
-              </div>
+            {!project.hideAppButton && (
+              project.links.app ? (
+                <a
+                  href={project.links.app}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-ink bg-ink text-paper font-mono text-meta-xs uppercase hover:bg-brass hover:border-brass hover:text-paper transition-colors rounded-sm"
+                >
+                  <Globe className="w-3.5 h-3.5" /> ↗ App
+                </a>
+              ) : (
+                <div className="inline-flex items-center gap-2 px-4 py-2 border border-rule-strong bg-paper-soft text-ink-whisper font-mono text-meta-xs uppercase cursor-not-allowed rounded-sm">
+                  <Globe className="w-3.5 h-3.5" /> App coming soon
+                </div>
+              )
             )}
           </div>
         </div>
@@ -115,7 +117,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="grid grid-cols-2 gap-4">
             {project.metrics.map((metric, i) => (
               <div key={i} className="p-4 border border-rule-strong bg-paper-soft rounded-sm">
-                <span className="block font-display text-headline-md text-brass font-semibold tracking-tight">
+                <span className="block font-display text-headline-sm md:text-headline-md text-brass font-semibold tracking-tight break-words">
                   {metric.split(" ")[0]}
                 </span>
                 <span className="block font-mono text-[9px] uppercase tracking-wider text-ink-muted mt-1 leading-tight">

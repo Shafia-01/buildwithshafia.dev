@@ -111,7 +111,7 @@ export function FeaturedWork() {
             <div className="p-6 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 items-end">
               <div>
                 <MetaLabel className="text-brass">01 · FLAGSHIP</MetaLabel>
-                <h3 className="mt-3 font-display text-headline-lg md:text-display-sm text-ink leading-[1] tracking-tight">
+                <h3 className="mt-3 font-display text-headline-md sm:text-headline-lg md:text-display-sm text-ink leading-[1] tracking-tight whitespace-nowrap">
                   {featuredProject.title}
                 </h3>
                 <p className="mt-3 font-editorial italic text-quote text-ink-soft max-w-4xl">

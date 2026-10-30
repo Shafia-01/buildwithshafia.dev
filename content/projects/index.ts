@@ -36,6 +36,7 @@ export interface Project {
     watchDemo?: string;
     app?: string;
   };
+  hideAppButton?: boolean;
 }
 
 export const projects: Project[] = [
@@ -567,28 +568,28 @@ export const projects: Project[] = [
     oneLiner: "Watching the wire. In real time.",
     pullQuote: "Detecting network threats through ML-driven packet analysis.",
     metrics: [
-      "27 statistical flow features",
-      "Sub-second CSV inference",
-      "20-second live capture window",
-      "100 Random Forest estimators"
+      "27 flow features extracted",
+      "<1s CSV inference time",
+      "20s live capture window",
+      "100 RF estimators trained"
     ],
     stack: {
       backend: [
         "Python",
-        "Scapy (packet capture and parsing)",
-        "pandas (DataFrame manipulation)",
-        "NumPy (numerical operations)"
+        "Scapy",
+        "pandas",
+        "NumPy"
       ],
       frontend: [
-        "Streamlit (dashboard and file upload UI)"
+        "Streamlit"
       ],
       aiml: [
-        "scikit-learn (RandomForestClassifier, SimpleImputer, StandardScaler)",
-        "joblib (model and pipeline serialization)"
+        "scikit-learn",
+        "joblib"
       ],
       infra: [
-        "libpcap / Npcap (OS-level packet capture driver)",
-        "Local execution (requires administrator/root privileges for live capture)"
+        "libpcap / Npcap",
+        "Local execution"
       ]
     },
     problem: "Home and public Wi-Fi networks are routinely exposed to DoS floods, port scans, and man-in-the-middle exploits. Traditional intrusion detection systems depend on static rule sets and known signatures—they cannot generalize to novel attack patterns or subtle statistical anomalies in traffic flow. Security engineers need a tool that evaluates multi-dimensional flow characteristics rather than matching fixed rules, and that works equally well against historical log exports and live captured traffic.",
@@ -670,9 +671,9 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/Shafia-01/PacketWatch",
-      watchDemo: "https://youtu.be/7xAmwPxWTj4",
-      app: "https://packetwatch.streamlit.app"
-    }
+      watchDemo: "https://youtu.be/7xAmwPxWTj4"
+    },
+    hideAppButton: true
   },
   {
     slug: "cinescope",
