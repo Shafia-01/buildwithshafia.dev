@@ -29,8 +29,10 @@ export function PromotionConnector({
       const fRect = fromEl.getBoundingClientRect();
       const tRect = toEl.getBoundingClientRect();
 
-      // Attach to the right edge of the from-card + a small gap
-      const x = fRect.right - cRect.left + 12;
+      // Attach to the LEFT edge of the from-card minus a small gap,
+      // so the connector bows outward (away from the timeline center)
+      // instead of inward where other cards may sit.
+      const x = fRect.left - cRect.left - 12;
       // Vertical midpoints relative to the container
       const y1 = fRect.top + fRect.height / 2 - cRect.top;
       const y2 = tRect.top + tRect.height / 2 - cRect.top;
@@ -62,8 +64,8 @@ export function PromotionConnector({
     >
       {coords && (() => {
         const { x, y1, y2 } = coords;
-        // Bezier control point: bows 48px to the right of the card edge
-        const cx = x + 48;
+        // Bezier control point: bows 48px to the LEFT of the card edge (outward)
+        const cx = x - 48;
         const arrowSize = 10;
 
         return (

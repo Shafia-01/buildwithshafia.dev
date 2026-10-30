@@ -158,6 +158,6 @@ export const milestones: Milestone[] = [
     title: "Stratix",
     organization: "Independent Project",
     category: "milestone",
-    description: "Agentic AI-powered autonomous SEO market intelligence platform transforming seed keywords into strategy reports through 5 research tools, a 9-node stateful LangGraph pipeline with a ReAct agent, and 2 human approval checkpoints."
+    description: "Built an agentic AI-powered autonomous SEO intelligence platform: a 9-node LangGraph pipeline with a ReAct agent, 5 tools, 2 human approval gates, confidence scoring, an LLM critic, and LLM-as-judge evals, validated by 238 tests."
   }
 ];
