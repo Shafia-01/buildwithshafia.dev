@@ -37,7 +37,7 @@ export default function JourneyPage() {
                   ? GraduationCap
                   : item.category === "internship"
                   ? Briefcase
-                  : item.category === "achievement"
+                  : item.category === "milestone"
                   ? Award
                   : School;
 
