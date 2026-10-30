@@ -142,7 +142,7 @@ export const milestones: Milestone[] = [
     organization: "Independent Project",
     category: "milestone",
     highlight: true,
-    description: ""
+    description: "Architected a multimodal AI tutoring platform integrating FAISS-based RAG, 3 hot-swappable LLMs, emotion-aware personalization, multilingual voice I/O, adaptive quizzes, and 6 AI-powered mini-games."
   },
   {
     id: "graduation",
