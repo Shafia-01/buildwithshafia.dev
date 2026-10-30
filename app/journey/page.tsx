@@ -105,7 +105,7 @@ export default function JourneyPage() {
                           </div>
                           {/* Visual Promotion Connector (Desktop) */}
                           <div 
-                            className="hidden md:block absolute left-full top-1/2 w-8 border-y-2 border-r-2 border-dashed border-brass/40 rounded-r-md pointer-events-none"
+                            className="hidden md:block absolute right-full top-1/2 w-8 border-y-2 border-r-2 border-dashed border-brass/40 rounded-r-md pointer-events-none"
                             style={{ height: "38.5rem" }}
                           >
                             <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 rotate-90 text-brass">
