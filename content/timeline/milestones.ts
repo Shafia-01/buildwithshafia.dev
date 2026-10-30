@@ -133,7 +133,7 @@ export const milestones: Milestone[] = [
     title: "AI Engineer Intern",
     organization: "CyArt",
     category: "internship",
-    description: "Engineered a concurrent Python news analytics pipeline processing 494+ headlines from 20 RSS sources, improving ingestion performance by 20%, achieving 19 headlines/sec throughput, and generating 1,877+ sentiment classifications via 3 NLP engines."
+    description: "Engineered Python analytics, OpenCV surveillance, and voice-cloning evaluation systems, processing 494+ headlines, monitoring 4 camera streams, and achieving 0.965 speaker similarity across 15+ experiments."
   },
   {
     id: "learnify-ai-flagship",
