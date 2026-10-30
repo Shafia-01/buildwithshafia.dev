@@ -72,12 +72,12 @@ export const milestones: Milestone[] = [
     description: "Participated in the Delhi Section Students' Young Professionals, Women in Engineering, Life Members' Congress (DSSYWLC-24), attending technical sessions, workshops, and interactive activities focused on technology and professional development."
   },
   {
-    id: "cartverse-shipped",
-    date: "Feb 2025 – Mar 2025",
-    title: "CartVerse",
-    organization: "Walmart Sparkathon 2025",
-    category: "milestone",
-    description: "Dual-module Walmart shopping assistant with 2 independent pipelines (MoodCart + AutoCart), mapping 26 emotional states to product categories and generating frequency-based carts across 10 mock user purchase histories."
+    id: "google",
+    date: "March 2025",
+    title: "Participant",
+    organization: "Google Solutions Challenge 2025",
+    category: "extra-curricular",
+    description: ""
   },
   {
     id: "icidssd",
@@ -86,6 +86,22 @@ export const milestones: Milestone[] = [
     organization: "ICIDSSD'25, Jamia Hamdard",
     category: "extra-curricular",
     description: "Coordinated conference operations and hosted one track at the 5th International Conference on ICT for Digital, Smart and Sustainable Development (ICIDSSD ’25), supporting session execution, scripts, and award arrangements with a 50-member team at an 8-track, 2-day conference with 100+ participants."
+  },
+  {
+    id: "cartverse-shipped",
+    date: "June 2025 – July 2025",
+    title: "CartVerse",
+    organization: "Walmart Sparkathon 2025",
+    category: "milestone",
+    description: "Built a dual-module Walmart shopping assistant with 2 independent pipelines (MoodCart + AutoCart), mapping 26 emotional states to product categories and generating frequency-based carts across 10 mock user purchase histories."
+  },
+  {
+    id: "adobe",
+    date: "July 2025",
+    title: "Participant",
+    organization: "Adobe India Hackathon 2025",
+    category: "extra-curricular",
+    description: ""
   },
   {
     id: "edunet-internship",
