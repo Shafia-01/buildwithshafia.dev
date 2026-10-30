@@ -67,13 +67,13 @@ export const communityNetwork: NetworkConnection[] = [
   },
   {
     id: "enord",
-    label: "ENORD",
+    label: "enord",
     date: "Jan 2024",
     connections: [
       {
         label: "Product Launch & Event Assistant",
         subImpacts: [
-          "Coordinated ENORD's DRONE DAY aerospace product launch, managing pre-event logistics for 150+ participants with zero operational delays.",
+          "Coordinated enord's DRONE DAY aerospace product launch, managing pre-event logistics for 150+ participants with zero operational delays.",
           "Analyzed post-event attendee feedback and engagement metrics to inform future product launches and marketing strategies."
         ]
       }

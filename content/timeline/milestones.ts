@@ -5,7 +5,7 @@ export interface Milestone {
   organization: string;
   role?: string;
   description: string;
-  category: "education" | "experience" | "internship" | "achievement" | "milestone";
+  category: "education" | "experience" | "internship" | "extra-curricular" | "milestone";
   highlight?: boolean;
   promotionTo?: {
     title: string;
@@ -21,7 +21,7 @@ export const milestones: Milestone[] = [
     title: "Bachelor of Technology in Computer Science and Engineering",
     organization: "Jamia Hamdard",
     category: "education",
-    description: "Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, Database Management Systems."
+    description: "Relevant coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, Database Management Systems, Computer Networks"
   },
   {
     id: "ieee-jhsb",
@@ -32,12 +32,20 @@ export const milestones: Milestone[] = [
     description: "Contributed to 25+ flagship IEEE events impacting 700+ participants, boosting engagement and branch visibility by 40% and event participation by 30% through design support, hosting, and cross-functional coordination."
   },
   {
+    id: "enord",
+    date: "Jan 2024",
+    title: "Product Launch & Event Assistant",
+    organization: "enord",
+    category: "extra-curricular",
+    description: "Coordinated pre-event logistics for DRONE DAY, an aerospace product launch serving 150+ participants, and analyzed attendee feedback to inform future product launches and marketing strategies."
+  },
+  {
     id: "gdg-pr-associate",
     date: "Jan 2024 – Sep 2024",
     title: "PR & Social Media Associate",
     organization: "Google Developer Groups on Campus, Jamia Hamdard",
     category: "experience",
-    description: "Boosted Instagram engagement by 50% through visually compelling, timely content and campaigns. Coordinated cross-functional execution of digital strategies aligned with 15+ workshops/events per year."
+    description: "Increased social media engagement by 50% through creative content creation and targeted campaigns; promoted 15+ annual workshops and events, strengthening community participation and visibility."
   },
   {
     id: "placement-cell",
@@ -45,7 +53,7 @@ export const milestones: Milestone[] = [
     title: "Student Coordinator",
     organization: "The Department of Placement and Alumni Affairs, Jamia Hamdard",
     category: "experience",
-    description: "Facilitated connections between 200+ students and industry recruiters, enhancing placement opportunities through proactive outreach. Coordinated placement activities with cell heads and team members."
+    description: "Facilitated industry connections for 200+ students and supported campus recruitment coordination with Placement Cell leadership."
   },
   {
     id: "gdg-social-media-manager",
@@ -56,12 +64,28 @@ export const milestones: Milestone[] = [
     description: "Led a 10-member social media team, revamping the organization's social media presence and executing data-driven content strategies, driving 65% growth in digital reach, 40% higher content efficiency, and 5+ new industry partnerships."
   },
   {
+    id: "dssywlc",
+    date: "Feb 2025",
+    title: "Participant",
+    organization: "DSSYWLC'24, IEEE Delhi Section SAC",
+    category: "extra-curricular",
+    description: "Participated in the Delhi Section Students' Young Professionals, Women in Engineering, Life Members' Congress (DSSYWLC-24), attending technical sessions, workshops, and interactive activities focused on technology and professional development."
+  },
+  {
     id: "cartverse-shipped",
     date: "Feb 2025 – Mar 2025",
     title: "CartVerse",
     organization: "Walmart Sparkathon 2025",
     category: "milestone",
-    description: "Dual-module AI shopping assistant (MoodCart + AutoCart) using NLP and SerpAPI, boosting recommendation relevance by 45% and reducing decision time by 55%."
+    description: "Dual-module Walmart shopping assistant with 2 independent pipelines (MoodCart + AutoCart), mapping 26 emotional states to product categories and generating frequency-based carts across 10 mock user purchase histories."
+  },
+  {
+    id: "icidssd",
+    date: "April 2025",
+    title: "Student Volunteer",
+    organization: "ICIDSSD'25, Jamia Hamdard",
+    category: "extra-curricular",
+    description: "Coordinated conference operations and hosted one track at the 5th International Conference on ICT for Digital, Smart and Sustainable Development (ICIDSSD ’25), supporting session execution, scripts, and award arrangements with a 50-member team at an 8-track, 2-day conference with 100+ participants."
   },
   {
     id: "edunet-internship",
@@ -69,7 +93,7 @@ export const milestones: Milestone[] = [
     title: "Front-End Web Developer Intern",
     organization: "Edunet Foundation",
     category: "internship",
-    description: "Developed and deployed CineScope, a full-stack movie discovery platform integrating the OMDb API with 8 user-facing features. Engineered a secure Express proxy with 6 validation checks, 3 recovery mechanisms, and resolved 5 production-critical issues."
+    description: "Developed and deployed 'CineScope', a full-stack movie discovery platform using HTML, CSS, JavaScript, Node.js, & Express, integrating the OMDb API to deliver 8 user-facing features including search, reviews, ratings, and personalized watchlists."
   },
   {
     id: "cyart-internship",
@@ -77,7 +101,7 @@ export const milestones: Milestone[] = [
     title: "AI Engineer Intern",
     organization: "CyArt",
     category: "internship",
-    description: "Engineered a concurrent Python news analytics pipeline processing 494+ headlines from 20 RSS sources (19 headlines/sec, 20% ingestion improvement, 1,877+ sentiment classifications via 3 NLP engines). Developed a real-time OpenCV surveillance system monitoring 4 concurrent camera streams at ~7.4 FPS with 2 motion-detection algorithms and 4 integrity checks. Researched and benchmarked XTTS-v2 and VALL-E-X through 15+ voice-cloning experiments, achieving 0.965 speaker similarity."
+    description: "Engineered a concurrent Python news analytics pipeline processing 494+ headlines from 20 RSS sources, improving ingestion performance by 20%, achieving 19 headlines/sec throughput, and generating 1,877+ sentiment classifications via 3 NLP engines."
   },
   {
     id: "learnify-ai-flagship",
@@ -86,7 +110,7 @@ export const milestones: Milestone[] = [
     organization: "Independent Project",
     category: "milestone",
     highlight: true,
-    description: "Multimodal AI tutoring platform with hot-swappable multi-LLM orchestration (Gemini, Groq, Ollama), real-time DeepFace/OpenCV emotion detection, and a level-adaptive RAG pipeline delivering 3x faster contextual retrieval and a 40% personalization lift."
+    description: ""
   },
   {
     id: "graduation",
@@ -102,6 +126,6 @@ export const milestones: Milestone[] = [
     title: "Stratix",
     organization: "Independent Project",
     category: "milestone",
-    description: "Agentic AI-powered autonomous SEO market intelligence platform transforming seed keywords into strategy reports through 5 research tools, a 9-node LangGraph ReAct pipeline, and 2 human approval checkpoints."
+    description: "Agentic AI-powered autonomous SEO market intelligence platform transforming seed keywords into strategy reports through 5 research tools, a 9-node stateful LangGraph pipeline with a ReAct agent, and 2 human approval checkpoints."
   }
 ];
