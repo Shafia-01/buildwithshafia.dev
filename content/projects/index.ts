@@ -50,9 +50,7 @@ export const projects: Project[] = [
       "3 swappable LLM providers",
       "6 AI-powered, document-driven mini-games",
       "5-tier adaptive quiz engine",
-      "6 languages",
-      "3 level-adaptive prompts",
-      "7 raw emotions mapped"
+      "6 languages for multilingual responses"
     ],
     stack: {
       backend: [
