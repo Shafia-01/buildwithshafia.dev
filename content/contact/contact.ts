@@ -14,14 +14,14 @@ export interface Contact {
 
 export const contact: Contact = {
   headline: "Let's build something meaningful.",
-  recruiterCta: "Available for AI Engineer / GenAI / ML / Software Engineering roles. India-based, open to remote and relocation. Email or LinkedIn — whichever you check first.",
+  recruiterCta: "Available for AI / Gen AI / Software / Product Engineering roles. India-based, open to remote and relocation. Email or LinkedIn — whichever you check first.",
   collaborationCta: "Working on something AI-related and want a second engineer who can take it from prototype to production? Let's talk.",
-  hiringCta: "Hiring for AI Engineer, GenAI Engineer, ML Engineer, or Software Engineer roles? Five shipped products and two engineering internships say I can contribute from day one.",
+  hiringCta: "Hiring for AI Engineer, GenAI Engineer, Software Engineer or Product Engineer roles? Five shipped products and two engineering internships say I can contribute from day one.",
   channels: {
     email: "shafiaameeruddin637@gmail.com",
     linkedin: "https://linkedin.com/in/shafia-ameeruddin01",
     github: "https://github.com/Shafia-01",
     resumePath: "/resume/Shafia_Ameeruddin_AI_Engineer_Resume.pdf"
   },
-  statusLine: "Open to AI / GenAI / Software Engineering opportunities · India · Open to Relocation · Open to Remote"
+  statusLine: "Open to AI / Software / Product Engineering opportunities · India · Open to Relocation · Open to Remote"
 };
