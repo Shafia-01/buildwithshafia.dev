@@ -150,7 +150,7 @@ export const milestones: Milestone[] = [
     title: "Graduation - B.Tech Computer Science and Engineering",
     organization: "Jamia Hamdard",
     category: "education",
-    description: "Completed | CGPA 8.55/10"
+    description: "Completed | Secured I Division with Distinction | CGPA 8.55/10"
   },
   {
     id: "stratix-shipped",
